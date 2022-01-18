@@ -1,9 +1,10 @@
 import React from "react";
+import classes from "./Header.module.css";
 
 function Header() {
   return (
-    <header className="app-header">
-      <img src="./img/logo.png" className="app-logo" alt="logo" />
+    <header className={classes.header}>
+      <img src="./img/logo.png" className={classes.logo} alt="logo" />
     </header>
   );
 }
