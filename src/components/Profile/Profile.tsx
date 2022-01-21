@@ -1,4 +1,5 @@
 import React from "react";
+import Posts from "./Posts/Posts";
 import classes from "./Profile.module.css";
 
 function Profile() {
@@ -24,15 +25,7 @@ function Profile() {
           </ul>
         </div>
       </div>
-      <div className={classes.post}>
-        <h3 className={classes.postTitle}>Posts</h3>
-        <textarea name="" id="" cols={140} rows={10}></textarea>
-        <button className={classes.postBtn}>Send</button>
-        <div className={classes.postItem}>Hello everybody!</div>
-        <div className={classes.postItem}>
-          I'm start my first React application!
-        </div>
-      </div>
+      <Posts />
     </main>
   );
 }
