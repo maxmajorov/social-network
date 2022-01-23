@@ -17,7 +17,7 @@ function Posts() {
         placeholder="Hello"
         name=""
         id=""
-        cols={140}
+        cols={110}
         rows={10}
       ></textarea>
       <button className={classes.postBtn}>Send</button>
