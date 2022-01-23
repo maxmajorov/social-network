@@ -1,56 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
+import MessageItem from "./MessageItem/MesssageItem";
 
 function Dialogs() {
   return (
     <main className={classes.dialogs}>
       <div className={classes.dialogsList}>
-        <NavLink to="/dialogs/1" className={classes.dialog}>
-          <img
-            src="../../img/avatar.jpg"
-            alt="user-avatar"
-            className={classes.userAvatar}
-          />
-          Maxim
-        </NavLink>
-        <NavLink to="/dialogs/2" className={classes.dialog}>
-          <img
-            src="../../img/avatar.jpg"
-            alt="user-avatar"
-            className={classes.userAvatar}
-          />
-          Olga
-        </NavLink>
-        <NavLink to="/dialogs/3" className={classes.dialog}>
-          <img
-            src="../../img/avatar.jpg"
-            alt="user-avatar"
-            className={classes.userAvatar}
-          />
-          Pavel
-        </NavLink>
-        <NavLink to="/dialogs/4" className={classes.dialog}>
-          <img
-            src="../../img/avatar.jpg"
-            alt="user-avatar"
-            className={classes.userAvatar}
-          />
-          Karina
-        </NavLink>
-        <NavLink to="/dialogs/5" className={classes.dialog}>
-          <img
-            src="../../img/avatar.jpg"
-            alt="user-avatar"
-            className={classes.userAvatar}
-          />
-          Oleg
-        </NavLink>
+        <DialogItem userName="Maxim" id="1" />
+        <DialogItem userName="Olga" id="2" />
+        <DialogItem userName="Pavel" id="3" />
+        <DialogItem userName="Karina" id="4" />
+        <DialogItem userName="Oleg" id="5" />
       </div>
       <div className={classes.messagesList}>
-        <div className={classes.message}>Hello!</div>
-        <div className={classes.message}>How are you?</div>
-        <div className={classes.message}>i'm fine! And you?</div>
+        <MessageItem messageText="Hello!" />
+        <MessageItem messageText="How are you?" />
+        <MessageItem messageText="I'm fine! And you?" />
       </div>
     </main>
   );

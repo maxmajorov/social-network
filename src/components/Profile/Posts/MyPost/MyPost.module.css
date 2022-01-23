@@ -1,6 +1,24 @@
 .postItem {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.postWatches::after {
+  content: "";
+  position: absolute;
+  top: 110px;
+  right: 0;
+  width: 100%;
+  background-color: #edeff1;
+  height: 2px;
+}
+
+.postText {
+  position: relative;
+  display: flex;
+  align-items: center;
   font-size: 18px;
-  padding: 20px 0;
+  padding: 20px 20px 20px 0;
 }
 
 .postAvatar {
@@ -12,11 +30,5 @@
 
 .postLikes {
   display: inline-block;
-  margin-left: 50px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid rgb(8, 99, 99);
-  color: rgb(8, 99, 99);
-  text-align: center;
+  margin: 0 20px;
 }

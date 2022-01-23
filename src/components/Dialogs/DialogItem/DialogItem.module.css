@@ -1,0 +1,14 @@
+.dialog {
+  display: flex;
+  align-items: center;
+}
+
+.dialog:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.userAvatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
