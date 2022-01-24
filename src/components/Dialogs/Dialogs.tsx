@@ -4,19 +4,42 @@ import classes from "./Dialogs.module.css";
 import MessageItem from "./MessageItem/MesssageItem";
 
 function Dialogs() {
+  type dialogDataType = {
+    id: string;
+    name: string;
+  };
+
+  let dialogData: Array<dialogDataType> = [
+    { id: "1", name: "Maxim" },
+    { id: "2", name: "Olga" },
+    { id: "3", name: "Pavel" },
+    { id: "4", name: "Karina" },
+    { id: "5", name: "Oleg" },
+  ];
+
+  type messageDataType = {
+    id: string;
+    message: string;
+  };
+
+  let messageData: Array<messageDataType> = [
+    { id: "1", message: "Hello" },
+    { id: "2", message: "How are you?" },
+    { id: "3", message: "I'm fine! And you?" },
+    { id: "4", message: "Thanks! I'm OK!!!" },
+  ];
+
   return (
     <main className={classes.dialogs}>
       <div className={classes.dialogsList}>
-        <DialogItem userName="Maxim" id="1" />
-        <DialogItem userName="Olga" id="2" />
-        <DialogItem userName="Pavel" id="3" />
-        <DialogItem userName="Karina" id="4" />
-        <DialogItem userName="Oleg" id="5" />
+        {dialogData.map((el) => (
+          <DialogItem userName={el.name} id={el.id} />
+        ))}
       </div>
       <div className={classes.messagesList}>
-        <MessageItem messageText="Hello!" />
-        <MessageItem messageText="How are you?" />
-        <MessageItem messageText="I'm fine! And you?" />
+        {messageData.map((el) => (
+          <MessageItem messageText={el.message} id={el.id} />
+        ))}
       </div>
     </main>
   );
