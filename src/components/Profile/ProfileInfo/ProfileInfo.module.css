@@ -14,7 +14,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 0 20px 20px;
+  padding: 0 0 30px 30px;
 }
 
 .userAvatar {
@@ -22,4 +22,10 @@
   max-width: 200px;
   margin-right: 30px;
   border-radius: 7px;
+}
+
+.userInfo {
+  margin-top: 40px;
+  letter-spacing: 1px;
+  line-height: 25px;
 }

@@ -3,20 +3,18 @@ import MyPost from "./MyPost/MyPost";
 import PostCreate from "./PostCreate/PostsCreate";
 import classes from "./Posts.module.css";
 
-function Posts() {
-  type postsType = {
-    text: string;
-    likes: number;
-    comments: number;
-  };
+type postObj = {
+  text: string;
+  likes: number;
+  comments: number;
+};
 
-  let posts: Array<postsType> = [
-    { text: "Hello everybody!", likes: 4, comments: 2 },
-    { text: "I'm start learning React", likes: 14, comments: 4 },
-    { text: "Redux & TypeScript...", likes: 8, comments: 10 },
-  ];
+type postsPropsType = {
+  posts: Array<postObj>;
+};
 
-  let postsElement = posts.map((post) => (
+function Posts(props: postsPropsType) {
+  let postsElement = props.posts.map((post) => (
     <MyPost text={post.text} likes={post.likes} comments={post.comments} />
   ));
 

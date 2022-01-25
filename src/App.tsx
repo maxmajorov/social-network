@@ -9,7 +9,29 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-function App() {
+type postObj = {
+  text: string;
+  likes: number;
+  comments: number;
+};
+
+type dialogObj = {
+  id: string;
+  name: string;
+};
+
+type messagesObj = {
+  id: string;
+  message: string;
+};
+
+type appPropsType = {
+  posts: Array<postObj>;
+  dialogs: Array<dialogObj>;
+  messages: Array<messagesObj>;
+};
+
+function App(props: appPropsType) {
   return (
     <Router>
       <div className="container">
@@ -17,8 +39,13 @@ function App() {
         <Sidebar />
         <div className="container-content">
           <Routes>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/dialogs/*" element={<Dialogs />} />
+            <Route path="/profile" element={<Profile posts={props.posts} />} />
+            <Route
+              path="/dialogs/*"
+              element={
+                <Dialogs dialogs={props.dialogs} messages={props.messages} />
+              }
+            />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
