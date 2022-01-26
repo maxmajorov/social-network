@@ -1,15 +1,25 @@
 import React from "react";
 import classes from "./FriendMini.module.css";
 
-function FriendMini() {
+type friendsMiniPropsType = {
+  id: string;
+  name: string;
+  location: {
+    city: string;
+    country: string;
+  };
+  avatar: string;
+};
+
+function FriendMini(props: friendsMiniPropsType) {
   return (
     <div className={classes.friendCard}>
       <img
         className={classes.friendAvatar}
-        src="../../img/friend.png"
+        src={props.avatar}
         alt="friend-name"
       ></img>
-      <span className={classes.friendName}>Olga</span>
+      <span className={classes.friendName}>{props.name}</span>
     </div>
   );
 }

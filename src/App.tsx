@@ -26,10 +26,21 @@ type messagesObj = {
   message: string;
 };
 
+type friendsObj = {
+  id: string;
+  name: string;
+  location: {
+    city: string;
+    country: string;
+  };
+  avatar: string;
+};
+
 type appPropsType = {
   posts: Array<postObj>;
   dialogs: Array<dialogObj>;
   messages: Array<messagesObj>;
+  friends: Array<friendsObj>;
 };
 
 // type appPropsType = {
@@ -41,7 +52,7 @@ function App(props: appPropsType) {
     <Router>
       <div className="container">
         <Header />
-        <Sidebar />
+        <Sidebar friends={props.friends} />
         <div className="container-content">
           <Routes>
             <Route path="/profile" element={<Profile posts={props.posts} />} />
@@ -54,7 +65,10 @@ function App(props: appPropsType) {
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/friends" element={<Friends />} />
+            <Route
+              path="/friends"
+              element={<Friends friends={props.friends} />}
+            />
             {/* <Redirect from="/" to="/profile" /> */}
           </Routes>
         </div>

@@ -40,7 +40,6 @@ svg {
 
 .randomFriends {
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
