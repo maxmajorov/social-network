@@ -69,6 +69,7 @@ let state: stateType = {
       { id: "3", message: "I'm fine! And you?" },
       { id: "4", message: "Thanks! I'm OK!!!" },
       { id: "5", message: "Good luck! Bye!" },
+      { id: "6", message: "Bye!" },
     ],
   },
   friends: [
@@ -121,23 +122,22 @@ let state: stateType = {
     },
     {
       id: "5",
-      name: "Volodya",
+      name: "Kazik",
       location: {
-        city: "Moscow",
-        country: "Russia",
+        city: "New York",
+        country: "USA",
       },
-      avatar:
-        "https://www.meme-arsenal.com/memes/2860a0cb8333cc6923653a31792d4453.jpg",
+      avatar: "https://avatarko.ru/img/kartinka/33/cherep_naushniki_32366.jpg",
     },
     {
       id: "5",
-      name: "Volodya",
+      name: "Tadik",
       location: {
-        city: "Moscow",
-        country: "Russia",
+        city: "Zelva",
+        country: "Belarus",
       },
       avatar:
-        "https://www.meme-arsenal.com/memes/2860a0cb8333cc6923653a31792d4453.jpg",
+        "https://avatarko.ru/img/kartinka/30/multfilm_Simpsons_Bart_29436.jpg",
     },
   ],
 };

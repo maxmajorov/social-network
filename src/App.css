@@ -8,6 +8,7 @@
   grid-template-columns: 3fr 9fr;
 
   max-width: 1260px;
+  height: 100vh;
   margin: 0 auto;
 }
 

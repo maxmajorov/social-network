@@ -1,0 +1,47 @@
+.createMessage {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.inputMessage {
+  border-radius: 7px;
+  border: 2px solid #edeff1;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.postBtn {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0 20px;
+
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  height: 35px;
+  line-height: 40px;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #74c5ff;
+  background-color: #ddf0ff;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  touch-action: manipulation;
+}
+.postBtn:focus-visible {
+  box-shadow: 0 0 0 2px #666;
+}
+.postBtn:hover {
+  background-color: #dbe7f2;
+}
+.postBtn:active {
+  transform: scale(0.96);
+}
+.postBtn:disabled {
+  pointer-events: none;
+  opacity: 0.65;
+}
