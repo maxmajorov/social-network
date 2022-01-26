@@ -11,13 +11,14 @@ type postObj = {
 
 type profilePropsType = {
   posts: Array<postObj>;
+  addPost: any;
 };
 
 function Profile(props: profilePropsType) {
   return (
     <main className={classes.profile}>
       <ProfileInfo />
-      <Posts posts={props.posts} />
+      <Posts posts={props.posts} addPost={props.addPost} />
     </main>
   );
 }

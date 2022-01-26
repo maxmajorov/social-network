@@ -41,11 +41,8 @@ type appPropsType = {
   dialogs: Array<dialogObj>;
   messages: Array<messagesObj>;
   friends: Array<friendsObj>;
+  addPost: any;
 };
-
-// type appPropsType = {
-//   state: stateType;
-// };
 
 function App(props: appPropsType) {
   return (
@@ -55,7 +52,10 @@ function App(props: appPropsType) {
         <Sidebar friends={props.friends} />
         <div className="container-content">
           <Routes>
-            <Route path="/profile" element={<Profile posts={props.posts} />} />
+            <Route
+              path="/profile"
+              element={<Profile posts={props.posts} addPost={props.addPost} />}
+            />
             <Route
               path="/dialogs/*"
               element={

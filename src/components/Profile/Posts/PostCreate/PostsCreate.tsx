@@ -1,10 +1,15 @@
 import React from "react";
 import classes from "./PostsCreate.module.css";
 
-function PostCreate() {
+type postCreatePropsType = {
+  addPost: any;
+};
+
+function PostCreate(props: postCreatePropsType) {
   let newPost: any = React.createRef();
   let addPost = () => {
-    alert(newPost.current.value);
+    debugger;
+    props.addPost(newPost.current.value);
   };
 
   return (

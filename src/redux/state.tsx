@@ -142,4 +142,14 @@ let state: stateType = {
   ],
 };
 
+export let addPost = (postMessage: string) => {
+  let postItem = {
+    text: postMessage,
+    likes: 0,
+    comments: 0,
+  };
+  debugger;
+  state.profilePage.posts.push(postItem);
+};
+
 export default state;

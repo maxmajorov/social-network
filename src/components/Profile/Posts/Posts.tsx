@@ -11,6 +11,7 @@ type postObj = {
 
 type postsPropsType = {
   posts: Array<postObj>;
+  addPost: any;
 };
 
 function Posts(props: postsPropsType) {
@@ -20,7 +21,7 @@ function Posts(props: postsPropsType) {
 
   return (
     <div className={classes.post}>
-      <PostCreate />
+      <PostCreate addPost={props.addPost} />
       <div className={classes.postItem}>{postsElement}</div>
     </div>
   );
