@@ -37,3 +37,12 @@ svg {
   height: 24px;
   fill: currentColor;
 }
+
+.randomFriends {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}

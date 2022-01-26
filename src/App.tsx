@@ -8,29 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-
-// type postObj = {
-//   text: string;
-//   likes: number;
-//   comments: number;
-// };
-
-// type dialogObj = {
-//   id: string;
-//   name: string;
-// };
-
-// type messagesObj = {
-//   id: string;
-//   message: string;
-// };
-
-// type appPropsType = {
-//   posts: Array<postObj>;
-//   dialogs: Array<dialogObj>;
-//   messages: Array<messagesObj>;
-//   state: any;
-// };
+import Friends from "./components/Friends/Friends";
 
 type postObj = {
   text: string;
@@ -76,6 +54,7 @@ function App(props: appPropsType) {
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/friends" element={<Friends />} />
             {/* <Redirect from="/" to="/profile" /> */}
           </Routes>
         </div>

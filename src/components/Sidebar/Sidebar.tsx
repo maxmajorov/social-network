@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import FriendMini from "../Friends/FriendMini/FriendMini";
 import classes from "./Sidebar.module.css";
 
 function Sidebar() {
@@ -86,6 +87,23 @@ function Sidebar() {
             </svg>
             Settings
           </NavLink>
+        </li>
+        <li className={classes.item}>
+          <NavLink
+            to="/friends"
+            className={({ isActive }) =>
+              classes.link + " " + (isActive ? classes.active : "")
+            }
+          >
+            Friends
+          </NavLink>
+          <div className={classes.randomFriends}>
+            <FriendMini />
+            <FriendMini />
+            <FriendMini />
+            <FriendMini />
+            <FriendMini />
+          </div>
         </li>
       </ul>
     </aside>
