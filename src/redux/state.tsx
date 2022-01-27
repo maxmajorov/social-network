@@ -10,6 +10,7 @@ type postObj = {
 
 type profilePageType = {
   posts: Array<postObj>;
+  newPostText: string;
 };
 
 // DIALOGS
@@ -55,6 +56,7 @@ let state: stateType = {
       { text: "Redux & TypeScript...", likes: 8, comments: 10 },
       { text: "BLL => Redux", likes: 18, comments: 1 },
     ],
+    newPostText: "Write something here...",
   },
   dialogsPage: {
     dialogs: [
@@ -144,13 +146,21 @@ let state: stateType = {
   ],
 };
 
-export let addPost = (postMessage: string): void => {
+// Получение текста аоста из UI, добавление его в state.profilePage.posts
+export let addPost = (): void => {
   let postItem = {
-    text: postMessage,
+    text: state.profilePage.newPostText,
     likes: 0,
     comments: 0,
   };
   state.profilePage.posts.push(postItem);
+  state.profilePage.newPostText = "";
+  rerenderEntireTree(state);
+};
+
+// Обновление state при вводе символов в textarea. Берем newPostText и присваиваем ему значение которое приходит из UI
+export let updatePostText = (newPostText: string): void => {
+  state.profilePage.newPostText = newPostText;
   rerenderEntireTree(state);
 };
 

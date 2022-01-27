@@ -43,6 +43,8 @@ type appPropsType = {
   friends: Array<friendsObj>;
   addPost: any;
   addMessage: any;
+  newPostText: string;
+  updatePostText: any;
 };
 
 function App(props: appPropsType) {
@@ -55,7 +57,14 @@ function App(props: appPropsType) {
           <Routes>
             <Route
               path="/profile"
-              element={<Profile posts={props.posts} addPost={props.addPost} />}
+              element={
+                <Profile
+                  posts={props.posts}
+                  newPostText={props.newPostText}
+                  addPost={props.addPost}
+                  updatePostText={props.updatePostText}
+                />
+              }
             />
             <Route
               path="/dialogs/*"

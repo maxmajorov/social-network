@@ -12,6 +12,8 @@ type postObj = {
 type postsPropsType = {
   posts: Array<postObj>;
   addPost: any;
+  newPostText: string;
+  updatePostText: any;
 };
 
 function Posts(props: postsPropsType) {
@@ -21,7 +23,11 @@ function Posts(props: postsPropsType) {
 
   return (
     <div className={classes.post}>
-      <PostCreate addPost={props.addPost} />
+      <PostCreate
+        newPostText={props.newPostText}
+        addPost={props.addPost}
+        updatePostText={props.updatePostText}
+      />
       <div className={classes.postItem}>{postsElement}</div>
     </div>
   );

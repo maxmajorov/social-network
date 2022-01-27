@@ -12,13 +12,20 @@ type postObj = {
 type profilePropsType = {
   posts: Array<postObj>;
   addPost: any;
+  newPostText: string;
+  updatePostText: any;
 };
 
 function Profile(props: profilePropsType) {
   return (
     <main className={classes.profile}>
       <ProfileInfo />
-      <Posts posts={props.posts} addPost={props.addPost} />
+      <Posts
+        posts={props.posts}
+        newPostText={props.newPostText}
+        addPost={props.addPost}
+        updatePostText={props.updatePostText}
+      />
     </main>
   );
 }
