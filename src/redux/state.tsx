@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 // PROFILE
 
 type postObj = {
@@ -142,14 +144,23 @@ let state: stateType = {
   ],
 };
 
-export let addPost = (postMessage: string) => {
+export let addPost = (postMessage: string): void => {
   let postItem = {
     text: postMessage,
     likes: 0,
     comments: 0,
   };
-  debugger;
   state.profilePage.posts.push(postItem);
+  rerenderEntireTree(state);
+};
+
+export let addMessage = (newMessage: string) => {
+  let messageItem = {
+    id: "7",
+    message: newMessage,
+  };
+  state.dialogsPage.messages.push(messageItem);
+  rerenderEntireTree(state);
 };
 
 export default state;

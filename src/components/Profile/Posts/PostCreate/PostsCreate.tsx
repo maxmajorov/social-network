@@ -8,8 +8,8 @@ type postCreatePropsType = {
 function PostCreate(props: postCreatePropsType) {
   let newPost: any = React.createRef();
   let addPost = () => {
-    debugger;
     props.addPost(newPost.current.value);
+    newPost.current.value = "";
   };
 
   return (

@@ -1,10 +1,14 @@
 import React from "react";
 import classes from "./CreateMessage.module.css";
 
-function CreateMessage() {
+type createMessagePropsType = {
+  addMessage: any;
+};
+
+function CreateMessage(props: createMessagePropsType) {
   let newMessage: any = React.createRef();
   let addMessage = () => {
-    alert(newMessage.current.value);
+    props.addMessage(newMessage.current.value);
   };
 
   return (

@@ -42,6 +42,7 @@ type appPropsType = {
   messages: Array<messagesObj>;
   friends: Array<friendsObj>;
   addPost: any;
+  addMessage: any;
 };
 
 function App(props: appPropsType) {
@@ -59,7 +60,11 @@ function App(props: appPropsType) {
             <Route
               path="/dialogs/*"
               element={
-                <Dialogs dialogs={props.dialogs} messages={props.messages} />
+                <Dialogs
+                  dialogs={props.dialogs}
+                  messages={props.messages}
+                  addMessage={props.addMessage}
+                />
               }
             />
             <Route path="/news" element={<News />} />

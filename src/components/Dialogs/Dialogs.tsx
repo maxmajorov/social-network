@@ -17,6 +17,7 @@ type messagesObj = {
 type dialogPropsType = {
   dialogs: Array<dialogObj>;
   messages: Array<messagesObj>;
+  addMessage: any;
 };
 
 function Dialogs(props: dialogPropsType) {
@@ -35,7 +36,7 @@ function Dialogs(props: dialogPropsType) {
             <MessageItem messageText={el.message} id={el.id} />
           ))}
         </div>
-        <CreateMessage />
+        <CreateMessage addMessage={props.addMessage} />
       </div>
     </main>
   );
