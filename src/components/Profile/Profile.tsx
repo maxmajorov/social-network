@@ -3,20 +3,20 @@ import Posts from "./Posts/Posts";
 import classes from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-type postObj = {
+type PostObj = {
   text: string;
   likes: number;
   comments: number;
 };
 
-type profilePropsType = {
-  posts: Array<postObj>;
+type ProfilePropsType = {
+  posts: Array<PostObj>;
   addPost: any;
   newPostText: string;
   updatePostText: any;
 };
 
-function Profile(props: profilePropsType) {
+const Profile: React.FC<ProfilePropsType> = (props) => {
   return (
     <main className={classes.profile}>
       <ProfileInfo />
@@ -28,6 +28,6 @@ function Profile(props: profilePropsType) {
       />
     </main>
   );
-}
+};
 
 export default Profile;

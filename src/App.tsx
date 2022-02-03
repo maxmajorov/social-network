@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Profile from "./components/Profile/Profile";
@@ -49,7 +49,7 @@ type appPropsType = {
 
 function App(props: appPropsType) {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="container">
         <Header />
         <Sidebar friends={props.friends} />
@@ -87,7 +87,7 @@ function App(props: appPropsType) {
           </Routes>
         </div>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

@@ -3,20 +3,20 @@ import MyPost from "./MyPost/MyPost";
 import PostCreate from "./PostCreate/PostsCreate";
 import classes from "./Posts.module.css";
 
-type postObj = {
+type PostObj = {
   text: string;
   likes: number;
   comments: number;
 };
 
-type postsPropsType = {
-  posts: Array<postObj>;
+type PostsPropsType = {
+  posts: Array<PostObj>;
   addPost: any;
   newPostText: string;
   updatePostText: any;
 };
 
-function Posts(props: postsPropsType) {
+const Posts: React.FC<PostsPropsType> = (props) => {
   let postsElement = props.posts.map((post) => (
     <MyPost text={post.text} likes={post.likes} comments={post.comments} />
   ));
@@ -31,6 +31,6 @@ function Posts(props: postsPropsType) {
       <div className={classes.postItem}>{postsElement}</div>
     </div>
   );
-}
+};
 
 export default Posts;
