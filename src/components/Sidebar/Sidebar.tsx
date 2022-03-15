@@ -1,34 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FriendsObj } from "../../redux/state";
 import FriendMini from "../Friends/FriendMini/FriendMini";
 import classes from "./Sidebar.module.css";
 
-type friendsObj = {
-  id: string;
-  name: string;
-  location: {
-    city: string;
-    country: string;
-  };
-  avatar: string;
+type SidebarPropsType = {
+  friends: Array<FriendsObj>;
 };
 
-type sidebarPropsType = {
-  friends: Array<friendsObj>;
-};
-
-function Sidebar(props: sidebarPropsType) {
-  let sixFriends: any = props.friends
-    .map((el) => (
-      <FriendMini
-        id={el.id}
-        name={el.name}
-        avatar={el.avatar}
-        location={el.location}
-      />
-    ))
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 6);
+const Sidebar: React.FC<SidebarPropsType> = (props) => {
+  // let sixFriends: Array<FriendsMiniPropsType> = props.friends
+  //   .map((el) => <FriendMini name={el.name} avatar={el.avatar} />)
+  //   .sort(() => 0.5 - Math.random())
+  //   .slice(0, 6);
 
   return (
     <aside className={classes.sidebar}>
@@ -128,9 +112,14 @@ function Sidebar(props: sidebarPropsType) {
           </NavLink>
         </li>
       </ul>
-      <div className={classes.randomFriends}>{sixFriends}</div>
+      <div className={classes.randomFriends}>
+        {props.friends
+          .map((el) => <FriendMini name={el.name} avatar={el.avatar} />)
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 6)}
+      </div>
     </aside>
   );
-}
+};
 
 export default Sidebar;

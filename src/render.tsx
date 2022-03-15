@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { addPost, addMessage, updatePostText } from "./redux/state";
+import { addMessage, StatePropsType } from "./redux/state";
 
-export let rerenderEntireTree = (state: any) => {
+export let rerenderEntireTree = (state: StatePropsType) => {
   ReactDOM.render(
     <React.StrictMode>
       <App
@@ -12,9 +12,6 @@ export let rerenderEntireTree = (state: any) => {
         dialogs={state.dialogsPage.dialogs}
         messages={state.dialogsPage.messages}
         friends={state.friends}
-        addPost={addPost}
-        newPostText={state.profilePage.newPostText}
-        updatePostText={updatePostText}
         addMessage={addMessage}
       />
     </React.StrictMode>,

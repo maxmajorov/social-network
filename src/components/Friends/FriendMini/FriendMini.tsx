@@ -1,17 +1,12 @@
 import React from "react";
 import classes from "./FriendMini.module.css";
 
-type friendsMiniPropsType = {
-  id: string;
+export type FriendsMiniPropsType = {
   name: string;
-  location: {
-    city: string;
-    country: string;
-  };
   avatar: string;
 };
 
-function FriendMini(props: friendsMiniPropsType) {
+const FriendMini: React.FC<FriendsMiniPropsType> = (props) => {
   return (
     <div className={classes.friendCard}>
       <img
@@ -22,6 +17,6 @@ function FriendMini(props: friendsMiniPropsType) {
       <span className={classes.friendName}>{props.name}</span>
     </div>
   );
-}
+};
 
 export default FriendMini;

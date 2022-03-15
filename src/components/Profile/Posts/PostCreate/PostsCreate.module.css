@@ -22,6 +22,10 @@
   border-bottom: 2px solid #edeff1;
 }
 
+.errorMessage {
+  color: red;
+}
+
 .postBtn {
   display: inline-block;
   box-sizing: border-box;

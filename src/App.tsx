@@ -9,45 +9,17 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
+import { DialogObj, MessagesObj, PostObj, FriendsObj } from "./redux/state";
 
-type postObj = {
-  text: string;
-  likes: number;
-  comments: number;
-};
-
-type dialogObj = {
-  id: string;
-  name: string;
-};
-
-type messagesObj = {
-  id: string;
-  message: string;
-};
-
-type friendsObj = {
-  id: string;
-  name: string;
-  location: {
-    city: string;
-    country: string;
-  };
-  avatar: string;
-};
-
-type appPropsType = {
-  posts: Array<postObj>;
-  dialogs: Array<dialogObj>;
-  messages: Array<messagesObj>;
-  friends: Array<friendsObj>;
-  addPost: any;
+type AppPropsType = {
+  posts: Array<PostObj>;
+  dialogs: Array<DialogObj>;
+  messages: Array<MessagesObj>;
+  friends: Array<FriendsObj>;
   addMessage: any;
-  newPostText: string;
-  updatePostText: any;
 };
 
-function App(props: appPropsType) {
+const App: React.FC<AppPropsType> = (props) => {
   return (
     <BrowserRouter>
       <div className="container">
@@ -55,17 +27,7 @@ function App(props: appPropsType) {
         <Sidebar friends={props.friends} />
         <div className="container-content">
           <Routes>
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  posts={props.posts}
-                  newPostText={props.newPostText}
-                  addPost={props.addPost}
-                  updatePostText={props.updatePostText}
-                />
-              }
-            />
+            <Route path="/profile" element={<Profile posts={props.posts} />} />
             <Route
               path="/dialogs/*"
               element={
@@ -89,6 +51,6 @@ function App(props: appPropsType) {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

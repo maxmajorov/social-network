@@ -1,22 +1,13 @@
 import React from "react";
+import { FriendsObj } from "../../redux/state";
 import FriendMaxi from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
 
-type friendsObj = {
-  id: string;
-  name: string;
-  location: {
-    city: string;
-    country: string;
-  };
-  avatar: string;
+type FriendsPropsType = {
+  friends: Array<FriendsObj>;
 };
 
-type friendsPropsType = {
-  friends: Array<friendsObj>;
-};
-
-function Friends(props: friendsPropsType) {
+function Friends(props: FriendsPropsType) {
   return (
     <main className={classes.friends}>
       <div className={classes.search}>

@@ -1,31 +1,20 @@
 import React from "react";
+import { DialogObj, MessagesObj } from "../../redux/state";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
 import CreateMessage from "./MessageItem/CreateMessage/CreateMessage";
 import MessageItem from "./MessageItem/MesssageItem";
 
-type dialogObj = {
-  id: string;
-  name: string;
-};
-
-type messagesObj = {
-  id: string;
-  message: string;
-};
-
-type dialogPropsType = {
-  dialogs: Array<dialogObj>;
-  messages: Array<messagesObj>;
+type DialogPropsType = {
+  dialogs: Array<DialogObj>;
+  messages: Array<MessagesObj>;
   addMessage: any;
 };
 
-function Dialogs(props: dialogPropsType) {
+const Dialogs: React.FC<DialogPropsType> = (props) => {
   let dialogsElement = props.dialogs.map((el) => (
-    <DialogItem userName={el.name} id={el.id} />
+    <DialogItem key={el._id} userName={el.name} id={el._id} />
   ));
-
-  // let messagesElement =
 
   return (
     <main className={classes.dialogs}>
@@ -33,13 +22,13 @@ function Dialogs(props: dialogPropsType) {
       <div className={classes.messagesList}>
         <div className={classes.item}>
           {props.messages.map((el) => (
-            <MessageItem messageText={el.message} id={el.id} />
+            <MessageItem key={el._id} messageText={el.message} id={el._id} />
           ))}
         </div>
         <CreateMessage addMessage={props.addMessage} />
       </div>
     </main>
   );
-}
+};
 
 export default Dialogs;

@@ -1,38 +1,40 @@
+import { v1 } from "uuid";
 import { rerenderEntireTree } from "../render";
 
 // PROFILE
 
-type postObj = {
+export type PostObj = {
+  _id: string;
   text: string;
   likes: number;
   comments: number;
 };
 
-type profilePageType = {
-  posts: Array<postObj>;
+type ProfilePageType = {
+  posts: Array<PostObj>;
   newPostText: string;
 };
 
 // DIALOGS
 
-type dialogObj = {
-  id: string;
+export type DialogObj = {
+  _id: string;
   name: string;
 };
 
-type messagesObj = {
-  id: string;
+export type MessagesObj = {
+  _id: string;
   message: string;
 };
 
-type dialogsPageType = {
-  dialogs: Array<dialogObj>;
-  messages: Array<messagesObj>;
+type DialogsPageType = {
+  dialogs: Array<DialogObj>;
+  messages: Array<MessagesObj>;
 };
 
 // FRIENDS
 
-type friendsObj = {
+export type FriendsObj = {
   id: string;
   name: string;
   location: {
@@ -42,38 +44,38 @@ type friendsObj = {
   avatar: string;
 };
 
-type stateType = {
-  profilePage: profilePageType;
-  dialogsPage: dialogsPageType;
-  friends: Array<friendsObj>;
+export type StatePropsType = {
+  profilePage: ProfilePageType;
+  dialogsPage: DialogsPageType;
+  friends: Array<FriendsObj>;
 };
 
-let state: stateType = {
+export let state: StatePropsType = {
   profilePage: {
     posts: [
-      { text: "Hello everybody!", likes: 4, comments: 2 },
-      { text: "I'm start learning React", likes: 14, comments: 4 },
-      { text: "Redux & TypeScript...", likes: 8, comments: 10 },
-      { text: "BLL => Redux", likes: 18, comments: 1 },
+      { _id: v1(), text: "Hello everybody!", likes: 4, comments: 2 },
+      { _id: v1(), text: "I'm start learning React", likes: 14, comments: 4 },
+      { _id: v1(), text: "Redux & TypeScript...", likes: 8, comments: 10 },
+      { _id: v1(), text: "BLL => Redux", likes: 18, comments: 1 },
     ],
     newPostText: "Write something here...",
   },
   dialogsPage: {
     dialogs: [
-      { id: "1", name: "Maxim" },
-      { id: "2", name: "Olga" },
-      { id: "3", name: "Pavel" },
-      { id: "4", name: "Karina" },
-      { id: "5", name: "Dasha" },
-      { id: "6", name: "Oleg" },
+      { _id: v1(), name: "Maxim" },
+      { _id: v1(), name: "Olga" },
+      { _id: v1(), name: "Pavel" },
+      { _id: v1(), name: "Karina" },
+      { _id: v1(), name: "Dasha" },
+      { _id: v1(), name: "Oleg" },
     ],
     messages: [
-      { id: "1", message: "Hello" },
-      { id: "2", message: "How are you?" },
-      { id: "3", message: "I'm fine! And you?" },
-      { id: "4", message: "Thanks! I'm OK!!!" },
-      { id: "5", message: "Good luck! Bye!" },
-      { id: "6", message: "Bye!" },
+      { _id: v1(), message: "Hello" },
+      { _id: v1(), message: "How are you?" },
+      { _id: v1(), message: "I'm fine! And you?" },
+      { _id: v1(), message: "Thanks! I'm OK!!!" },
+      { _id: v1(), message: "Good luck! Bye!" },
+      { _id: v1(), message: "Bye!" },
     ],
   },
   friends: [
@@ -146,27 +148,32 @@ let state: stateType = {
   ],
 };
 
-// Получение текста аоста из UI, добавление его в state.profilePage.posts
-export let addPost = (): void => {
-  let postItem = {
-    text: state.profilePage.newPostText,
-    likes: 0,
-    comments: 0,
-  };
-  state.profilePage.posts.push(postItem);
-  state.profilePage.newPostText = "";
-  rerenderEntireTree(state);
-};
+// Получение текста поста из UI, добавление его в state.profilePage.posts
+
+// export let addPost = (post: string): void => {
+//   let postItem = {
+//     text: post,
+//     likes: 0,
+//     comments: 0,
+//   };
+//   console.log(post);
+
+//   // state.profilePage.posts.push(postItem);
+//   // state.profilePage.newPostText = "";
+//   // rerenderEntireTree(state);
+//   state.profilePage.posts.push(postItem);
+//   console.log(state.profilePage.posts);
+// };
 
 // Обновление state при вводе символов в textarea. Берем newPostText и присваиваем ему значение которое приходит из UI
-export let updatePostText = (newPostText: string): void => {
-  state.profilePage.newPostText = newPostText;
-  rerenderEntireTree(state);
-};
+// export let updatePostText = (newPostText: string): void => {
+//   state.profilePage.newPostText = newPostText;
+//   rerenderEntireTree(state);
+// };
 
 export let addMessage = (newMessage: string) => {
   let messageItem = {
-    id: "7",
+    _id: "7",
     message: newMessage,
   };
   state.dialogsPage.messages.push(messageItem);
