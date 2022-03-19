@@ -1,5 +1,8 @@
 import { v1 } from "uuid";
-import { rerenderEntireTree } from "../render";
+
+let rerenderEntireTree = () => {
+  console.log("State is changed");
+};
 
 // PROFILE
 
@@ -173,11 +176,15 @@ export let state: StatePropsType = {
 
 export let addMessage = (newMessage: string) => {
   let messageItem = {
-    _id: "7",
+    _id: v1(),
     message: newMessage,
   };
   state.dialogsPage.messages.push(messageItem);
-  rerenderEntireTree(state);
+  rerenderEntireTree();
+};
+
+export const subscribe = (observer: any) => {
+  rerenderEntireTree = observer;
 };
 
 export default state;

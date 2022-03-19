@@ -7,7 +7,7 @@ type MyPostsPropsType = {
   comments: number;
 };
 
-function MyPost(props: MyPostsPropsType) {
+const MyPost: React.FC<MyPostsPropsType> = (props) => {
   return (
     <div className={classes.postItem}>
       <div className={classes.postText}>
@@ -24,6 +24,6 @@ function MyPost(props: MyPostsPropsType) {
       </div>
     </div>
   );
-}
+};
 
 export default MyPost;

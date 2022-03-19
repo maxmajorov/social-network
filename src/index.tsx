@@ -1,8 +1,27 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import state from "./redux/state";
-import { rerenderEntireTree } from "./render";
+import state, { subscribe } from "./redux/state";
+import App from "./App";
+import { addMessage } from "./redux/state";
 
-rerenderEntireTree(state);
+let rerenderEntireTree = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App
+        posts={state.profilePage.posts}
+        dialogs={state.dialogsPage.dialogs}
+        messages={state.dialogsPage.messages}
+        friends={state.friends}
+        addMessage={addMessage}
+      />
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+};
 
+subscribe(rerenderEntireTree);
+
+rerenderEntireTree();
 reportWebVitals();
