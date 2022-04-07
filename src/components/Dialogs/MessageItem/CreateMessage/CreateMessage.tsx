@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
-import { addMessageActionCreator } from "../../../../redux/state";
+import { addMessageActionCreator } from "../../../../redux/dialogs-reducer";
+
 import classes from "./CreateMessage.module.css";
 
 type createMessagePropsType = {

@@ -18,7 +18,7 @@ function PostCreate(props: postCreatePropsType) {
   const onClickAddPostHandler = () => {
     newPost.trim().length
       ? props.addPost(newPost.trim())
-      : setError("Invalin input");
+      : setError("Invalid input");
     setNewPost("");
   };
 

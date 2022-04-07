@@ -1,6 +1,8 @@
 import { v1 } from "uuid";
+import { dialogsReduser } from "./dialogs-reducer";
+import { profileReduser } from "./profile-reducer";
 
-let rerenderEntireTree = () => {
+export let rerenderEntireTree = () => {
   console.log("State is changed");
 };
 
@@ -163,27 +165,27 @@ export let addMessage = (newMessage: string) => {
 
 // -----------DISPATCH ==> ACTION----------------
 
-export const addMessageActionCreator = (newMessage: string) => ({
-  type: "ADD-NEW-MESSAGE",
-  newMessage: newMessage,
-});
-
 export const dispatch = (action: any) => {
-  if (action.type === "ADD-NEW-MESSAGE") {
-    let messageItem = {
-      _id: v1(),
-      message: action.newMessage,
-    };
-    state.dialogsPage.messages = [...state.dialogsPage.messages, messageItem]; //не мутируя
-    // state.dialogsPage.messages.push(messageItem);
-    rerenderEntireTree();
-  }
+  // if (action.type === "ADD-NEW-MESSAGE") {
+  //   let messageItem = {
+  //     _id: v1(),
+  //     message: action.newMessage,
+  //   };
+  //   state.dialogsPage.messages = [...state.dialogsPage.messages, messageItem]; //не мутируя
+  //   // state.dialogsPage.messages.push(messageItem);
+  //   rerenderEntireTree();
+  // }
+
+  state.dialogsPage = dialogsReduser(state.dialogsPage, action); // можно сразу присвоить новый кусок state который вернет reducer
+  state.profilePage = profileReduser(state.profilePage, action);
+  // subscribe(state); // ????
 };
 
 // -----------DISPATCH ==> ACTION----------------
 
 export const subscribe = (observer: any) => {
   rerenderEntireTree = observer;
+  console.log("subscribe");
 };
 
 export default state;
