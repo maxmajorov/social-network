@@ -16,7 +16,8 @@ type AppPropsType = {
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
   friends: Array<FriendsObj>;
-  addMessage: any;
+  addMessage: (newMessage: string) => void;
+  dispatch: any;
 };
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -35,6 +36,7 @@ const App: React.FC<AppPropsType> = (props) => {
                   dialogs={props.dialogs}
                   messages={props.messages}
                   addMessage={props.addMessage}
+                  dispatch={props.dispatch}
                 />
               }
             />
@@ -45,7 +47,6 @@ const App: React.FC<AppPropsType> = (props) => {
               path="/friends"
               element={<Friends friends={props.friends} />}
             />
-            {/* <Redirect from="/" to="/profile" /> */}
           </Routes>
         </div>
       </div>

@@ -2,13 +2,14 @@ import React from "react";
 import { DialogObj, MessagesObj } from "../../redux/state";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
-import CreateMessage from "./MessageItem/CreateMessage/CreateMessage";
+import { CreateMessage } from "./MessageItem/CreateMessage/CreateMessage";
 import MessageItem from "./MessageItem/MesssageItem";
 
 type DialogPropsType = {
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
-  addMessage: any;
+  addMessage: (newMessage: string) => void;
+  dispatch: any;
 };
 
 const Dialogs: React.FC<DialogPropsType> = (props) => {
@@ -25,7 +26,10 @@ const Dialogs: React.FC<DialogPropsType> = (props) => {
             <MessageItem key={el._id} messageText={el.message} id={el._id} />
           ))}
         </div>
-        <CreateMessage addMessage={props.addMessage} />
+        <CreateMessage
+          addMessage={props.addMessage}
+          dispatch={props.dispatch}
+        />
       </div>
     </main>
   );

@@ -151,37 +151,36 @@ export let state: StatePropsType = {
   ],
 };
 
-// Получение текста поста из UI, добавление его в state.profilePage.posts
-
-// export let addPost = (post: string): void => {
-//   let postItem = {
-//     text: post,
-//     likes: 0,
-//     comments: 0,
-//   };
-//   console.log(post);
-
-//   // state.profilePage.posts.push(postItem);
-//   // state.profilePage.newPostText = "";
-//   // rerenderEntireTree(state);
-//   state.profilePage.posts.push(postItem);
-//   console.log(state.profilePage.posts);
-// };
-
-// Обновление state при вводе символов в textarea. Берем newPostText и присваиваем ему значение которое приходит из UI
-// export let updatePostText = (newPostText: string): void => {
-//   state.profilePage.newPostText = newPostText;
-//   rerenderEntireTree(state);
-// };
-
 export let addMessage = (newMessage: string) => {
-  let messageItem = {
-    _id: v1(),
-    message: newMessage,
-  };
-  state.dialogsPage.messages.push(messageItem);
-  rerenderEntireTree();
+  // let messageItem = {
+  //   _id: v1(),
+  //   message: newMessage,
+  // };
+  // state.dialogsPage.messages = [...state.dialogsPage.messages, messageItem]; //не мутируя
+  // // state.dialogsPage.messages.push(messageItem);
+  // rerenderEntireTree();
 };
+
+// -----------DISPATCH ==> ACTION----------------
+
+export const addMessageActionCreator = (newMessage: string) => ({
+  type: "ADD-NEW-MESSAGE",
+  newMessage: newMessage,
+});
+
+export const dispatch = (action: any) => {
+  if (action.type === "ADD-NEW-MESSAGE") {
+    let messageItem = {
+      _id: v1(),
+      message: action.newMessage,
+    };
+    state.dialogsPage.messages = [...state.dialogsPage.messages, messageItem]; //не мутируя
+    // state.dialogsPage.messages.push(messageItem);
+    rerenderEntireTree();
+  }
+};
+
+// -----------DISPATCH ==> ACTION----------------
 
 export const subscribe = (observer: any) => {
   rerenderEntireTree = observer;

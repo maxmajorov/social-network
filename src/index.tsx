@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import state, { subscribe } from "./redux/state";
 import App from "./App";
-import { addMessage } from "./redux/state";
+import { addMessage, dispatch } from "./redux/state";
 
 let rerenderEntireTree = () => {
   ReactDOM.render(
@@ -15,6 +15,7 @@ let rerenderEntireTree = () => {
         messages={state.dialogsPage.messages}
         friends={state.friends}
         addMessage={addMessage}
+        dispatch={dispatch}
       />
     </React.StrictMode>,
     document.getElementById("root")
