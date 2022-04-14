@@ -1,10 +1,10 @@
 import React from "react";
-import { FriendsObj } from "../../redux/store";
-import FriendMaxi from "./FriendMaxi/FriendMaxi";
+import { FriendsPageType } from "../../redux/store";
+import { FriendMaxi } from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
 
 type FriendsPropsType = {
-  friends: Array<FriendsObj>;
+  friends: Array<FriendsPageType>;
 };
 
 function Friends(props: FriendsPropsType) {
@@ -16,7 +16,7 @@ function Friends(props: FriendsPropsType) {
       <div className={classes.list}>
         {props.friends.map((el) => (
           <FriendMaxi
-            id={el.id}
+            id={el._id}
             name={el.name}
             avatar={el.avatar}
             location={el.location}

@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./FriendMaxi.module.css";
 
-type friendsMaxiPropsType = {
+type FriendsMaxiPropsType = {
   id: string;
   name: string;
   location: {
@@ -11,7 +11,7 @@ type friendsMaxiPropsType = {
   avatar: string;
 };
 
-function FriendMaxi(props: friendsMaxiPropsType) {
+export const FriendMaxi: React.FC<FriendsMaxiPropsType> = (props) => {
   return (
     <div className={classes.card}>
       <img
@@ -27,6 +27,4 @@ function FriendMaxi(props: friendsMaxiPropsType) {
       </div>
     </div>
   );
-}
-
-export default FriendMaxi;
+};

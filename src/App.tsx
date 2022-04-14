@@ -13,7 +13,7 @@ import {
   DialogObj,
   MessagesObj,
   PostObj,
-  FriendsObj,
+  FriendsPageType,
   ActionCreatorType,
 } from "./redux/store";
 
@@ -21,7 +21,7 @@ type AppPropsType = {
   posts: Array<PostObj>;
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
-  friends: Array<FriendsObj>;
+  friends: Array<FriendsPageType>;
   dispatch: (action: ActionCreatorType) => void;
 };
 

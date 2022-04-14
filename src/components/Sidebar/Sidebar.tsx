@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FriendsObj } from "../../redux/store";
+import { FriendsPageType } from "../../redux/store";
 import FriendMini from "../Friends/FriendMini/FriendMini";
 import classes from "./Sidebar.module.css";
 
 type SidebarPropsType = {
-  friends: Array<FriendsObj>;
+  friends: Array<FriendsPageType>;
 };
 
 const Sidebar: React.FC<SidebarPropsType> = (props) => {

@@ -39,8 +39,8 @@ export type DialogsPageType = {
 
 // FRIENDS
 
-export type FriendsObj = {
-  id: string;
+export type FriendsPageType = {
+  _id: string;
   name: string;
   location: {
     city: string;
@@ -57,7 +57,7 @@ export type ActionCreatorType = {
 type StateType = {
   profilePage: ProfilePageType;
   dialogsPage: DialogsPageType;
-  friends: Array<FriendsObj>;
+  friends: Array<FriendsPageType>;
 };
 
 export type StorePropsType = {
