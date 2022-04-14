@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FriendsObj } from "../../redux/state";
+import { FriendsObj } from "../../redux/store";
 import FriendMini from "../Friends/FriendMini/FriendMini";
 import classes from "./Sidebar.module.css";
 
@@ -9,11 +9,6 @@ type SidebarPropsType = {
 };
 
 const Sidebar: React.FC<SidebarPropsType> = (props) => {
-  // let sixFriends: Array<FriendsMiniPropsType> = props.friends
-  //   .map((el) => <FriendMini name={el.name} avatar={el.avatar} />)
-  //   .sort(() => 0.5 - Math.random())
-  //   .slice(0, 6);
-
   return (
     <aside className={classes.sidebar}>
       <ul className="sidebar__list list-reset">

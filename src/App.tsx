@@ -15,14 +15,13 @@ import {
   PostObj,
   FriendsObj,
   ActionCreatorType,
-} from "./redux/state";
+} from "./redux/store";
 
 type AppPropsType = {
   posts: Array<PostObj>;
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
   friends: Array<FriendsObj>;
-  addMessage: (newMessage: string) => void;
   dispatch: (action: ActionCreatorType) => void;
 };
 
@@ -46,7 +45,6 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Dialogs
                   dialogs={props.dialogs}
                   messages={props.messages}
-                  addMessage={props.addMessage}
                   dispatch={props.dispatch}
                 />
               }

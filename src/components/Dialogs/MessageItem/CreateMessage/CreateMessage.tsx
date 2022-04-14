@@ -1,16 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
 import { addMessageActionCreator } from "../../../../redux/dialogs-reducer";
-import { ActionCreatorType } from "../../../../redux/state";
+import { ActionCreatorType } from "../../../../redux/store";
 
 import classes from "./CreateMessage.module.css";
 
 type createMessagePropsType = {
-  addMessage: (newMessage: string) => void;
   dispatch: (action: ActionCreatorType) => void;
 };
 
 export const CreateMessage: React.FC<createMessagePropsType> = ({
-  addMessage,
   dispatch,
 }) => {
   const [newMessage, setNewMessage] = useState<string>("");

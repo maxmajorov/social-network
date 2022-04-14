@@ -2,20 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import state, { subscribe } from "./redux/state";
+import { store, subscribe } from "./redux/store";
 import App from "./App";
-import { addMessage, dispatch } from "./redux/state";
 
 let rerenderEntireTree = () => {
   ReactDOM.render(
     <React.StrictMode>
       <App
-        posts={state.profilePage.posts}
-        dialogs={state.dialogsPage.dialogs}
-        messages={state.dialogsPage.messages}
-        friends={state.friends}
-        addMessage={addMessage}
-        dispatch={dispatch}
+        posts={store.getState().profilePage.posts}
+        dialogs={store.getState().dialogsPage.dialogs}
+        messages={store.getState().dialogsPage.messages}
+        friends={store.getState().friends}
+        dispatch={store.dispatch}
       />
     </React.StrictMode>,
     document.getElementById("root")

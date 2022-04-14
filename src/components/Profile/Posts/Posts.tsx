@@ -1,5 +1,5 @@
 import React from "react";
-import { ActionCreatorType, PostObj } from "../../../redux/state";
+import { ActionCreatorType, PostObj } from "../../../redux/store";
 import MyPost from "./MyPost/MyPost";
 import { PostCreate } from "./PostCreate/PostsCreate";
 import classes from "./Posts.module.css";

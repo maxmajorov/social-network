@@ -3,7 +3,7 @@ import {
   rerenderEntireTree,
   DialogsPageType,
   ActionCreatorType,
-} from "./state";
+} from "./store";
 
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 

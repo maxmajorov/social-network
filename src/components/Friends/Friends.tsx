@@ -1,5 +1,5 @@
 import React from "react";
-import { FriendsObj } from "../../redux/state";
+import { FriendsObj } from "../../redux/store";
 import FriendMaxi from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
 

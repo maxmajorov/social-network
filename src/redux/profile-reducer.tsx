@@ -3,7 +3,7 @@ import {
   rerenderEntireTree,
   ProfilePageType,
   ActionCreatorType,
-} from "./state";
+} from "./store";
 
 const ADD_NEW_POST = "ADD-NEW-POST";
 
