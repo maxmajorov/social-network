@@ -1,5 +1,5 @@
 import React from "react";
-import { DialogObj, MessagesObj } from "../../redux/state";
+import { ActionCreatorType, DialogObj, MessagesObj } from "../../redux/state";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
 import { CreateMessage } from "./MessageItem/CreateMessage/CreateMessage";
@@ -9,7 +9,7 @@ type DialogPropsType = {
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
   addMessage: (newMessage: string) => void;
-  dispatch: any;
+  dispatch: (action: ActionCreatorType) => void;
 };
 
 const Dialogs: React.FC<DialogPropsType> = (props) => {

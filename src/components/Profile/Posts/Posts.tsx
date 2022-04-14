@@ -1,25 +1,16 @@
-import React, { useState } from "react";
-import { v1 } from "uuid";
-import state, { PostObj } from "../../../redux/state";
+import React from "react";
+import { ActionCreatorType, PostObj } from "../../../redux/state";
 import MyPost from "./MyPost/MyPost";
-import PostCreate from "./PostCreate/PostsCreate";
+import { PostCreate } from "./PostCreate/PostsCreate";
 import classes from "./Posts.module.css";
 
 type PostsPropsType = {
   posts: Array<PostObj>;
+  dispatch: (action: ActionCreatorType) => void;
 };
 
-const Posts: React.FC<PostsPropsType> = (props) => {
-  let [postList, setPostList] = useState(state.profilePage.posts);
-
-  const addPost = (post: string) => {
-    let newPostList = { _id: v1(), text: post, likes: 0, comments: 0 };
-    setPostList([newPostList, ...postList]);
-  };
-
-  console.log(postList);
-
-  let postsElement = postList.map((post) => (
+const Posts: React.FC<PostsPropsType> = ({ posts, dispatch }) => {
+  const postsElement = posts.map((post) => (
     <MyPost
       key={post._id}
       text={post.text}
@@ -30,7 +21,7 @@ const Posts: React.FC<PostsPropsType> = (props) => {
 
   return (
     <div className={classes.post}>
-      <PostCreate posts={props.posts} addPost={addPost} />
+      <PostCreate dispatch={dispatch} />
       <div className={classes.postItem}>{postsElement}</div>
     </div>
   );

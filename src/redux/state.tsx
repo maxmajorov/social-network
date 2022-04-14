@@ -15,7 +15,7 @@ export type PostObj = {
   comments: number;
 };
 
-type ProfilePageType = {
+export type ProfilePageType = {
   posts: Array<PostObj>;
   newPostText: string;
 };
@@ -32,7 +32,7 @@ export type MessagesObj = {
   message: string;
 };
 
-type DialogsPageType = {
+export type DialogsPageType = {
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
 };
@@ -165,17 +165,12 @@ export let addMessage = (newMessage: string) => {
 
 // -----------DISPATCH ==> ACTION----------------
 
-export const dispatch = (action: any) => {
-  // if (action.type === "ADD-NEW-MESSAGE") {
-  //   let messageItem = {
-  //     _id: v1(),
-  //     message: action.newMessage,
-  //   };
-  //   state.dialogsPage.messages = [...state.dialogsPage.messages, messageItem]; //не мутируя
-  //   // state.dialogsPage.messages.push(messageItem);
-  //   rerenderEntireTree();
-  // }
+export type ActionCreatorType = {
+  type: string;
+  newItem: string;
+};
 
+export const dispatch = (action: ActionCreatorType) => {
   state.dialogsPage = dialogsReduser(state.dialogsPage, action); // можно сразу присвоить новый кусок state который вернет reducer
   state.profilePage = profileReduser(state.profilePage, action);
   // subscribe(state); // ????

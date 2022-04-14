@@ -1,23 +1,25 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
-import { PostObj } from "../../../../redux/state";
+import { addPostActionCreator } from "../../../../redux/profile-reducer";
+import { ActionCreatorType } from "../../../../redux/state";
+
 import classes from "./PostsCreate.module.css";
 
-type postCreatePropsType = {
-  posts: Array<PostObj>;
-  addPost: (post: string) => void;
+type PostCreatePropsType = {
+  dispatch: (action: ActionCreatorType) => void;
 };
 
-function PostCreate(props: postCreatePropsType) {
+export const PostCreate: React.FC<PostCreatePropsType> = ({ dispatch }) => {
   const [newPost, setNewPost] = useState("");
   const [error, setError] = useState("");
 
   const onChangeAddPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewPost(event.currentTarget.value);
+    setNewPost(event.currentTarget.value.trim());
   };
 
+  console.log(newPost);
   const onClickAddPostHandler = () => {
-    newPost.trim().length
-      ? props.addPost(newPost.trim())
+    newPost.length
+      ? dispatch(addPostActionCreator(newPost))
       : setError("Invalid input");
     setNewPost("");
   };
@@ -25,7 +27,7 @@ function PostCreate(props: postCreatePropsType) {
   const onKeyPressInputHandler = (
     event: KeyboardEvent<HTMLTextAreaElement>
   ) => {
-    event.charCode === 13 ? onClickAddPostHandler() : console.log("f");
+    event.charCode === 13 ? onClickAddPostHandler() : console.log("notEnter");
   };
 
   return (
@@ -46,6 +48,4 @@ function PostCreate(props: postCreatePropsType) {
       </button>
     </div>
   );
-}
-
-export default PostCreate;
+};

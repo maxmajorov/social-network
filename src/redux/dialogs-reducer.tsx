@@ -1,13 +1,20 @@
 import { v1 } from "uuid";
-import { rerenderEntireTree } from "./state";
+import {
+  rerenderEntireTree,
+  DialogsPageType,
+  ActionCreatorType,
+} from "./state";
 
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 
-export const dialogsReduser = (state: any, action: any) => {
+export const dialogsReduser = (
+  state: DialogsPageType,
+  action: ActionCreatorType
+) => {
   if (action.type === ADD_NEW_MESSAGE) {
-    let messageItem = {
+    const messageItem = {
       _id: v1(),
-      message: action.newMessage,
+      message: action.newItem,
     };
     state.messages = [...state.messages, messageItem]; //не мутируя
 
@@ -19,5 +26,5 @@ export const dialogsReduser = (state: any, action: any) => {
 
 export const addMessageActionCreator = (newMessage: string) => ({
   type: "ADD-NEW-MESSAGE",
-  newMessage: newMessage,
+  newItem: newMessage,
 });

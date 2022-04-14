@@ -9,7 +9,13 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
-import { DialogObj, MessagesObj, PostObj, FriendsObj } from "./redux/state";
+import {
+  DialogObj,
+  MessagesObj,
+  PostObj,
+  FriendsObj,
+  ActionCreatorType,
+} from "./redux/state";
 
 type AppPropsType = {
   posts: Array<PostObj>;
@@ -17,7 +23,7 @@ type AppPropsType = {
   messages: Array<MessagesObj>;
   friends: Array<FriendsObj>;
   addMessage: (newMessage: string) => void;
-  dispatch: any;
+  dispatch: (action: ActionCreatorType) => void;
 };
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -28,7 +34,12 @@ const App: React.FC<AppPropsType> = (props) => {
         <Sidebar friends={props.friends} />
         <div className="container-content">
           <Routes>
-            <Route path="/profile" element={<Profile posts={props.posts} />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile posts={props.posts} dispatch={props.dispatch} />
+              }
+            />
             <Route
               path="/dialogs/*"
               element={
