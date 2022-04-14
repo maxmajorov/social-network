@@ -4,23 +4,19 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/redux-store";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "./StoreContext";
 
 let rerenderEntireTree = () => {
   ReactDOM.render(
-    <React.StrictMode>
-      <App
-      // posts={store.getState().profileReduser.posts}
-      // dialogs={store.getState().dialogsReduser.dialogs}
-      // messages={store.getState().dialogsReduser.messages}
-      // friends={store.getState().friendsReduser.friends}
-      // dispatch={store.dispatch}
-      />
-    </React.StrictMode>,
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>,
     document.getElementById("root")
   );
 };
-
-// rerenderEntireTree();
 
 store.subscribe(rerenderEntireTree);
 
