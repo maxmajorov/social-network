@@ -28,7 +28,7 @@ const initialState = {
 
 export const dialogsReduser = (
   state: DialogsPageType = initialState,
-  action: ActionCreatorType
+  action: any
 ) => {
   if (action.type === ADD_NEW_MESSAGE) {
     const messageItem = {

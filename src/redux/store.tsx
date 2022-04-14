@@ -97,7 +97,7 @@ export const store: StorePropsType = {
     },
     friends: [
       {
-        id: "1",
+        _id: v1(),
         name: "Olga",
         location: {
           city: "Minsk",
@@ -107,7 +107,7 @@ export const store: StorePropsType = {
           "https://avatarko.ru/img/kartinka/29/fantastika_rusalka_Ariel_28509.jpg",
       },
       {
-        id: "2",
+        _id: v1(),
         name: "Pavel",
         location: {
           city: "Minsk",
@@ -116,7 +116,7 @@ export const store: StorePropsType = {
         avatar: "https://avatarko.ru/img/kartinka/17/kot_multfilm_16243.jpg",
       },
       {
-        id: "3",
+        _id: v1(),
         name: "Karina",
         location: {
           city: "Wroclaw",
@@ -125,7 +125,7 @@ export const store: StorePropsType = {
         avatar: "https://avatarko.ru/img/avatar/11/multfilm_Timon_10391.jpg",
       },
       {
-        id: "4",
+        _id: v1(),
         name: "Oleg",
         location: {
           city: "Kiev",
@@ -135,7 +135,7 @@ export const store: StorePropsType = {
           "https://add-groups.com/uploads/mini/short/7a/1371_original.jpg",
       },
       {
-        id: "5",
+        _id: v1(),
         name: "Volodya",
         location: {
           city: "Moscow",
@@ -145,7 +145,7 @@ export const store: StorePropsType = {
           "https://www.meme-arsenal.com/memes/2860a0cb8333cc6923653a31792d4453.jpg",
       },
       {
-        id: "5",
+        _id: v1(),
         name: "Kazik",
         location: {
           city: "New York",
@@ -155,7 +155,7 @@ export const store: StorePropsType = {
           "https://avatarko.ru/img/kartinka/33/cherep_naushniki_32366.jpg",
       },
       {
-        id: "5",
+        _id: v1(),
         name: "Tadik",
         location: {
           city: "Zelva",

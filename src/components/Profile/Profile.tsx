@@ -1,19 +1,13 @@
 import React from "react";
-import { ActionCreatorType, PostObj } from "../../redux/store";
-import Posts from "./Posts/Posts";
+import { PostsContainer } from "./Posts/PostsContainer";
 import classes from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-type ProfilePropsType = {
-  posts: Array<PostObj>;
-  dispatch: (action: ActionCreatorType) => void;
-};
-
-const Profile: React.FC<ProfilePropsType> = (props) => {
+const Profile = () => {
   return (
     <main className={classes.profile}>
       <ProfileInfo />
-      <Posts posts={props.posts} dispatch={props.dispatch} />
+      <PostsContainer />
     </main>
   );
 };

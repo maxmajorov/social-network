@@ -109,7 +109,9 @@ const Sidebar: React.FC<SidebarPropsType> = (props) => {
       </ul>
       <div className={classes.randomFriends}>
         {props.friends
-          .map((el) => <FriendMini name={el.name} avatar={el.avatar} />)
+          .map((el) => (
+            <FriendMini key={el._id} name={el.name} avatar={el.avatar} />
+          ))
           .sort(() => 0.5 - Math.random())
           .slice(0, 6)}
       </div>

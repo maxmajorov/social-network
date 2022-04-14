@@ -1,14 +1,13 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
-import { addPostActionCreator } from "../../../../redux/profile-reducer";
-import { ActionCreatorType } from "../../../../redux/store";
-
 import classes from "./PostsCreate.module.css";
 
 type PostCreatePropsType = {
-  dispatch: (action: ActionCreatorType) => void;
+  addNewPostToStore: (newPost: string) => void;
 };
 
-export const PostCreate: React.FC<PostCreatePropsType> = ({ dispatch }) => {
+export const PostCreate: React.FC<PostCreatePropsType> = ({
+  addNewPostToStore,
+}) => {
   const [newPost, setNewPost] = useState("");
   const [error, setError] = useState("");
 
@@ -16,11 +15,8 @@ export const PostCreate: React.FC<PostCreatePropsType> = ({ dispatch }) => {
     setNewPost(event.currentTarget.value.trim());
   };
 
-  console.log(newPost);
   const onClickAddPostHandler = () => {
-    newPost.length
-      ? dispatch(addPostActionCreator(newPost))
-      : setError("Invalid input");
+    newPost.length ? addNewPostToStore(newPost) : setError("Invalid input");
     setNewPost("");
   };
 

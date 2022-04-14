@@ -1,9 +1,5 @@
 import { v1 } from "uuid";
-import {
-  rerenderEntireTree,
-  ActionCreatorType,
-  // FriendsPageType,
-} from "./store";
+import { ActionCreatorType } from "./store";
 
 const ADD_NEW_FRIEND = "ADD-NEW-FRIEND";
 
@@ -90,10 +86,7 @@ const initialState = {
   ],
 };
 
-export const friendsReduser = (
-  state = initialState,
-  action: ActionCreatorType
-) => {
+export const friendsReduser = (state = initialState, action: any) => {
   return state;
 };
 

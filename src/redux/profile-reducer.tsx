@@ -1,9 +1,5 @@
 import { v1 } from "uuid";
-import {
-  rerenderEntireTree,
-  ProfilePageType,
-  ActionCreatorType,
-} from "./store";
+import { rerenderEntireTree, ProfilePageType } from "./store";
 
 const ADD_NEW_POST = "ADD-NEW-POST";
 
@@ -19,7 +15,7 @@ const initialState = {
 
 export const profileReduser = (
   state: ProfilePageType = initialState,
-  action: ActionCreatorType
+  action: any
 ) => {
   if (action.type === ADD_NEW_POST) {
     const postItem = {
