@@ -1,6 +1,4 @@
 import { v1 } from "uuid";
-import { dialogsReduser } from "./dialogs-reducer";
-import { profileReduser } from "./profile-reducer";
 
 export let rerenderEntireTree = () => {
   console.log("State is changed");
@@ -8,31 +6,31 @@ export let rerenderEntireTree = () => {
 
 // PROFILE
 
-export type PostObj = {
+type PostObj = {
   _id: string;
   text: string;
   likes: number;
   comments: number;
 };
 
-export type ProfilePageType = {
+type ProfilePageType = {
   posts: Array<PostObj>;
   newPostText: string;
 };
 
 // DIALOGS
 
-export type DialogObj = {
+type DialogObj = {
   _id: string;
   name: string;
 };
 
-export type MessagesObj = {
+type MessagesObj = {
   _id: string;
   message: string;
 };
 
-export type DialogsPageType = {
+type DialogsPageType = {
   dialogs: Array<DialogObj>;
   messages: Array<MessagesObj>;
 };
@@ -170,8 +168,8 @@ export const store: StorePropsType = {
     return this._state;
   },
   dispatch(action: ActionCreatorType) {
-    store._state.dialogsPage = dialogsReduser(store._state.dialogsPage, action); // можно сразу присвоить новый кусок state который вернет reducer
-    store._state.profilePage = profileReduser(store._state.profilePage, action);
+    // store._state.dialogsPage = dialogsReduser(store._state.dialogsPage, action); // можно сразу присвоить новый кусок state который вернет reducer
+    // store._state.profilePage = profileReduser(store._state.profilePage, action);
   },
 };
 

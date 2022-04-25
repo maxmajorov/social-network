@@ -1,17 +1,18 @@
 import React from "react";
-import { store } from "../../redux/redux-store";
-import { DialogsPageType } from "../../redux/store";
+import { DialogsPageType } from "../../reducers/dialogs-reducer";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
 import { CreateMessage } from "./MessageItem/CreateMessage/CreateMessage";
 import MessageItem from "./MessageItem/MesssageItem";
 
-type DialogPropsType = {
+type DialogsPropsType = {
   dialogsState: DialogsPageType;
   addNewMessageToStore: (newMessage: string) => void;
 };
 
-const Dialogs: React.FC<DialogPropsType> = ({
+// type берем из типизированных mapStateToProps & mapDispatchToProps
+
+const Dialogs: React.FC<DialogsPropsType> = ({
   dialogsState,
   addNewMessageToStore,
 }) => {
