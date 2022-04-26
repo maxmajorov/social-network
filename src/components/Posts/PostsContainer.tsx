@@ -8,7 +8,7 @@ import { Posts } from "./Posts";
 // Контейнерная компонента ==> вся логика и store только здесь.
 
 export const PostsContainer = () => {
-  const postsState = useSelector((state: AppStateType) => state.profileReduser);
+  const postsState = useSelector((state: AppStateType) => state.profileReducer);
   const dispatch = useDispatch();
 
   const addNewPostToStoreCallback = (newPost: string) => {

@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="container">
       <Header />
-      <Sidebar friends={store.getState().friendsReduser.friends} />
+      <Sidebar friends={store.getState().friendsReducer.friends} />
       <div className="container-content">
         <Routes>
           <Route path="/profile" element={<Profile />} />
@@ -28,7 +28,7 @@ const App = () => {
           <Route
             path="/friends"
             element={
-              <Friends friends={store.getState().friendsReduser.friends} />
+              <Friends friends={store.getState().friendsReducer.friends} />
             }
           />
         </Routes>

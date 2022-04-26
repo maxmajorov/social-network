@@ -1,7 +1,8 @@
 import { v1 } from "uuid";
 import {
+  SET_USERS,
   SHOW_MORE_USERS,
-  FOLLOW_USER,
+  SUBSCRIBE_USER,
   UsersActionsType,
 } from "../actions/users-actions";
 
@@ -57,23 +58,23 @@ const initialState = {
       location: { country: "Belarus", city: "Minsk" },
       description: "Want to relokate to Poland",
     },
-    {
-      _id: v1(),
-      fullname: "Tadik Siniy",
-      followed: false,
-      avatar: "https://avatarko.ru/img/kartinka/33/cherep_naushniki_32366.jpg",
-      location: { country: "Russia", city: "Moscow" },
-      description: "I wonna drink beer....",
-    },
-    {
-      _id: v1(),
-      fullname: "Kazik T.",
-      followed: false,
-      avatar:
-        "https://avatarko.ru/img/kartinka/30/multfilm_Simpsons_Bart_29436.jpg",
-      location: { country: "USA", city: "New York" },
-      description: "Help me please!!!!!!!!",
-    },
+    // {
+    //   _id: v1(),
+    //   fullname: "Tadik Siniy",
+    //   followed: false,
+    //   avatar: "https://avatarko.ru/img/kartinka/33/cherep_naushniki_32366.jpg",
+    //   location: { country: "Russia", city: "Moscow" },
+    //   description: "I wonna drink beer....",
+    // },
+    // {
+    //   _id: v1(),
+    //   fullname: "Kazik T.",
+    //   followed: false,
+    //   avatar:
+    //     "https://avatarko.ru/img/kartinka/30/multfilm_Simpsons_Bart_29436.jpg",
+    //   location: { country: "USA", city: "New York" },
+    //   description: "Help me please!!!!!!!!",
+    // },
   ] as Array<UsersObjType>,
 };
 
@@ -87,12 +88,24 @@ export const usersReducer = (
       console.log(state);
       return { ...state };
     }
-    case FOLLOW_USER: {
-      console.log("FOLLOW");
-      return state;
+    case SUBSCRIBE_USER: {
+      return {
+        ...state,
+        users: state.users.map((el) =>
+          el._id === action.userID ? { ...el, followed: !el.followed } : el
+        ),
+      };
+    }
+    case SET_USERS: {
+      return {
+        ...state,
+        users: [...state.users, ...action.users],
+      };
     }
     default: {
       return state;
     }
   }
 };
+
+// {... state, state.users.map(el => el.followed = action.status)}

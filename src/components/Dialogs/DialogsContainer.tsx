@@ -41,7 +41,7 @@ import Dialogs from "./Dialogs";
 
 export const DialogsContainer = () => {
   const dialogsState = useSelector(
-    (state: AppStateType) => state.dialogsReduser
+    (state: AppStateType) => state.dialogsReducer
   );
   const dispatch = useDispatch();
 

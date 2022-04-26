@@ -13,7 +13,7 @@ type FriendsMaxiPropsType = {
   location: LocationType;
   description?: string;
   followed?: boolean;
-  subscribe?: (status: boolean) => void;
+  subscribeUser?: (userID: string) => void;
 };
 
 export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
@@ -23,18 +23,13 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
   location,
   description,
   followed,
-  subscribe,
+  subscribeUser,
 }) => {
-  const [status, setStatus] = useState<boolean>(true);
-  console.log(status);
+  const [status, setStatus] = useState<boolean>(followed ? true : false);
 
-  // const subscribeHandler = () => {
-  //   setStatus(!status);
-  //   subscribe && subscribe(status);
-  // };
-
-  const ha = () => {
-    console.log("change status");
+  const subscribeHandler = () => {
+    setStatus(!status);
+    subscribeUser && subscribeUser(id);
   };
 
   return (
@@ -49,7 +44,9 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
           {description && <span>{description}</span>}
         </div>
         <div className={classes.subscribe}>
-          <button onChange={ha}>lkjkj{status}</button>
+          <button onClick={subscribeHandler}>
+            {followed ? "Follow" : "Unfollow"}
+          </button>
         </div>
       </div>
     </div>

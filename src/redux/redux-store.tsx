@@ -10,10 +10,10 @@ import { usersReducer } from "../reducers/users-reducer";
 // У Store уже есть методы getState, dispatch
 
 const rootReducer = combineReducers({
-  profileReduser: profileReducer,
-  dialogsReduser: dialogsReducer,
-  friendsReduser: friendsReducer,
+  profileReducer: profileReducer,
+  dialogsReducer: dialogsReducer,
   usersReducer: usersReducer,
+  friendsReducer: friendsReducer,
 });
 
 type RootReducersType = typeof rootReducer;
