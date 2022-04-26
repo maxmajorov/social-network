@@ -25,7 +25,7 @@ const initialState = {
   newPostText: "Write something here...",
 };
 
-export const profileReduser = (
+export const profileReducer = (
   state: InitialStateType = initialState,
   action: PostsActionsType
 ): InitialStateType => {

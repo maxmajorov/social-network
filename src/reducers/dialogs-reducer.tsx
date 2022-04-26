@@ -37,7 +37,7 @@ const initialState = {
   ] as Array<MessagesObj>,
 };
 
-export const dialogsReduser = (
+export const dialogsReducer = (
   state: InitialStateType = initialState,
   action: DialogsActionsType
 ): InitialStateType => {

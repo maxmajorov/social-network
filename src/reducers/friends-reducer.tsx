@@ -1,5 +1,5 @@
 import { v1 } from "uuid";
-import { ActionCreatorType } from "./store";
+import { ActionCreatorType } from "../redux/store";
 
 const ADD_NEW_FRIEND = "ADD-NEW-FRIEND";
 
@@ -86,7 +86,7 @@ const initialState = {
   ],
 };
 
-export const friendsReduser = (state = initialState, action: any) => {
+export const friendsReducer = (state = initialState, action: any) => {
   return state;
 };
 

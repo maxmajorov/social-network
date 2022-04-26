@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { dialogsReduser } from "../reducers/dialogs-reducer";
-import { friendsReduser } from "./friends-reducer";
-import { profileReduser } from "../reducers/profile-reducer";
+import { dialogsReducer } from "../reducers/dialogs-reducer";
+import { friendsReducer } from "../reducers/friends-reducer";
+import { profileReducer } from "../reducers/profile-reducer";
+import { usersReducer } from "../reducers/users-reducer";
 
 // ====== Объединяем reducer вместе======
 
@@ -9,9 +10,10 @@ import { profileReduser } from "../reducers/profile-reducer";
 // У Store уже есть методы getState, dispatch
 
 const rootReducer = combineReducers({
-  profileReduser: profileReduser,
-  dialogsReduser: dialogsReduser,
-  friendsReduser: friendsReduser,
+  profileReduser: profileReducer,
+  dialogsReduser: dialogsReducer,
+  friendsReduser: friendsReducer,
+  usersReducer: usersReducer,
 });
 
 type RootReducersType = typeof rootReducer;

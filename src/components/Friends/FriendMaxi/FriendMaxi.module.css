@@ -1,9 +1,13 @@
 .card {
+  display: flex;
   position: relative;
   margin-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  width: 100%;
+}
+
+.card div {
+  flex-basis: 87%;
+  
 }
 
 .card:not(:last-child) {
@@ -14,22 +18,41 @@
   content: "";
   position: absolute;
   top: 75px;
-  right: 0;
-  width: 100%;
+  right: 30px;
+  width: 96%;
   background-color: #edeff1;
-  height: 2px;
+  height: 5px;
 }
 
 .avatar {
+  flex-shrink: 1;
   width: 60px;
   height: 60px;
   border-radius: 50%;
 }
 
-.info {
+.cardInner {
+  display: flex;
+  justify-content: space-between; 
+  flex-shrink: 1;
+    padding: 0 20px; 
+}
+
+.info { 
+  flex-shrink: 0;
   padding-left: 20px;
 }
 
 .name {
   display: block;
 }
+
+/* .subscribe {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+} */
+
+
+
+
