@@ -16,6 +16,7 @@ function Friends(props: FriendsPropsType) {
       <div className={classes.list}>
         {props.friends.map((el) => (
           <FriendMaxi
+            key={el._id}
             id={el._id}
             name={el.name}
             avatar={el.avatar}
