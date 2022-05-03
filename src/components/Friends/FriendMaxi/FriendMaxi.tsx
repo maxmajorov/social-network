@@ -10,7 +10,7 @@ type FriendsMaxiPropsType = {
   id: string;
   name: string;
   avatar: string;
-  location: LocationType;
+  location?: LocationType;
   description?: string;
   followed?: boolean;
   subscribeUser?: (userID: string) => void;
@@ -26,6 +26,7 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
   subscribeUser,
 }) => {
   const [status, setStatus] = useState<boolean>(followed ? true : false);
+  console.log(status);
 
   const subscribeHandler = () => {
     setStatus(!status);
@@ -38,9 +39,9 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
       <div className={classes.cardInner}>
         <div className={classes.info}>
           <span className={classes.name}>{name}</span>
-          <span className={classes.name}>
-            {location.city}, {location.country}
-          </span>
+          {/* <span className={classes.name}>
+            {location.city && <span>{location.city}}, {location.country && <span>{location.country}</span>}
+          </span> */}
           {description && <span>{description}</span>}
         </div>
         <div className={classes.subscribe}>
