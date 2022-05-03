@@ -46,7 +46,7 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
         </div>
         <div className={classes.subscribe}>
           <button onClick={subscribeHandler}>
-            {followed ? "Follow" : "Unfollow"}
+            {status ? "Follow" : "Unfollow"}
           </button>
         </div>
       </div>

@@ -77,7 +77,7 @@ const initialState: Array<UsersFromServerType> = [];
 export type initialStateType = typeof initialState;
 
 export const usersReducer = (
-  state = initialState,
+  state: initialStateType = initialState,
   action: UsersActionsType
 ): initialStateType => {
   switch (action.type) {
@@ -86,14 +86,13 @@ export const usersReducer = (
       return { ...state };
     }
     case SUBSCRIBE_USER: {
-      console.log(state[0].followed);
       return [
         ...state.map((el) =>
           el.id.toString() === action.userID
             ? { ...el, followed: !el.followed }
             : el
         ),
-      ]; // Чтоб изменилось нужен запрс на сервак на update
+      ]; // Чтоб изменилось нужен запрос на сервак на update
     }
     case SET_USERS: {
       return action.users;
