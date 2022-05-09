@@ -1,4 +1,5 @@
 import {
+  SET_PAGE_NUMBER,
   SET_USERS,
   // SET_USERS,
   SHOW_MORE_USERS,
@@ -72,9 +73,15 @@ import { UsersFromServerType } from "../api/api";
 //   },
 // };
 
-const initialState: Array<UsersFromServerType> = [];
+export type initialStateType = {
+  users: Array<UsersFromServerType>;
+  currentPage: number;
+};
 
-export type initialStateType = typeof initialState;
+const initialState = {
+  users: [],
+  currentPage: 1,
+};
 
 export const usersReducer = (
   state: initialStateType = initialState,
@@ -86,17 +93,26 @@ export const usersReducer = (
       return { ...state };
     }
     case SUBSCRIBE_USER: {
-      return [
-        ...state.map((el) =>
+      return {
+        ...state,
+        ...state.users.map((el) =>
           el.id.toString() === action.userID
             ? { ...el, followed: !el.followed }
             : el
         ),
-      ]; // Чтоб изменилось нужен запрос на сервак на update
+      };
     }
     case SET_USERS: {
-      return action.users;
+      return {
+        ...state,
+      };
     }
+    // case SET_PAGE_NUMBER: {
+    //   return {
+    //     ...state,
+    //     currentPage: action.currentPage,
+    //   };
+    // }
     default: {
       return state;
     }

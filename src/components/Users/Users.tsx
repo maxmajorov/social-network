@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { UsersFromServerType } from "../../api/api";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
 import classes from "./Users.module.css";
 
 type UsersPropsType = {
   users: Array<UsersFromServerType>;
+  pagesNumber: Array<number>;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
   showMoreUsers: () => void;
   subscribeUser: (userID: string) => void;
 };
 
 export const Users: React.FC<UsersPropsType> = ({
   users,
+  pagesNumber,
+  currentPage,
+  setCurrentPage,
   showMoreUsers,
   subscribeUser,
 }) => {
-  console.log(users);
   return (
     <main className={classes.friends}>
       <div className={classes.search}>
@@ -40,6 +45,19 @@ export const Users: React.FC<UsersPropsType> = ({
           ))
           // .filter((el, ind, arr) => ind < 10)}
         }
+      </div>
+      <div className={classes.pages}>
+        {pagesNumber
+          .map((page) => (
+            <span
+              key={page}
+              className={currentPage === page ? classes.activePage : ""}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </span>
+          ))
+          .filter((el, ind, arr) => ind < 5)}
       </div>
       <button onClick={showMoreUsers}>SHOW MORE</button>
     </main>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   subscribeUserAC,
@@ -11,22 +10,30 @@ import {
   UsersFromServerType,
   UsersResponseType,
 } from "../../api/api";
-// import { AppStateType } from "../../redux/redux-store";
-
 import { Users } from "./Users";
 
 export const UsersContainer = () => {
-  // const usersState = useSelector((state: AppStateType) => state.usersReducer);
   const dispatch = useDispatch();
 
-  // console.log(usersState);
-
   const [users, setUsers] = useState<Array<UsersFromServerType>>([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const pageSize: number = 5; // Количество пользователей на странице
+  let pagesCount: number = Math.ceil(totalCount / pageSize);
+  console.log(currentPage);
+
+  let pagesNumber: number[] = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pagesNumber.push(i);
+  }
 
   if (users.length === 0) {
     instance
-      .get<UsersResponseType>(`users`)
-      .then((response) => setUsers(response.data.items));
+      .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+      .then((response) => {
+        setUsers(response.data.items);
+        setTotalCount(response.data.totalCount);
+      });
   }
 
   const showUsers = () => {
@@ -34,6 +41,13 @@ export const UsersContainer = () => {
   };
 
   showUsers();
+
+  const setCurrentPageCallback = (currentPage: number) => {
+    setCurrentPage(currentPage);
+    instance
+      .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+      .then((response) => setUsers(response.data.items));
+  };
 
   const showMoreUsersCallback = () => {
     dispatch(showMoreUsersAC());
@@ -46,6 +60,9 @@ export const UsersContainer = () => {
   return (
     <Users
       users={users}
+      pagesNumber={pagesNumber}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPageCallback}
       showMoreUsers={showMoreUsersCallback}
       subscribeUser={subscribeUserCallback}
     />

@@ -26,7 +26,6 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
   subscribeUser,
 }) => {
   const [status, setStatus] = useState<boolean>(followed ? true : false);
-  console.log(status);
 
   const subscribeHandler = () => {
     setStatus(!status);
