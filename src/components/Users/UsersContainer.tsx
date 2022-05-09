@@ -11,6 +11,8 @@ import {
   UsersResponseType,
 } from "../../api/api";
 import { Users } from "./Users";
+import preloader from "../../assets/img/Spinner.gif";
+import { Preloader } from "../Preloader/Preloader";
 
 export const UsersContainer = () => {
   const dispatch = useDispatch();
@@ -18,9 +20,10 @@ export const UsersContainer = () => {
   const [users, setUsers] = useState<Array<UsersFromServerType>>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize: number = 5; // Количество пользователей на странице
+  const [fetch, setFetch] = useState<boolean>(true);
+  const pageSize: number = 8; // Количество пользователей на странице
   let pagesCount: number = Math.ceil(totalCount / pageSize);
-  console.log(currentPage);
+  console.log(fetch);
 
   let pagesNumber: number[] = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -31,6 +34,7 @@ export const UsersContainer = () => {
     instance
       .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
       .then((response) => {
+        setFetch(false);
         setUsers(response.data.items);
         setTotalCount(response.data.totalCount);
       });
@@ -43,10 +47,15 @@ export const UsersContainer = () => {
   showUsers();
 
   const setCurrentPageCallback = (currentPage: number) => {
+    setFetch(true);
+
     setCurrentPage(currentPage);
     instance
       .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
-      .then((response) => setUsers(response.data.items));
+      .then((response) => {
+        setFetch(false);
+        setUsers(response.data.items);
+      });
   };
 
   const showMoreUsersCallback = () => {
@@ -58,13 +67,19 @@ export const UsersContainer = () => {
   };
 
   return (
-    <Users
-      users={users}
-      pagesNumber={pagesNumber}
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPageCallback}
-      showMoreUsers={showMoreUsersCallback}
-      subscribeUser={subscribeUserCallback}
-    />
+    <>
+      {fetch ? (
+        <Preloader />
+      ) : (
+        <Users
+          users={users}
+          pagesNumber={pagesNumber}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPageCallback}
+          showMoreUsers={showMoreUsersCallback}
+          subscribeUser={subscribeUserCallback}
+        />
+      )}
+    </>
   );
 };

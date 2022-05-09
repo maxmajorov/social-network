@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { UsersFromServerType } from "../../api/api";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
 import classes from "./Users.module.css";
@@ -20,6 +20,15 @@ export const Users: React.FC<UsersPropsType> = ({
   showMoreUsers,
   subscribeUser,
 }) => {
+  useEffect(() => {
+    // Потом переисать для всех страниц
+    document.title = `Users`;
+    return () => {
+      // cleanup
+      document.title = `Social Network`;
+    };
+  });
+
   return (
     <main className={classes.friends}>
       <div className={classes.search}>
@@ -57,7 +66,7 @@ export const Users: React.FC<UsersPropsType> = ({
               {page}
             </span>
           ))
-          .filter((el, ind, arr) => ind < 5)}
+          .filter((el, ind, arr) => ind < 9)}
       </div>
       <button onClick={showMoreUsers}>SHOW MORE</button>
     </main>
