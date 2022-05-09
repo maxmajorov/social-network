@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import classes from "./FriendMaxi.module.css";
 
 type LocationType = {
@@ -34,7 +35,10 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
 
   return (
     <div className={classes.card}>
-      <img className={classes.avatar} src={avatar} alt="friend-name"></img>
+      <NavLink to={"/profile/" + id}>
+        <img className={classes.avatar} src={avatar} alt="friend-name"></img>
+      </NavLink>
+
       <div className={classes.cardInner}>
         <div className={classes.info}>
           <span className={classes.name}>{name}</span>

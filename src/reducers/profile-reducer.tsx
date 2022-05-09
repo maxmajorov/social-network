@@ -1,5 +1,10 @@
 import { v1 } from "uuid";
-import { ADD_NEW_POST, PostsActionsType } from "../actions/post-actions";
+import {
+  ADD_NEW_POST,
+  PostsActionsType,
+  SHOW_USER_PROFILE,
+} from "../actions/profile-actions";
+import { ProfileResponseType } from "../api/api";
 
 export type PostObj = {
   _id: string;
@@ -9,6 +14,7 @@ export type PostObj = {
 };
 
 export type ProfilePageType = {
+  profile: ProfileResponseType | null;
   posts: Array<PostObj>;
   newPostText: string;
 };
@@ -16,6 +22,26 @@ export type ProfilePageType = {
 export type InitialStateType = typeof initialState;
 
 const initialState = {
+  profile: {
+    userId: 0,
+    lookingForAJob: true,
+    lookingForAJobDescription: "looking for new opportunities",
+    fullName: "Maxim Predko",
+    contacts: {
+      github: "https://github.com/maxmajorov",
+      vk: "none",
+      facebook: "none",
+      instagram: "none",
+      twitter: "none",
+      website: "none",
+      youtube: "none",
+      mainLink: "maxpredko@gmail.com",
+    },
+    photos: {
+      small: "./img/avatar.jpg",
+      large: "./img/avatar.jpg",
+    },
+  },
   posts: [
     { _id: v1(), text: "Hello everybody!", likes: 4, comments: 2 },
     { _id: v1(), text: "I'm start learning React", likes: 14, comments: 4 },
@@ -38,6 +64,9 @@ export const profileReducer = (
         comments: 0,
       };
       return { ...state, posts: [postItem, ...state.posts] };
+    }
+    case SHOW_USER_PROFILE: {
+      return { ...state, profile: action.profile };
     }
     default: {
       return state;

@@ -7,12 +7,13 @@ import {
 } from "../../actions/users-actions";
 import {
   instance,
+  ProfileResponseType,
   UsersFromServerType,
   UsersResponseType,
 } from "../../api/api";
 import { Users } from "./Users";
-import preloader from "../../assets/img/Spinner.gif";
 import { Preloader } from "../Preloader/Preloader";
+import { showUserProfileAC } from "../../actions/profile-actions";
 
 export const UsersContainer = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,11 @@ export const UsersContainer = () => {
         setUsers(response.data.items);
         setTotalCount(response.data.totalCount);
       });
+
+    instance.get<ProfileResponseType>(`profile/2`).then((response) => {
+      console.log("get prof");
+      dispatch(showUserProfileAC(response.data));
+    });
   }
 
   const showUsers = () => {

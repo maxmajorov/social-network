@@ -3,7 +3,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Profile from "./components/Profile/Profile";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -11,6 +10,7 @@ import Friends from "./components/Friends/Friends";
 import { store } from "./redux/redux-store";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from "./components/Users/UsersContainer";
+import { ProfileContainer } from "./components/Profile/ProfileContainer";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
       <Sidebar friends={store.getState().friendsReducer.friends} />
       <div className="container-content">
         <Routes>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/*" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />
           <Route path="/news" element={<News />} />

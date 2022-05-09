@@ -5,6 +5,7 @@ import classes from "./Users.module.css";
 
 type UsersPropsType = {
   users: Array<UsersFromServerType>;
+
   pagesNumber: Array<number>;
   currentPage: number;
   setCurrentPage: (page: number) => void;
