@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   subscribeUserAC,
@@ -7,13 +7,11 @@ import {
 } from "../../actions/users-actions";
 import {
   instance,
-  ProfileResponseType,
   UsersFromServerType,
   UsersResponseType,
 } from "../../api/api";
 import { Users } from "./Users";
 import { Preloader } from "../Preloader/Preloader";
-import { showUserProfileAC } from "../../actions/profile-actions";
 
 export const UsersContainer = () => {
   const dispatch = useDispatch();
@@ -24,27 +22,23 @@ export const UsersContainer = () => {
   const [fetch, setFetch] = useState<boolean>(true);
   const pageSize: number = 8; // Количество пользователей на странице
   let pagesCount: number = Math.ceil(totalCount / pageSize);
-  console.log(fetch);
 
   let pagesNumber: number[] = [];
   for (let i = 1; i <= pagesCount; i++) {
     pagesNumber.push(i);
   }
 
-  if (users.length === 0) {
-    instance
-      .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
-      .then((response) => {
-        setFetch(false);
-        setUsers(response.data.items);
-        setTotalCount(response.data.totalCount);
-      });
-
-    instance.get<ProfileResponseType>(`profile/2`).then((response) => {
-      console.log("get prof");
-      dispatch(showUserProfileAC(response.data));
-    });
-  }
+  useEffect(() => {
+    if (users.length === 0) {
+      instance
+        .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+        .then((response) => {
+          setFetch(false);
+          setUsers(response.data.items);
+          setTotalCount(response.data.totalCount);
+        });
+    }
+  });
 
   const showUsers = () => {
     dispatch(setUsersAC(users));

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { AppStateType } from "../../../redux/redux-store";
 import classes from "./ProfileInfo.module.css";
 import defaultImage from "../../../assets/img/def-image.png";
-import defaultBackground from "../../../assets/img/def-back.jpg";
 
 export const ProfileInfo: React.FC = () => {
   const profileState = useSelector(
@@ -12,7 +11,7 @@ export const ProfileInfo: React.FC = () => {
   return (
     <div className={classes.profileInfo}>
       <div className={classes.picture}>
-        <img src={`${defaultBackground}`} alt="mood" />
+        <img src="./img/mood.jpg" alt="mood"></img>
       </div>
       <div className={classes.user}>
         <div className={classes.userAvatar}>

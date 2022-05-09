@@ -6,7 +6,7 @@
 
 .picture {
   height: 250px;
-  overflow: hidden;
+  /* overflow: hidden; */
   object-fit: cover;
 }
 
