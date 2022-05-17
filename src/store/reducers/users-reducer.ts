@@ -1,9 +1,9 @@
 import {
+  FOLLOW_USER,
   SET_PAGE_NUMBER,
   SET_USERS,
-  // SET_USERS,
   SHOW_MORE_USERS,
-  SUBSCRIBE_USER,
+  UNFOLLOW_USER,
   UsersActionsType,
 } from "../actions/users-actions";
 import { UsersFromServerType } from "../../api/api";
@@ -92,27 +92,31 @@ export const usersReducer = (
       console.log("showMore, do it later. Request state from server");
       return { ...state };
     }
-    case SUBSCRIBE_USER: {
+    case FOLLOW_USER: {
       return {
         ...state,
-        ...state.users.map((el) =>
-          el.id.toString() === action.userID
-            ? { ...el, followed: !el.followed }
-            : el
+        users: state.users.map((el) =>
+          el.id.toString() === action.userID ? { ...el, followed: true } : el
         ),
       };
     }
+
+    case UNFOLLOW_USER: {
+      return {
+        ...state,
+        users: state.users.map((el) =>
+          el.id.toString() === action.userID ? { ...el, followed: false } : el
+        ),
+      };
+    }
+
     case SET_USERS: {
       return {
         ...state,
+        users: action.users,
       };
     }
-    // case SET_PAGE_NUMBER: {
-    //   return {
-    //     ...state,
-    //     currentPage: action.currentPage,
-    //   };
-    // }
+
     default: {
       return state;
     }

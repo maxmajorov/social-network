@@ -1,13 +1,15 @@
 import { UsersFromServerType } from "../../api/api";
 
 export const SHOW_MORE_USERS = "SHOW-MORE-USERS";
-export const SUBSCRIBE_USER = "SUBSCRIBE-USER";
+export const FOLLOW_USER = "FOLLOW-USER";
+export const UNFOLLOW_USER = "UNFOLLOW-USER";
 export const SET_USERS = "SET-USERS";
 export const SET_PAGE_NUMBER = "SET-PAGE-NUMBER";
 
 export type UsersActionsType =
   | ShowMoreUsersACType
-  | SubscribeACType
+  | FollowACType
+  | UnFollowACType
   | SetUsersType;
 // | SetPageNumberACType;
 
@@ -19,13 +21,23 @@ export const showMoreUsersAC = (): ShowMoreUsersACType => ({
   type: SHOW_MORE_USERS,
 });
 
-type SubscribeACType = {
-  type: typeof SUBSCRIBE_USER;
+type FollowACType = {
+  type: typeof FOLLOW_USER;
   userID: string;
 };
 
-export const subscribeUserAC = (userID: string): SubscribeACType => ({
-  type: SUBSCRIBE_USER,
+export const followUserAC = (userID: string): FollowACType => ({
+  type: FOLLOW_USER,
+  userID: userID,
+});
+
+type UnFollowACType = {
+  type: typeof UNFOLLOW_USER;
+  userID: string;
+};
+
+export const unFollowUserAC = (userID: string): UnFollowACType => ({
+  type: UNFOLLOW_USER,
   userID: userID,
 });
 

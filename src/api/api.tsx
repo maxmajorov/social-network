@@ -3,7 +3,10 @@ import axios from "axios";
 export const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   headers: { "API-KEY": "196d543e-854d-4840-b68c-b0f81150459a" },
+  withCredentials: true,
 });
+
+// ==== USERS ====
 
 export type UsersFromServerType = {
   id: number;
@@ -22,6 +25,8 @@ export type UsersResponseType = {
   totalCount: number;
   error: string;
 };
+
+// ==== PROFILE ====
 
 export type ProfileResponseType = {
   userId: number;
@@ -44,6 +49,8 @@ export type ProfileResponseType = {
   };
 };
 
+// ==== AUTHORIZATION ====
+
 export type AuthResponseType = {
   data: LoginInfo;
   resultCode: number;
@@ -56,30 +63,9 @@ export type LoginInfo = {
   login: string;
 };
 
-// export const usersAPI = {
-//   getUsers() {
-//     return instance
-//       .get<Array<UsersFromServerType>>(`users`)
-//       .then((response) => response.data);
-//   },
-// };
-
-// const userServ = {
-//   async getUsers() {
-//     try {
-//       const usersData = await axios.get<UsersResponseType>(
-//         "https://social-network.samuraijs.com/api/1.0/users"
-//       );
-//       return usersData.data.items;
-//     } catch (error) {
-//       throw new Error("error, users not found");
-//     }
-//   },
-// };
-
-// export let usersGetFromServer = axios
-//   .get<UsersResponseType>("https://social-network.samuraijs.com/api/1.0/users")
-//   .then((response) => {
-//     // console.log(response.data.items);
-//     return response.data.items;
-//   });
+// ==== FOLLOW ====
+export type FollowResponseType = {
+  resultCode: number;
+  data: any;
+  messages: Array<string>;
+};

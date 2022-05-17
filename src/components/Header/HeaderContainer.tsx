@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AuthResponseType, instance } from "../../api/api";
 import { authorizeMeAC } from "../../store/actions";
@@ -23,11 +23,8 @@ export const HeaderContainer = () => {
       });
   }, []);
 
-  console.log(authData);
-
   const authRequestCallback = () => {
     dispatch(authorizeMeAC(authData));
-    console.log("request");
   };
 
   return (

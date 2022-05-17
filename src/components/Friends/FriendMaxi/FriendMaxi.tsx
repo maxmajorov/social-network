@@ -1,5 +1,9 @@
+import { Button } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { FollowResponseType, instance } from "../../../api/api";
+import { AppStateType } from "../../../store/redux-store";
 import classes from "./FriendMaxi.module.css";
 
 type LocationType = {
@@ -14,7 +18,8 @@ type FriendsMaxiPropsType = {
   location?: LocationType;
   description?: string;
   followed?: boolean;
-  subscribeUser?: (userID: string) => void;
+  followUser?: (userID: string) => void;
+  unFollowUser?: (userID: string) => void;
 };
 
 export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
@@ -24,13 +29,34 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
   location,
   description,
   followed,
-  subscribeUser,
+  followUser,
+  unFollowUser,
 }) => {
-  const [status, setStatus] = useState<boolean>(followed ? true : false);
+  console.log("rerender user");
+  const [status, setStatus] = useState<boolean>(followed ? false : true);
+  const [followProgress, setFollowProgress] = useState<boolean>(); // disabled кнопки на время изменения fol / unfol
 
   const subscribeHandler = () => {
-    setStatus(!status);
-    subscribeUser && subscribeUser(id);
+    !followed
+      ? instance
+          .post<FollowResponseType>(`follow/${id}`)
+          .then((response) => {
+            setFollowProgress(true);
+            if (response.data.resultCode === 0) {
+              setStatus(!status);
+              followUser && followUser(id);
+              setFollowProgress(false);
+            }
+          })
+          .catch((err) => console.log(err))
+      : instance.delete<FollowResponseType>(`follow/${id}`).then((response) => {
+          setFollowProgress(true);
+          if (response.data.resultCode === 0) {
+            setStatus(!status);
+            unFollowUser && unFollowUser(id);
+            setFollowProgress(false);
+          }
+        });
   };
 
   return (
@@ -48,9 +74,13 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
           {description && <span>{description}</span>}
         </div>
         <div className={classes.subscribe}>
-          <button onClick={subscribeHandler}>
+          <Button
+            type="primary"
+            onClick={subscribeHandler}
+            disabled={followProgress}
+          >
             {status ? "Follow" : "Unfollow"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

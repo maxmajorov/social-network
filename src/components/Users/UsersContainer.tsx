@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
-  subscribeUserAC,
   showMoreUsersAC,
   setUsersAC,
+  followUserAC,
+  unFollowUserAC,
 } from "../../store/actions";
 import {
   instance,
@@ -34,17 +35,12 @@ export const UsersContainer = () => {
         .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
         .then((response) => {
           setFetch(false);
+          dispatch(setUsersAC(response.data.items));
           setUsers(response.data.items);
           setTotalCount(response.data.totalCount);
         });
     }
-  });
-
-  const showUsers = () => {
-    dispatch(setUsersAC(users));
-  };
-
-  showUsers();
+  }, [dispatch, currentPage, pageSize, users]);
 
   const setCurrentPageCallback = (currentPage: number) => {
     setFetch(true);
@@ -62,8 +58,12 @@ export const UsersContainer = () => {
     dispatch(showMoreUsersAC());
   };
 
-  const subscribeUserCallback = (userID: string) => {
-    dispatch(subscribeUserAC(userID));
+  const followUserCallback = (userID: string) => {
+    dispatch(followUserAC(userID));
+  };
+
+  const unFollowUserCallback = (userID: string) => {
+    dispatch(unFollowUserAC(userID));
   };
 
   return (
@@ -77,7 +77,8 @@ export const UsersContainer = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPageCallback}
           showMoreUsers={showMoreUsersCallback}
-          subscribeUser={subscribeUserCallback}
+          followUser={followUserCallback}
+          unFollowUser={unFollowUserCallback}
         />
       )}
     </>
