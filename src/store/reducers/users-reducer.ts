@@ -6,7 +6,7 @@ import {
   SUBSCRIBE_USER,
   UsersActionsType,
 } from "../actions/users-actions";
-import { UsersFromServerType } from "../api/api";
+import { UsersFromServerType } from "../../api/api";
 
 // type LocationType = {
 //   country: string;

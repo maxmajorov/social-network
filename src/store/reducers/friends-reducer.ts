@@ -1,5 +1,4 @@
 import { v1 } from "uuid";
-import { ActionCreatorType } from "../redux/store";
 
 const ADD_NEW_FRIEND = "ADD-NEW-FRIEND";
 

@@ -1,4 +1,4 @@
-import { UsersFromServerType } from "../api/api";
+import { UsersFromServerType } from "../../api/api";
 
 export const SHOW_MORE_USERS = "SHOW-MORE-USERS";
 export const SUBSCRIBE_USER = "SUBSCRIBE-USER";

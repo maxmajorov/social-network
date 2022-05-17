@@ -1,4 +1,4 @@
-import { ProfileResponseType } from "../api/api";
+import { ProfileResponseType } from "./../../api/api";
 
 export const ADD_NEW_POST = "ADD-NEW-POST";
 export const SHOW_USER_PROFILE = "SHOW-USER-PROFILE";

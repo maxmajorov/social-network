@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { AppStateType } from "../../../redux/redux-store";
 import classes from "./ProfileInfo.module.css";
 import defaultImage from "../../../assets/img/def-image.png";
 import defaultBackground from "../../../assets/img/def-back.jpg";
+import { AppStateType } from "../../../store/redux-store";
 
 export const ProfileInfo: React.FC = () => {
   const profileState = useSelector(

@@ -7,7 +7,7 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
-import { store } from "./redux/redux-store";
+import { store } from "./store/redux-store";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from "./components/Users/UsersContainer";
 import { ProfileContainer } from "./components/Profile/ProfileContainer";
@@ -20,7 +20,7 @@ const App = () => {
       <Sidebar friends={store.getState().friendsReducer.friends} />
       <div className="container-content">
         <Routes>
-          <Route path="/" element={<MyProfile />} />
+          <Route path="/profile" element={<MyProfile />} />
           <Route path="/profile/:userId" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />

@@ -4,7 +4,7 @@ import {
   subscribeUserAC,
   showMoreUsersAC,
   setUsersAC,
-} from "../../actions/users-actions";
+} from "../../store/actions";
 import {
   instance,
   UsersFromServerType,

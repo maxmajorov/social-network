@@ -1,5 +1,5 @@
 import React from "react";
-import { DialogsPageType } from "../../reducers/dialogs-reducer";
+import { DialogsPageType } from "../../store/reducers/dialogs-reducer";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
 import { CreateMessage } from "./MessageItem/CreateMessage/CreateMessage";

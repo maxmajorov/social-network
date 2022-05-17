@@ -4,7 +4,7 @@ import {
   PostsActionsType,
   SHOW_USER_PROFILE,
 } from "../actions/profile-actions";
-import { ProfileResponseType } from "../api/api";
+import { ProfileResponseType } from "../../api/api";
 
 export type PostObj = {
   _id: string;

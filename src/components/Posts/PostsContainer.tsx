@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { addNewPostAC } from "../../actions/profile-actions";
-import { AppStateType } from "../../redux/redux-store";
+import { addNewPostAC } from "../../store/actions";
+import { AppStateType } from "../../store/redux-store";
+
 import { Posts } from "./Posts";
 
 // Контейнерная компонента ==> вся логика и store только здесь.
@@ -24,22 +25,3 @@ export const PostsContainer = () => {
     />
   );
 };
-
-// const mapStateToProps = (state: ProfilePageType) => {
-//   return {
-//     postsState: state,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-//   return {
-//     addNewPostToStore: (newPost: string) => {
-//       dispatch(addPostActionCreator(newPost));
-//     },
-//   };
-// };
-
-// export const PostsContainer = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Posts);

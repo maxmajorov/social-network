@@ -1,5 +1,5 @@
 import React from "react";
-import { FriendsPageType } from "../../redux/store";
+import { FriendsPageType } from "../../store/store";
 import { FriendMaxi } from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
 
