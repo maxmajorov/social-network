@@ -44,6 +44,18 @@ export type ProfileResponseType = {
   };
 };
 
+export type AuthResponseType = {
+  data: LoginInfo;
+  resultCode: number;
+  messages: Array<any>;
+};
+
+export type LoginInfo = {
+  id: number;
+  email: string;
+  login: string;
+};
+
 // export const usersAPI = {
 //   getUsers() {
 //     return instance

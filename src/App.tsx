@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -12,11 +11,12 @@ import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from "./components/Users/UsersContainer";
 import { ProfileContainer } from "./components/Profile/ProfileContainer";
 import { MyProfile } from "./components/MyProfile/MyProfile";
+import { HeaderContainer } from "./components/Header/HeaderContainer";
 
 const App = () => {
   return (
     <div className="container">
-      <Header />
+      <HeaderContainer />
       <Sidebar friends={store.getState().friendsReducer.friends} />
       <div className="container-content">
         <Routes>

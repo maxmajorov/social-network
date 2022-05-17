@@ -4,6 +4,7 @@ import {
   friendsReducer,
   profileReducer,
   usersReducer,
+  authReducer,
 } from "./reducers";
 
 // ====== Объединяем reducer вместе======
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   dialogsReducer: dialogsReducer,
   usersReducer: usersReducer,
   friendsReducer: friendsReducer,
+  authReducer: authReducer,
 });
 
 type RootReducersType = typeof rootReducer;
@@ -30,3 +32,6 @@ export const store = configureStore({
 // export type RootState = ReturnType<typeof store.getState>;
 // // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 // export type AppDispatch = typeof store.dispatch;
+
+//@ts-ignore
+window.store = store;
