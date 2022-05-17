@@ -14,6 +14,7 @@ interface AuthFormProps {
   onCancel: () => void;
   login: string;
   authRequest: () => void;
+  toggle: () => void;
 }
 
 export const AuthModal: React.FC<AuthFormProps> = ({
@@ -22,6 +23,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
   onCancel,
   login,
   authRequest,
+  toggle,
 }) => {
   const [inputLogin, setInputLogin] = useState<string>("");
 
@@ -36,6 +38,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
 
   const logINHandler = () => {
     inputLogin === login ? authRequest() : alert("Login is not found");
+    toggle();
   };
 
   return (

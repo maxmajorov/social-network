@@ -20,3 +20,18 @@
   font-weight: 500;
   letter-spacing: 1px;
 }
+
+.indicator {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+}
+
+.online {
+  background-color: green;
+}
+
+.offline {
+  background-color: red;
+}

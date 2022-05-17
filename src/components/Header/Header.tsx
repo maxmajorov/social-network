@@ -10,6 +10,14 @@ type HeaderType = {
 
 export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
   const [visible, setVisible] = useState(false);
+  const [logOK, setLogOK] = useState<boolean>(false);
+
+  const toggleCallback = () => {
+    login ? setLogOK(true) : setLogOK(false);
+  };
+  const classNameForIndicator = `${classes.indicator} ${
+    logOK ? classes.online : classes.offline
+  } `;
 
   const onCreate = (values: any) => {
     console.log("Received values of form: ", values);
@@ -21,14 +29,18 @@ export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
         <img src="./img/logo.png" className={classes.logo} alt="logo" />
         <span className={classes.title}>Social Network</span>
       </div>
-      <Button
-        type="text"
-        onClick={() => {
-          setVisible(true);
-        }}
-      >
-        Login
-      </Button>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div className={classNameForIndicator} />
+        <Button
+          type="text"
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          Login
+        </Button>
+      </div>
+
       <AuthModal
         visible={visible}
         onCreate={onCreate}
@@ -37,6 +49,7 @@ export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
         }}
         login={login}
         authRequest={authRequest}
+        toggle={toggleCallback}
       />
     </header>
   );
