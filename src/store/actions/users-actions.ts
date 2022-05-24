@@ -3,15 +3,17 @@ import { UsersFromServerType } from "../../api/api";
 export const SHOW_MORE_USERS = "SHOW-MORE-USERS";
 export const FOLLOW_USER = "FOLLOW-USER";
 export const UNFOLLOW_USER = "UNFOLLOW-USER";
-export const SET_USERS = "SET-USERS";
-export const SET_PAGE_NUMBER = "SET-PAGE-NUMBER";
+export const GET_USERS = "GET-USERS";
+export const SET_TOTAL_COUNT_USERS = "SET-TOTAL-COUNT-USERS";
+export const IS_FETCHING = "IS-FETCHING";
 
 export type UsersActionsType =
   | ShowMoreUsersACType
   | FollowACType
   | UnFollowACType
-  | SetUsersType;
-// | SetPageNumberACType;
+  | GetUsersType
+  | SetTotalCountUsersACType
+  | IsFetchingACType;
 
 type ShowMoreUsersACType = {
   type: typeof SHOW_MORE_USERS;
@@ -41,24 +43,36 @@ export const unFollowUserAC = (userID: string): UnFollowACType => ({
   userID: userID,
 });
 
-type SetUsersType = {
-  type: typeof SET_USERS;
+type GetUsersType = {
+  type: typeof GET_USERS;
   users: Array<UsersFromServerType>;
 };
 
-export const setUsersAC = (
+export const getUsersAC = (
   users: Array<UsersFromServerType>
-): SetUsersType => ({
-  type: SET_USERS,
+): GetUsersType => ({
+  type: GET_USERS,
   users: users,
 });
 
-// type SetPageNumberACType = {
-//   type: typeof SET_PAGE_NUMBER;
-//   currentPage: number;
-// };
+type SetTotalCountUsersACType = {
+  type: typeof SET_TOTAL_COUNT_USERS;
+  totalCount: number;
+};
 
-// export const setPageNumberAC = (currentPage: number): SetPageNumberACType => ({
-//   type: SET_PAGE_NUMBER,
-//   currentPage: currentPage,
-// });
+export const setTotalCountUsersAC = (
+  totalCount: number
+): SetTotalCountUsersACType => ({
+  type: SET_TOTAL_COUNT_USERS,
+  totalCount: totalCount,
+});
+
+type IsFetchingACType = {
+  type: typeof IS_FETCHING;
+  fetch: boolean;
+};
+
+export const isFetchingAC = (fetch: boolean): IsFetchingACType => ({
+  type: IS_FETCHING,
+  fetch: fetch,
+});

@@ -8,6 +8,23 @@ export const instance = axios.create({
 
 // ==== USERS ====
 
+export const usersAPI = {
+  getUsers(currentPage: number, pageSize: number) {
+    return instance
+      .get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+      .then((response) => response.data);
+  },
+  follow(userID: string) {
+    return instance.post<FollowResponseType>(`follow/${userID}`);
+  },
+
+  unfollow(userID: string) {
+    return instance.delete<FollowResponseType>(`follow/${userID}`);
+  },
+};
+
+// ==== TYPES ====
+
 export type UsersFromServerType = {
   id: number;
   followed: boolean;

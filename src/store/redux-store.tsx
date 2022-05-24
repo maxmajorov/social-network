@@ -1,4 +1,5 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { applyMiddleware, combineReducers, createStore, Store } from "redux";
+import thunkMiddleware from "redux-thunk";
 import {
   dialogsReducer,
   friendsReducer,
@@ -7,12 +8,9 @@ import {
   authReducer,
 } from "./reducers";
 
-// ====== Объединяем reducer вместе======
+import { composeWithDevTools } from "redux-devtools-extension";
 
-// ======Создаем Store======
-// У Store уже есть методы getState, dispatch
-
-const rootReducer = combineReducers({
+const rootReducers = combineReducers({
   profileReducer: profileReducer,
   dialogsReducer: dialogsReducer,
   usersReducer: usersReducer,
@@ -20,18 +18,19 @@ const rootReducer = combineReducers({
   authReducer: authReducer,
 });
 
-type RootReducersType = typeof rootReducer;
+type RootReducersType = typeof rootReducers;
+
+// export const store = configureStore({
+//   reducer: rootReducer,
+// });
+
+export const store: Store<AppStateType> = createStore(
+  rootReducers,
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
+  // applyMiddleware(thunkMiddleware)
+);
 
 export type AppStateType = ReturnType<RootReducersType>; // ТИП ВСЕГО СТЕЙТА
-
-export const store = configureStore({
-  reducer: rootReducer,
-});
-
-// // Infer the `RootState` and `AppDispatch` types from the store itself
-// export type RootState = ReturnType<typeof store.getState>;
-// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-// export type AppDispatch = typeof store.dispatch;
 
 //@ts-ignore
 window.store = store;

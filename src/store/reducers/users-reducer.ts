@@ -1,7 +1,8 @@
+import { IS_FETCHING } from "./../actions/users-actions";
 import {
   FOLLOW_USER,
-  SET_PAGE_NUMBER,
-  SET_USERS,
+  SET_TOTAL_COUNT_USERS,
+  GET_USERS,
   SHOW_MORE_USERS,
   UNFOLLOW_USER,
   UsersActionsType,
@@ -61,26 +62,18 @@ import { UsersFromServerType } from "../../api/api";
 //   ] as Array<UsersObjType>,
 // };
 
-// let usersFromServer: Array<UsersFromServer> = [];
-
-// const initialState = {
-//   id: null as number | null,
-//   followed: null as boolean | null,
-//   name: null as string | null,
-//   photos: {
-//     large: null as string | null,
-//     small: null as string | null,
-//   },
-// };
-
 export type initialStateType = {
   users: Array<UsersFromServerType>;
   currentPage: number;
+  totalCount: number;
+  isFetching: boolean;
 };
 
 const initialState = {
   users: [],
   currentPage: 1,
+  totalCount: 0,
+  isFetching: true,
 };
 
 export const usersReducer = (
@@ -110,10 +103,24 @@ export const usersReducer = (
       };
     }
 
-    case SET_USERS: {
+    case GET_USERS: {
       return {
         ...state,
         users: action.users,
+      };
+    }
+
+    case SET_TOTAL_COUNT_USERS: {
+      return {
+        ...state,
+        totalCount: action.totalCount,
+      };
+    }
+
+    case IS_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.fetch,
       };
     }
 

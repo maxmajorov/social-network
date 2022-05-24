@@ -7,7 +7,7 @@ type UsersPropsType = {
   users: Array<UsersFromServerType>;
   pagesNumber: Array<number>;
   currentPage: number;
-  setCurrentPage: (page: number) => void;
+  setCurrentPage: (pageNumber: number) => void;
   showMoreUsers: () => void;
   followUser: (userID: string) => void;
   unFollowUser: (userID: string) => void;
@@ -23,7 +23,6 @@ export const Users: React.FC<UsersPropsType> = ({
   unFollowUser,
 }) => {
   useEffect(() => {
-    // Потом переисать для всех страниц
     document.title = `Users`;
     return () => {
       // cleanup
@@ -49,8 +48,6 @@ export const Users: React.FC<UsersPropsType> = ({
             followed={user.followed}
             followUser={followUser}
             unFollowUser={unFollowUser}
-            // location={el.location}
-            // description={el.description}
           />
         ))}
       </div>

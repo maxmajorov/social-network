@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DialogsPageType } from "../../store/reducers/dialogs-reducer";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
@@ -16,6 +16,15 @@ const Dialogs: React.FC<DialogsPropsType> = ({
   dialogsState,
   addNewMessageToStore,
 }) => {
+  useEffect(() => {
+    // Потом переисать для всех страниц
+    document.title = `Dialogs`;
+    return () => {
+      // cleanup
+      document.title = `Social Network`;
+    };
+  });
+
   const dialogsElements = dialogsState.dialogs.map((el) => (
     <DialogItem key={el._id} userName={el.name} id={el._id} />
   ));

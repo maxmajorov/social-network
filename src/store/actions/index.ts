@@ -1,9 +1,11 @@
 export { authorizeMeAC } from "./auth-actions";
 export {
-  setUsersAC,
+  getUsersAC,
+  isFetchingAC,
   showMoreUsersAC,
   followUserAC,
   unFollowUserAC,
+  setTotalCountUsersAC,
 } from "./users-actions";
 export { AddNewMessageAC } from "./dialogs-actions";
 export { addNewPostAC, showUserProfileAC } from "./profile-actions";
