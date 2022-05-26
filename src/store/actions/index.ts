@@ -2,6 +2,7 @@ export { authorizeMeAC } from "./auth-actions";
 export {
   getUsersAC,
   isFetchingAC,
+  followProgressAC,
   showMoreUsersAC,
   followUserAC,
   unFollowUserAC,

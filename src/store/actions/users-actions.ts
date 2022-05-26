@@ -6,14 +6,7 @@ export const UNFOLLOW_USER = "UNFOLLOW-USER";
 export const GET_USERS = "GET-USERS";
 export const SET_TOTAL_COUNT_USERS = "SET-TOTAL-COUNT-USERS";
 export const IS_FETCHING = "IS-FETCHING";
-
-export type UsersActionsType =
-  | ShowMoreUsersACType
-  | FollowACType
-  | UnFollowACType
-  | GetUsersType
-  | SetTotalCountUsersACType
-  | IsFetchingACType;
+export const FOLLOW_IN_PROGRESS = "FOLLOW-IN-PROGRESS";
 
 type ShowMoreUsersACType = {
   type: typeof SHOW_MORE_USERS;
@@ -76,3 +69,22 @@ export const isFetchingAC = (fetch: boolean): IsFetchingACType => ({
   type: IS_FETCHING,
   fetch: fetch,
 });
+
+type followProgressACType = {
+  type: typeof FOLLOW_IN_PROGRESS;
+  fetch: boolean;
+};
+
+export const followProgressAC = (fetch: boolean): followProgressACType => ({
+  type: FOLLOW_IN_PROGRESS,
+  fetch: fetch,
+});
+
+export type UsersActionsType =
+  | ShowMoreUsersACType
+  | FollowACType
+  | UnFollowACType
+  | GetUsersType
+  | SetTotalCountUsersACType
+  | IsFetchingACType
+  | followProgressACType;

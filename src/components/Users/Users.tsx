@@ -29,6 +29,7 @@ export const Users: React.FC<UsersPropsType> = ({
       document.title = `Social Network`;
     };
   });
+  console.log(users);
   return (
     <main className={classes.friends}>
       <div className={classes.search}>

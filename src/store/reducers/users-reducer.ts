@@ -1,10 +1,11 @@
-import { IS_FETCHING } from "./../actions/users-actions";
 import {
   FOLLOW_USER,
   SET_TOTAL_COUNT_USERS,
   GET_USERS,
   SHOW_MORE_USERS,
   UNFOLLOW_USER,
+  FOLLOW_IN_PROGRESS,
+  IS_FETCHING,
   UsersActionsType,
 } from "../actions/users-actions";
 import { UsersFromServerType } from "../../api/api";
@@ -67,6 +68,7 @@ export type initialStateType = {
   currentPage: number;
   totalCount: number;
   isFetching: boolean;
+  followProgress: boolean;
 };
 
 const initialState = {
@@ -74,6 +76,7 @@ const initialState = {
   currentPage: 1,
   totalCount: 0,
   isFetching: true,
+  followProgress: false,
 };
 
 export const usersReducer = (
@@ -118,6 +121,13 @@ export const usersReducer = (
     }
 
     case IS_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.fetch,
+      };
+    }
+
+    case FOLLOW_IN_PROGRESS: {
       return {
         ...state,
         isFetching: action.fetch,

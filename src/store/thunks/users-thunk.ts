@@ -1,4 +1,9 @@
-import { isFetchingAC, followUserAC } from "./../actions/users-actions";
+import {
+  isFetchingAC,
+  followUserAC,
+  unFollowUserAC,
+  followProgressAC,
+} from "./../actions/users-actions";
 import { AnyAction, Dispatch } from "redux";
 import { usersAPI } from "../../api/api";
 import { getUsersAC, setTotalCountUsersAC } from "../actions";
@@ -15,22 +20,32 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 
 export const followUserThunkCreator = (userID: string) => {
   return (dispatch: Dispatch<AnyAction>) => {
-    usersAPI.follow(userID).then((response) => {
-      console.log(response);
-      response.data.resultCode === 0
-        ? dispatch(followUserAC(userID))
-        : console.log("asas");
-    });
+    usersAPI
+      .follow(userID)
+      .then((response) => {
+        dispatch(followProgressAC(true));
+        return response;
+      })
+      .then((response) => {
+        console.log(response);
+        response.data.resultCode === 0
+          ? dispatch(followUserAC(userID))
+          : console.log(response.data);
+      })
+      .catch((err) => console.log(err));
   };
 };
 
 export const unfollowUserThunkCreator = (userID: string) => {
   return (dispatch: Dispatch<AnyAction>) => {
-    usersAPI.unfollow(userID).then((response) => {
-      console.log(response);
-      response.data.resultCode === 0
-        ? dispatch(followUserAC(userID))
-        : console.log("asas");
-    });
+    usersAPI
+      .unfollow(userID)
+      .then((response) => {
+        console.log(response);
+        response.data.resultCode === 0
+          ? dispatch(unFollowUserAC(userID))
+          : console.log(response.data);
+      })
+      .catch((err) => console.log(err));
   };
 };
