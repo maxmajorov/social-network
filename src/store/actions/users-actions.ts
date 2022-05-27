@@ -73,11 +73,16 @@ export const isFetchingAC = (fetch: boolean): IsFetchingACType => ({
 type followProgressACType = {
   type: typeof FOLLOW_IN_PROGRESS;
   fetch: boolean;
+  userID: string;
 };
 
-export const followProgressAC = (fetch: boolean): followProgressACType => ({
+export const followProgressAC = (
+  fetch: boolean,
+  userID: string
+): followProgressACType => ({
   type: FOLLOW_IN_PROGRESS,
   fetch: fetch,
+  userID: userID,
 });
 
 export type UsersActionsType =

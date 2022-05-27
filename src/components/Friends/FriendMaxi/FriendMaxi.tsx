@@ -11,47 +11,49 @@ type FriendsMaxiPropsType = {
   followed?: boolean;
   followUser?: (userID: string) => void;
   unFollowUser?: (userID: string) => void;
+  followProgress?: boolean;
 };
 
-export const FriendMaxi: React.FC<FriendsMaxiPropsType> = ({
-  id,
-  name,
-  avatar,
-  description,
-  followed,
-  followUser,
-  unFollowUser,
-}) => {
-  const [disable, setDisable] = useState<boolean>(false);
+export const FriendMaxi: React.FC<FriendsMaxiPropsType> = React.memo(
+  ({
+    id,
+    name,
+    avatar,
+    description,
+    followed,
+    followUser,
+    unFollowUser,
+    followProgress,
+  }) => {
+    const subscribeHandler = () => {
+      followed
+        ? unFollowUser && unFollowUser(id)
+        : followUser && followUser(id);
+    };
 
-  const subscribeHandler = () => {
-    // followed ? unFollowUser && unFollowUser(id) : followUser && followUser(id);
+    console.log(followProgress);
+    return (
+      <div className={classes.card}>
+        <NavLink to={"/profile/" + id}>
+          <img className={classes.avatar} src={avatar} alt="friend-name"></img>
+        </NavLink>
 
-    if (followed) {
-      setDisable(true);
-      unFollowUser && unFollowUser(id);
-    } else {
-      followUser && followUser(id);
-    }
-  };
-
-  return (
-    <div className={classes.card}>
-      <NavLink to={"/profile/" + id}>
-        <img className={classes.avatar} src={avatar} alt="friend-name"></img>
-      </NavLink>
-
-      <div className={classes.cardInner}>
-        <div className={classes.info}>
-          <span className={classes.name}>{name}</span>
-          {description && <span>{description}</span>}
-        </div>
-        <div className={classes.subscribe}>
-          <Button type="primary" onClick={subscribeHandler} disabled={disable}>
-            {!followed ? "Follow" : "Unfollow"}
-          </Button>
+        <div className={classes.cardInner}>
+          <div className={classes.info}>
+            <span className={classes.name}>{name}</span>
+            {description && <span>{description}</span>}
+          </div>
+          <div className={classes.subscribe}>
+            <Button
+              type="primary"
+              onClick={subscribeHandler}
+              disabled={followProgress}
+            >
+              {!followed ? "Follow" : "Unfollow"}
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { showMoreUsersAC, isFetchingAC } from "../../store/actions";
 import { Users } from "./Users";
@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { AppStateType } from "../../store/redux-store";
 
 export const UsersContainer = () => {
-  const { users, totalCount, isFetching } = useSelector(
+  const { users, totalCount, isFetching, followProgress } = useSelector(
     (state: AppStateType) => state.usersReducer
   );
   const dispatch = useDispatch();
@@ -42,17 +42,19 @@ export const UsersContainer = () => {
     dispatch(showMoreUsersAC());
   };
 
-  const followUserCallback = (userID: string) => {
-    console.log("follow", userID);
-    followUserThunkCreator(userID)(dispatch);
-    // dispatch(followUserAC(userID));
-  };
+  const followUserCallback = useCallback(
+    (userID: string) => {
+      followUserThunkCreator(userID)(dispatch);
+    },
+    [dispatch]
+  );
 
-  const unFollowUserCallback = (userID: string) => {
-    console.log("unfollow", userID);
-    unfollowUserThunkCreator(userID)(dispatch);
-    // dispatch(unFollowUserAC(userID));
-  };
+  const unFollowUserCallback = useCallback(
+    (userID: string) => {
+      unfollowUserThunkCreator(userID)(dispatch);
+    },
+    [dispatch]
+  );
 
   return (
     <>
@@ -67,6 +69,7 @@ export const UsersContainer = () => {
           showMoreUsers={showMoreUsersCallback}
           followUser={followUserCallback}
           unFollowUser={unFollowUserCallback}
+          followProgress={followProgress}
         />
       )}
     </>

@@ -20,17 +20,15 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 
 export const followUserThunkCreator = (userID: string) => {
   return (dispatch: Dispatch<AnyAction>) => {
+    dispatch(followProgressAC(true, userID));
     usersAPI
       .follow(userID)
-      .then((response) => {
-        dispatch(followProgressAC(true));
-        return response;
-      })
       .then((response) => {
         console.log(response);
         response.data.resultCode === 0
           ? dispatch(followUserAC(userID))
           : console.log(response.data);
+        dispatch(followProgressAC(false, userID));
       })
       .catch((err) => console.log(err));
   };
@@ -38,6 +36,7 @@ export const followUserThunkCreator = (userID: string) => {
 
 export const unfollowUserThunkCreator = (userID: string) => {
   return (dispatch: Dispatch<AnyAction>) => {
+    dispatch(followProgressAC(true, userID));
     usersAPI
       .unfollow(userID)
       .then((response) => {
@@ -45,6 +44,7 @@ export const unfollowUserThunkCreator = (userID: string) => {
         response.data.resultCode === 0
           ? dispatch(unFollowUserAC(userID))
           : console.log(response.data);
+        dispatch(followProgressAC(false, userID));
       })
       .catch((err) => console.log(err));
   };

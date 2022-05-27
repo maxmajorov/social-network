@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { UsersFromServerType } from "../../api/api";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
+
 import classes from "./Users.module.css";
 
 type UsersPropsType = {
@@ -11,6 +12,7 @@ type UsersPropsType = {
   showMoreUsers: () => void;
   followUser: (userID: string) => void;
   unFollowUser: (userID: string) => void;
+  followProgress: boolean[];
 };
 
 export const Users: React.FC<UsersPropsType> = ({
@@ -21,6 +23,7 @@ export const Users: React.FC<UsersPropsType> = ({
   showMoreUsers,
   followUser,
   unFollowUser,
+  followProgress,
 }) => {
   useEffect(() => {
     document.title = `Users`;
@@ -30,13 +33,14 @@ export const Users: React.FC<UsersPropsType> = ({
     };
   });
   console.log(users);
+
   return (
     <main className={classes.friends}>
       <div className={classes.search}>
         <input className={classes.serchInput} type="text" />
       </div>
       <div className={classes.list}>
-        {users.map((user) => (
+        {users.map((user, ind) => (
           <FriendMaxi
             key={user.id}
             id={user.id.toString()}
@@ -49,6 +53,7 @@ export const Users: React.FC<UsersPropsType> = ({
             followed={user.followed}
             followUser={followUser}
             unFollowUser={unFollowUser}
+            followProgress={followProgress[ind]}
           />
         ))}
       </div>
