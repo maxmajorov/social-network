@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Params } from "react-router";
 
 export const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -21,8 +22,24 @@ export const usersAPI = {
   unfollow(userID: string) {
     return instance.delete<FollowResponseType>(`follow/${userID}`);
   },
+
+  getUserProfile(params: Params<string>) {
+    return instance
+      .get<ProfileResponseType>(`profile/${params.userId}`)
+      .then((response) => response.data);
+  },
 };
 
+// ==== AUTH ====
+export const authAPI = {
+  authUser() {
+    return instance
+      .get<AuthResponseType>(`/auth/me`, {
+        withCredentials: true, // При кроссдоменности
+      })
+      .then((response) => response.data.data);
+  },
+};
 // ==== TYPES ====
 
 export type UsersFromServerType = {

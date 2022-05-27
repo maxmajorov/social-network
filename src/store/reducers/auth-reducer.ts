@@ -23,9 +23,6 @@ export const authReducer = (
       return {
         ...state,
         ...action.data,
-        // id: action.data.id,
-        // email: action.data.email,
-        // login: action.data.login,
         isAuth: true,
       };
     }

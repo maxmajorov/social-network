@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { AuthResponseType, instance } from "../../api/api";
-import { authorizeMeAC } from "../../store/actions";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { AppStateType } from "../../store/redux-store";
+import { authUserTC } from "../../store/thunks";
 import { Header } from "./Header";
 
 export const HeaderContainer = () => {
-  const [authData, setAuthData] = useState({
-    id: 0,
-    email: "",
-    login: "",
-  });
+  const { login } = useSelector((state: AppStateType) => state.authReducer);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    instance
-      .get<AuthResponseType>(`/auth/me`, {
-        withCredentials: true, // При кроссдоменности
-      })
-      .then((response) => {
-        console.log(response.data);
-        setAuthData(response.data.data);
-      });
-  }, []);
+  console.log(login);
 
-  const authRequestCallback = () => {
-    dispatch(authorizeMeAC(authData));
-  };
+  useEffect(() => {
+    authUserTC()(dispatch);
+  }, [dispatch]);
 
   return (
     <>
-      <Header login={authData.login} authRequest={authRequestCallback} />
+      <Header login={login} />
     </>
   );
 };
