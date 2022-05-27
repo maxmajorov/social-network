@@ -8,15 +8,14 @@ export const HeaderContainer = () => {
   const { login } = useSelector((state: AppStateType) => state.authReducer);
   const dispatch = useDispatch();
 
-  console.log(login);
+  const authRequestCallback = () => {
+    console.log("auth");
 
-  useEffect(() => {
     authUserTC()(dispatch);
-  }, [dispatch]);
-
+  };
   return (
     <>
-      <Header login={login} />
+      <Header login={login} authRequest={authRequestCallback} />
     </>
   );
 };

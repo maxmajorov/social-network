@@ -5,17 +5,14 @@ import { AuthModal } from "../AuthModal/AuthModal";
 
 type HeaderType = {
   login: string;
+  authRequest: () => void;
 };
 
-export const Header: React.FC<HeaderType> = ({ login }) => {
+export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
   const [visible, setVisible] = useState(false);
-  const [logOK, setLogOK] = useState<boolean>(false);
 
-  const toggleCallback = () => {
-    login ? setLogOK(true) : setLogOK(false);
-  };
   const classNameForIndicator = `${classes.indicator} ${
-    logOK ? classes.online : classes.offline
+    login ? classes.online : classes.offline
   } `;
 
   const onCreate = (values: any) => {
@@ -47,7 +44,7 @@ export const Header: React.FC<HeaderType> = ({ login }) => {
           setVisible(false);
         }}
         login={login}
-        toggle={toggleCallback}
+        authRequest={authRequest}
       />
     </header>
   );

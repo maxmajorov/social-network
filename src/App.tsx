@@ -6,20 +6,25 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
-import { store } from "./store/redux-store";
+import { AppStateType } from "./store/redux-store";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from "./components/Users/UsersContainer";
 import { ProfileContainer } from "./components/Profile/ProfileContainer";
 import { MyProfile } from "./components/MyProfile/MyProfile";
 import { HeaderContainer } from "./components/Header/HeaderContainer";
+import { AuthModal } from "./components/AuthModal/AuthModal";
+import { useSelector } from "react-redux";
+import { Login } from "./components/AuthModal/Login";
 
 const App = () => {
+  const state = useSelector((state: AppStateType) => state);
   return (
     <div className="container">
       <HeaderContainer />
-      <Sidebar friends={store.getState().friendsReducer.friends} />
+      <Sidebar friends={state.friendsReducer.friends} />
       <div className="container-content">
         <Routes>
+          <Route path="/authentication" element={<Login />} />
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/profile/:userId" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
@@ -29,9 +34,7 @@ const App = () => {
           <Route path="/settings" element={<Settings />} />
           <Route
             path="/friends"
-            element={
-              <Friends friends={store.getState().friendsReducer.friends} />
-            }
+            element={<Friends friends={state.friendsReducer.friends} />}
           />
         </Routes>
       </div>

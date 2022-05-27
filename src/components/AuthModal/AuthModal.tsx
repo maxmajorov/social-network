@@ -9,11 +9,11 @@ interface Values {
 }
 
 interface AuthFormProps {
-  visible: boolean;
-  onCreate: (values: Values) => void;
-  onCancel: () => void;
+  visible?: boolean;
+  onCreate?: (values: Values) => void;
+  onCancel?: () => void;
   login: string;
-  toggle: () => void;
+  authRequest: () => void;
 }
 
 export const AuthModal: React.FC<AuthFormProps> = ({
@@ -21,7 +21,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
   onCreate,
   onCancel,
   login,
-  toggle,
+  authRequest,
 }) => {
   const [inputLogin, setInputLogin] = useState<string>("");
 
@@ -35,8 +35,10 @@ export const AuthModal: React.FC<AuthFormProps> = ({
   };
 
   const logINHandler = () => {
-    inputLogin === login ? alert(`Hello ${login}`) : alert("User is not found");
-    toggle();
+    authRequest();
+    // inputLogin === login
+    //   ? alert(`Hello, ${login}`)
+    //   : alert("User is not found");
   };
 
   return (
@@ -51,7 +53,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
           .validateFields()
           .then((values) => {
             form.resetFields();
-            onCreate(values);
+            onCreate && onCreate(values);
           })
           .catch((info) => {
             console.log("Validate Failed:", info);

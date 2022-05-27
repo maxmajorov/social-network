@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router";
+import { AppStateType } from "../../store/redux-store";
 import { FriendsPageType } from "../../store/store";
 import { FriendMaxi } from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
@@ -8,6 +11,7 @@ type FriendsPropsType = {
 };
 
 function Friends(props: FriendsPropsType) {
+  const authState = useSelector((state: AppStateType) => state.authReducer);
   useEffect(() => {
     // Потом переисать для всех страниц
     document.title = `Friends`;
@@ -16,6 +20,11 @@ function Friends(props: FriendsPropsType) {
       document.title = `Social Network`;
     };
   });
+
+  if (!authState.isAuth) {
+    console.log(authState.isAuth);
+    return <Navigate replace to="/authentication" />;
+  }
   return (
     <main className={classes.friends}>
       <div className={classes.search}>

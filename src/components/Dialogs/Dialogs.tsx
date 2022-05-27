@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router";
 import { DialogsPageType } from "../../store/reducers/dialogs-reducer";
+import { AppStateType } from "../../store/redux-store";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
 import { CreateMessage } from "./MessageItem/CreateMessage/CreateMessage";
@@ -16,6 +19,8 @@ const Dialogs: React.FC<DialogsPropsType> = ({
   dialogsState,
   addNewMessageToStore,
 }) => {
+  const authState = useSelector((state: AppStateType) => state.authReducer);
+
   useEffect(() => {
     // Потом переисать для всех страниц
     document.title = `Dialogs`;
@@ -32,6 +37,11 @@ const Dialogs: React.FC<DialogsPropsType> = ({
   const messageElements = dialogsState.messages.map((el) => (
     <MessageItem key={el._id} messageText={el.message} id={el._id} />
   ));
+
+  if (!authState.isAuth) {
+    console.log(authState.isAuth);
+    return <Navigate replace to="/authentication" />;
+  }
 
   return (
     <main className={classes.dialogs}>
