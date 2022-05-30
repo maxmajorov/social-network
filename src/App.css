@@ -1,5 +1,13 @@
 @import '~antd/dist/antd.css';
 
+@font-face {
+  font-family: 'Raleway', sans-serif;
+  src: url("./assets/fonts/Raleway-Bold.ttf") format("ttf");
+  src: url("./assets/fonts/Raleway-Light.ttf") format("ttf");
+  src: url("./assets/fonts/Raleway-Medium.ttf") format("ttf");
+  src: url("./assets/fonts/Raleway-Thin.ttf") format("ttf");
+}
+
 .container {
   display: grid;
 
@@ -12,6 +20,8 @@
   max-width: 1260px;
   height: 100vh;
   margin: 0 auto;
+
+  /* font-family: 'Raleway', sans-serif; */
 }
 
 .conatiner-content {

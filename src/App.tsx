@@ -10,11 +10,10 @@ import { AppStateType } from "./store/redux-store";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from "./components/Users/UsersContainer";
 import { ProfileContainer } from "./components/Profile/ProfileContainer";
-import { MyProfile } from "./components/MyProfile/MyProfile";
 import { HeaderContainer } from "./components/Header/HeaderContainer";
-import { AuthModal } from "./components/AuthModal/AuthModal";
 import { useSelector } from "react-redux";
 import { Login } from "./components/AuthModal/Login";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
   const state = useSelector((state: AppStateType) => state);
@@ -25,7 +24,7 @@ const App = () => {
       <div className="container-content">
         <Routes>
           <Route path="/authentication" element={<Login />} />
-          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/profile/:userId" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />
