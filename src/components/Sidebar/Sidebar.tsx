@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FriendsPageType } from "../../store/store";
-import FriendMini from "../Friends/FriendMini/FriendMini";
 import classes from "./Sidebar.module.css";
 
 type SidebarPropsType = {
@@ -124,14 +123,6 @@ const Sidebar: React.FC<SidebarPropsType> = (props) => {
           </NavLink>
         </li>
       </ul>
-      <div className={classes.randomFriends}>
-        {props.friends
-          .map((el) => (
-            <FriendMini key={el._id} name={el.name} avatar={el.avatar} />
-          ))
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 6)}
-      </div>
     </aside>
   );
 };
