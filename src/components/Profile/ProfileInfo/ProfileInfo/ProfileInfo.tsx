@@ -6,12 +6,14 @@ type ProfileInfoPropsType = {
   fullName: string;
   lookingForJobDescr: string;
   mailLink: string;
+  github: string;
 };
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
   fullName,
   lookingForJobDescr,
   mailLink,
+  github,
 }) => {
   return (
     <div className={classes.userInfo}>
@@ -21,10 +23,12 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
       </div>
       <div>
         <ul className={classes.userList}>
-          <li className={classes.userItem}>Birthday: 10-06-1989</li>
-          <li className={classes.userItem}>City: Minsk</li>
+          <li className={classes.userItem}>city: Minsk</li>
           <li className={classes.userItem}>{lookingForJobDescr}</li>
-          <li className={classes.item}>Mail: {mailLink}</li>
+          <li className={classes.userItem}>mail: {mailLink}</li>
+          <li className={classes.userItem}>
+            github: <a href="https://github.com/maxmajorov">{github}</a>
+          </li>
         </ul>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import { followUserAC } from "./../actions/users-actions";
 import {
   FOLLOW_USER,
   SET_TOTAL_COUNT_USERS,

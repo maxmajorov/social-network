@@ -1,22 +1,25 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { FriendsPageType } from "../../store/store";
+import { getMyProfileTC } from "../../store/thunks/profile-thunk";
 import classes from "./Sidebar.module.css";
 
-type SidebarPropsType = {
-  friends: Array<FriendsPageType>;
-};
+const Sidebar: React.FC = () => {
+  const dispatch = useDispatch();
+  const loadProfileHandler = () => {
+    getMyProfileTC()(dispatch);
+  };
 
-const Sidebar: React.FC<SidebarPropsType> = (props) => {
   return (
     <aside className={classes.sidebar}>
       <ul className="sidebar__list list-reset">
         <li className={classes.item}>
           <NavLink
-            to="/profile"
+            to="/profile/23584"
             className={({ isActive }) =>
               classes.link + " " + (isActive ? classes.active : "")
             }
+            onClick={loadProfileHandler}
           >
             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
               <title />
@@ -25,7 +28,7 @@ const Sidebar: React.FC<SidebarPropsType> = (props) => {
                 <path d="M17,18H15A11,11,0,0,0,4,29a1,1,0,0,0,1,1H27a1,1,0,0,0,1-1A11,11,0,0,0,17,18ZM6.06,28A9,9,0,0,1,15,20h2a9,9,0,0,1,8.94,8Z" />
               </g>
             </svg>
-            Profile
+            My profile
           </NavLink>
         </li>
         <li className={classes.item}>

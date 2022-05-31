@@ -1,5 +1,9 @@
 export { authUserTC } from "./auth-thunk";
-export { getUserProfileTC } from "./profile-thunk";
+export {
+  getUserProfileTC,
+  getProfileStatusTC,
+  updateProfileStatusTC,
+} from "./profile-thunk";
 export {
   getUsersThunkCreator,
   followUserThunkCreator,

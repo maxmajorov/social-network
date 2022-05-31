@@ -9,4 +9,10 @@ export {
   setTotalCountUsersAC,
 } from "./users-actions";
 export { AddNewMessageAC } from "./dialogs-actions";
-export { addNewPostAC, showUserProfileAC } from "./profile-actions";
+export {
+  addNewPostAC,
+  // getMyProfileAC,
+  getUserProfileAC,
+  getUserProfileStatusAC,
+  updateUserProfileStatusAC,
+} from "./profile-actions";

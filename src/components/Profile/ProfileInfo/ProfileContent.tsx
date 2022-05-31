@@ -27,6 +27,7 @@ export const ProfileContent: React.FC = () => {
               fullName={profileState.fullName}
               lookingForJobDescr={profileState.lookingForAJobDescription}
               mailLink={profileState.contacts.mainLink}
+              github={profileState.contacts.github}
             />
           </Col>
         </Row>

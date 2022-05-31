@@ -2,25 +2,27 @@ import { Input } from "antd";
 import React, { ChangeEvent, FocusEvent, MouseEvent, useState } from "react";
 // import classes from "./EditableSpan.module.css";
 
-// type EditableSpanPropsType = {
-//   text: string;
-//   onChange: (changedTask: string) => void;
-// };
+type EditableSpanPropsType = {
+  statusFromState: string;
+  updateProfileStatus: (status: string) => void;
+};
 
-export const EditableSpan: React.FC = () => {
+export const EditableSpan: React.FC<EditableSpanPropsType> = ({
+  statusFromState,
+  updateProfileStatus,
+}) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [status, setStatus] = useState<string>("Set status");
+  const [status, setStatus] = useState<string>("");
 
   let spanStyle: string = "";
 
   const activateEditMode = (event: MouseEvent<HTMLSpanElement>) => {
     setEditMode(true);
-    // setStatus(text);
   };
 
   const disactivateEditMode = (event: FocusEvent<HTMLInputElement>) => {
     setEditMode(false);
-    // onChange(title);
+    updateProfileStatus(status);
   };
 
   const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +39,7 @@ export const EditableSpan: React.FC = () => {
     />
   ) : (
     <span onDoubleClick={activateEditMode} className={spanStyle}>
-      {status}
+      {statusFromState}
     </span>
   );
 };

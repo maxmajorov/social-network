@@ -22,10 +22,32 @@ export const usersAPI = {
   unfollow(userID: string) {
     return instance.delete<FollowResponseType>(`follow/${userID}`);
   },
+};
+
+// ==== PROFILE ====
+
+export const profileAPI = {
+  getMyProfile() {
+    return instance
+      .get<ProfileResponseType>(`profile/23584`)
+      .then((response) => response.data);
+  },
 
   getUserProfile(params: Params<string>) {
     return instance
       .get<ProfileResponseType>(`profile/${params.userId}`)
+      .then((response) => response.data);
+  },
+
+  getProfileStatus(params: Params<string>) {
+    return instance
+      .get<string>(`profile/status/${params.userId}`)
+      .then((response) => response.data);
+  },
+
+  updateProfileStatus(status: string) {
+    return instance
+      .put<ProfileStatusResponseType>(`profile/status`, { status: status })
       .then((response) => response.data);
   },
 };
@@ -51,7 +73,7 @@ export type UsersFromServerType = {
     small: string | null;
   };
   uniqueUrlName: string | null;
-  status: boolean | null;
+  status: string;
 };
 
 export type UsersResponseType = {
@@ -81,6 +103,12 @@ export type ProfileResponseType = {
     small: string;
     large: string;
   };
+};
+
+type ProfileStatusResponseType = {
+  resultCode: number;
+  messages: Array<string>;
+  data: {};
 };
 
 // ==== AUTHORIZATION ====

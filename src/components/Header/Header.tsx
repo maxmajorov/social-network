@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
             setVisible(true);
           }}
         >
-          Login
+          sign in
         </Button>
       </div>
 

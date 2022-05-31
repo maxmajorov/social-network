@@ -2,7 +2,9 @@ import { v1 } from "uuid";
 import {
   ADD_NEW_POST,
   PostsActionsType,
-  SHOW_USER_PROFILE,
+  GET_USER_PROFILE,
+  PUT_USER_PROFILE_STATUS,
+  GET_USER_PROFILE_STATUS,
 } from "../actions/profile-actions";
 import { ProfileResponseType } from "../../api/api";
 
@@ -42,6 +44,7 @@ const initialState = {
       large: "./img/avatar.jpg",
     },
   },
+  profileStatus: "set status",
   posts: [
     { _id: v1(), text: "Hello everybody!", likes: 4, comments: 2 },
     { _id: v1(), text: "I'm start learning React", likes: 14, comments: 4 },
@@ -65,9 +68,24 @@ export const profileReducer = (
       };
       return { ...state, posts: [postItem, ...state.posts] };
     }
-    case SHOW_USER_PROFILE: {
+    case GET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
+
+    case GET_USER_PROFILE_STATUS: {
+      return {
+        ...state,
+        profileStatus:
+          state.profile.userId === action.userId
+            ? action.status
+            : action.status,
+      };
+    }
+
+    case PUT_USER_PROFILE_STATUS: {
+      return { ...state, profileStatus: action.status };
+    }
+
     default: {
       return state;
     }
