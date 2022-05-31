@@ -12,6 +12,7 @@ export { AddNewMessageAC } from "./dialogs-actions";
 export {
   addNewPostAC,
   // getMyProfileAC,
+  isFetchingProfileAC,
   getUserProfileAC,
   getUserProfileStatusAC,
   updateUserProfileStatusAC,

@@ -5,7 +5,7 @@ import { AppStateType } from "../../../../store/redux-store";
 import { updateProfileStatusTC } from "../../../../store/thunks";
 import { EditableSpan } from "../../../EditableSpan/EditableSpan";
 
-import classes from "./ProfileInfo.module.css";
+// import classes from "./ProfileInfo.module.css";
 
 export const ProfileStatus: React.FC = () => {
   const statusSelector = useSelector(

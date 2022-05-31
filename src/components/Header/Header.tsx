@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import classes from "./Header.module.css";
 import { AuthModal } from "../AuthModal/AuthModal";
+import socialLogo from "../../assets/img/social-logo.png";
 
 type HeaderType = {
   login: string;
@@ -21,9 +22,16 @@ export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
   };
   return (
     <header className={classes.header}>
-      <div>
-        <img src="./img/logo.png" className={classes.logo} alt="logo" />
-        <span className={classes.title}>Social Network</span>
+      <div className={classes.headerLogo}>
+        <div>
+          <img src={socialLogo} className={classes.logo} alt="logo" />
+        </div>
+        <span className={classes.title}>
+          social
+          <b>
+            <span style={{ color: "#228be6" }}>GO</span>
+          </b>
+        </span>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
         <div className={classNameForIndicator} />

@@ -1,3 +1,4 @@
+import { isFetchingProfileAC } from "./../actions/profile-actions";
 import { Params } from "react-router";
 import { AnyAction, Dispatch } from "redux";
 import { profileAPI } from "../../api/api";
@@ -20,9 +21,10 @@ export const getMyProfileTC = () => {
 
 export const getUserProfileTC = (userId: Params<string>) => {
   return (dispatch: Dispatch<AnyAction>) => {
-    profileAPI
-      .getUserProfile(userId)
-      .then((response) => dispatch(getUserProfileAC(response)));
+    profileAPI.getUserProfile(userId).then((response) => {
+      dispatch(getUserProfileAC(response));
+      dispatch(isFetchingProfileAC(false));
+    });
   };
 };
 

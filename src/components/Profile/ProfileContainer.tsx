@@ -3,9 +3,15 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import Profile from "./Profile";
 import { getProfileStatusTC, getUserProfileTC } from "../../store/thunks";
+import { Preloader } from "../Preloader/Preloader";
+import { useSelector } from "react-redux";
+import { AppStateType } from "../../store/redux-store";
 // import classes from "./Profile.module.css";
 
 export const ProfileContainer = () => {
+  const { isFetching } = useSelector(
+    (state: AppStateType) => state.profileReducer
+  );
   const dispatch = useDispatch();
   const userId = useParams();
 
@@ -16,5 +22,5 @@ export const ProfileContainer = () => {
     getProfileStatusTC(userId)(dispatch);
   }, [dispatch, userId]);
 
-  return <Profile />;
+  return <>{isFetching ? <Preloader /> : <Profile />}</>;
 };

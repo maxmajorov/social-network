@@ -14,8 +14,6 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = ({
   const [editMode, setEditMode] = useState<boolean>(false);
   const [status, setStatus] = useState<string>("");
 
-  let spanStyle: string = "";
-
   const activateEditMode = (event: MouseEvent<HTMLSpanElement>) => {
     setEditMode(true);
   };
@@ -31,15 +29,15 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = ({
 
   return editMode ? (
     <Input
-      placeholder="Basic usage"
+      placeholder="set status"
       value={status}
       onBlur={disactivateEditMode}
       onChange={onChangeTitleHandler}
       autoFocus
     />
   ) : (
-    <span onDoubleClick={activateEditMode} className={spanStyle}>
-      {statusFromState}
+    <span onDoubleClick={activateEditMode}>
+      {statusFromState ? statusFromState : "set status"}
     </span>
   );
 };

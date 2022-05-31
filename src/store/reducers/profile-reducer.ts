@@ -5,6 +5,7 @@ import {
   GET_USER_PROFILE,
   PUT_USER_PROFILE_STATUS,
   GET_USER_PROFILE_STATUS,
+  IS_FETCHING_PROFILE,
 } from "../actions/profile-actions";
 import { ProfileResponseType } from "../../api/api";
 
@@ -24,6 +25,7 @@ export type ProfilePageType = {
 export type InitialStateType = typeof initialState;
 
 const initialState = {
+  isFetching: true,
   profile: {
     userId: 0,
     lookingForAJob: true,
@@ -44,7 +46,7 @@ const initialState = {
       large: "./img/avatar.jpg",
     },
   },
-  profileStatus: "set status",
+  profileStatus: "",
   posts: [
     { _id: v1(), text: "Hello everybody!", likes: 4, comments: 2 },
     { _id: v1(), text: "I'm start learning React", likes: 14, comments: 4 },
@@ -68,6 +70,11 @@ export const profileReducer = (
       };
       return { ...state, posts: [postItem, ...state.posts] };
     }
+
+    case IS_FETCHING_PROFILE: {
+      return { ...state, isFetching: action.fetch };
+    }
+
     case GET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
