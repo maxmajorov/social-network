@@ -19,10 +19,10 @@ export const ProfileContent: React.FC = () => {
     <div className={classes.profileContainer}>
       <div className={classes.wrapper}>
         <Row justify="center" align="top">
-          <Col className={classes.photoContainer} span={7}>
+          <Col className={classes.photoContainer} span={6}>
             <ProfilePhotoActions profilePhoto={profileState.photos.large} />
           </Col>
-          <Col className={classes.infoContainer} span={16} offset={1}>
+          <Col className={classes.infoContainer} span={17} offset={1}>
             <ProfileInfo
               fullName={profileState.fullName}
               lookingForJobDescr={profileState.lookingForAJobDescription}
@@ -31,7 +31,7 @@ export const ProfileContent: React.FC = () => {
           </Col>
         </Row>
         <Row justify="center" align="top">
-          <Col className={classes.randomFriends} span={7}>
+          <Col className={classes.randomFriends} span={6}>
             {friendsState
               .map((el) => (
                 <FriendMini key={el._id} name={el.name} avatar={el.avatar} />
@@ -39,7 +39,7 @@ export const ProfileContent: React.FC = () => {
               .sort(() => 0.5 - Math.random())
               .slice(0, 6)}
           </Col>
-          <Col className={classes.postContainer} span={16} offset={1}>
+          <Col className={classes.postContainer} span={17} offset={1}>
             <PostsContainer />
           </Col>
         </Row>

@@ -10,11 +10,10 @@
   right: 0;
   width: 100%;
   background-color: #edeff1;
-  height: 2px;
+  height: 1px;
 }
 
 .postText {
-  position: relative;
   display: flex;
   align-items: center;
   font-size: 18px;

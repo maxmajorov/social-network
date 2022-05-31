@@ -1,3 +1,5 @@
+import { Button } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import classes from "./PostsCreate.module.css";
 
@@ -13,6 +15,7 @@ export const PostCreate: React.FC<PostCreatePropsType> = ({
 
   const onChangeAddPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setNewPost(event.currentTarget.value.trim());
+    setError("");
   };
 
   const onClickAddPostHandler = () => {
@@ -29,19 +32,28 @@ export const PostCreate: React.FC<PostCreatePropsType> = ({
   return (
     <div className={classes.postCreate}>
       <h3 className={classes.postTitle}>Create Posts</h3>
-      <textarea
-        className={classes.postInput}
-        placeholder="Write something here..."
+      <TextArea
         value={newPost}
+        showCount
+        maxLength={100}
+        // placeholder="Write something here..."
+        placeholder={error ? error : "Write something here..."}
+        bordered={false}
+        style={{
+          height: 40,
+          backgroundColor: "#edeef0",
+          // borderRadius: "7px",
+          border: error ? "1px solid red" : "",
+        }}
         onChange={onChangeAddPostHandler}
         onKeyPress={onKeyPressInputHandler}
-        cols={110}
-        rows={4}
       />
-      <div className={classes.errorMessage}>{error}</div>
-      <button className={classes.postBtn} onClick={onClickAddPostHandler}>
-        Send post
-      </button>
+      {/* <div className={classes.errorMessage}>{error}</div> */}
+      <div className={classes.postBtn}>
+        <Button type="primary" size={"large"} onClick={onClickAddPostHandler}>
+          Add post
+        </Button>
+      </div>
     </div>
   );
 };

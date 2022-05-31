@@ -8,6 +8,16 @@
   src: url("./assets/fonts/Raleway-Thin.ttf") format("ttf");
 }
 
+body {
+  font-family: 'Raleway', sans-serif;
+  color: rgb(71, 71, 71);
+  background-color: #edeef0;
+}
+
+a{
+  color: #1890ff
+}
+
 .container {
   display: grid;
 
@@ -20,7 +30,7 @@
   max-width: 1260px;
   height: 100vh;
   margin: 0 auto;
-  /* background-color: #edeef0; */
+ 
 }
 
 .conatiner-content {

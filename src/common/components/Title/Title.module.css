@@ -1,0 +1,20 @@
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+  padding-bottom: 60px;
+}
+
+
+.title::after {
+  display: block;
+  content: '';
+  width: 100px;
+  height: 5px;
+  background-color: #ff0066;
+  margin: 19px auto 0;
+} 
+
+

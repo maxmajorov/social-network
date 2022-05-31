@@ -1,21 +1,8 @@
 .postCreate {
-  position: relative;
-  margin-top: 40px;
   padding: 20px;
-  border-radius: 7px;
-  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-  background-color: white;
+  border-bottom: 1px solid #edeff1;
 }
 
-.postTitle::after {
-  content: "";
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #edeff1;
-}
 .postInput {
   margin-top: 30px;
   border: 0 none;
@@ -27,35 +14,6 @@
 }
 
 .postBtn {
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 0 20px;
-  margin: 15px 15px 0 0;
-  outline: none;
-  border: none;
-  border-radius: 7px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 17px;
-  font-weight: 600;
-  text-decoration: none;
-  color: #74c5ff;
-  background-color: #ddf0ff;
-  cursor: pointer;
-  user-select: none;
-  appearance: none;
-  touch-action: manipulation;
+ padding-top: 10px;
 }
-.postBtn:focus-visible {
-  box-shadow: 0 0 0 2px #666;
-}
-.postBtn:hover {
-  background-color: #dbe7f2;
-}
-.postBtn:active {
-  transform: scale(0.96);
-}
-.postBtn:disabled {
-  pointer-events: none;
-  opacity: 0.65;
-}
+

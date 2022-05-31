@@ -1,3 +1,4 @@
+import { Input } from "antd";
 import React, { ChangeEvent, FocusEvent, MouseEvent, useState } from "react";
 // import classes from "./EditableSpan.module.css";
 
@@ -27,12 +28,13 @@ export const EditableSpan: React.FC = () => {
   };
 
   return editMode ? (
-    <input
+    <Input
+      placeholder="Basic usage"
       value={status}
       onBlur={disactivateEditMode}
       onChange={onChangeTitleHandler}
       autoFocus
-    ></input>
+    />
   ) : (
     <span onDoubleClick={activateEditMode} className={spanStyle}>
       {status}

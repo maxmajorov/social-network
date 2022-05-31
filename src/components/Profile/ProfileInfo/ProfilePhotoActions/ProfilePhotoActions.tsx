@@ -12,13 +12,17 @@ export const ProfilePhotoActions: React.FC<ProfilePhotoActionsPropsType> = ({
 }) => {
   return (
     <div className={classes.userAvatar}>
-      <img
-        src={`${profilePhoto ? profilePhoto : defaultImage}`}
-        alt="avatar"
-      ></img>
-      <Button type="primary" className={classes.editBtn}>
-        Edit
-      </Button>
+      <div>
+        <img
+          src={`${profilePhoto ? profilePhoto : defaultImage}`}
+          alt="avatar"
+        ></img>
+      </div>
+      <div className={classes.editBtn}>
+        <Button type="primary" block>
+          Write message
+        </Button>
+      </div>
     </div>
   );
 };
