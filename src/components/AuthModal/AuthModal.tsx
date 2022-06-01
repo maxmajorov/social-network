@@ -92,7 +92,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <a className="login-form-forgot" href="">
+          <a className="login-form-forgot" href="#">
             Forgot password
           </a>
         </Form.Item>
@@ -104,9 +104,9 @@ export const AuthModal: React.FC<AuthFormProps> = ({
             className="login-form-button"
             onClick={logINHandler}
           >
-            Log in
+            Sign in
           </Button>
-          Or <a href="">register now!</a>
+          Or <a href="#">register now!</a>
         </Form.Item>
       </Form>
     </Modal>

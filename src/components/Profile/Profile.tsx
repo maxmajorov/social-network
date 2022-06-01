@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Profile.module.css";
-import { ProfileContent } from "./ProfileInfo/ProfileContent";
+import { ProfileContent } from "./ProfileContent/ProfileContent";
 
 const Profile: React.FC = () => {
   return (

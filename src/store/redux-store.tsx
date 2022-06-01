@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import thunkMiddleware from "redux-thunk";
+import { reducer as formReducer } from "redux-form";
 import {
   dialogsReducer,
   friendsReducer,
@@ -16,6 +17,7 @@ const rootReducers = combineReducers({
   usersReducer: usersReducer,
   friendsReducer: friendsReducer,
   authReducer: authReducer,
+  form: formReducer,
 });
 
 type RootReducersType = typeof rootReducers;

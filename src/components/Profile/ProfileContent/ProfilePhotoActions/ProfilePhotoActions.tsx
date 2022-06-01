@@ -18,8 +18,8 @@ export const ProfilePhotoActions: React.FC<ProfilePhotoActionsPropsType> = ({
           alt="avatar"
         ></img>
       </div>
-      <div className={classes.editBtn}>
-        <Button type="primary" block>
+      <div>
+        <Button type="primary" block className={classes.editBtn}>
           Write message
         </Button>
       </div>
