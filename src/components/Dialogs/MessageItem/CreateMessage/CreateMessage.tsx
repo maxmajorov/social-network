@@ -1,53 +1,62 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { AddNewMessageAC } from "../../../../store/actions";
 
 import classes from "./CreateMessage.module.css";
 
-type createMessagePropsType = {
-  addNewMessageToStore: (newMessage: string) => void;
+type FormMessageType = {
+  newMessage: string;
 };
 
-export const CreateMessage: React.FC<createMessagePropsType> = ({
-  addNewMessageToStore,
-}) => {
-  const [newMessage, setNewMessage] = useState<string>("");
-  const [error, setError] = useState("");
-
-  const onChangeAddNewMessageHandler = (
-    event: ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setNewMessage(event.currentTarget.value.trim());
-  };
-
-  let onClickAddNewMessageHandler = () => {
-    newMessage.length
-      ? addNewMessageToStore(newMessage)
-      : setError("Invalid input");
-    setNewMessage("");
-  };
-
-  const onKeyPressInputHandler = (
-    event: KeyboardEvent<HTMLTextAreaElement>
-  ) => {
-    event.charCode === 13
-      ? onClickAddNewMessageHandler()
-      : console.log("notEnter");
-  };
-
+export const CreateMessage: React.FC<InjectedFormProps<FormMessageType>> = (
+  props
+) => {
+  console.log(props.error);
   return (
-    <div className={classes.createMessage}>
-      <textarea
-        value={newMessage}
+    <form className={classes.createMessage} onSubmit={props.handleSubmit}>
+      <Field
+        component="textarea"
+        name="newMessage"
         className={classes.inputMessage}
         placeholder="Write something here..."
-        onChange={onChangeAddNewMessageHandler}
-        onKeyPress={onKeyPressInputHandler}
+        // onKeyPress={onKeyPressInputHandler}
         cols={50}
         rows={2}
-      ></textarea>
+      ></Field>
+      <button className={classes.postBtn}>Send message</button>
+    </form>
+  );
+};
+
+export const CreateMessageReduxForm = reduxForm<FormMessageType>({
+  form: "addMessageForm",
+})(CreateMessage);
+
+export const CreateMessageForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
+
+  // const onKeyPressInputHandler = (
+  //   event: KeyboardEvent<HTMLTextAreaElement>
+  // ) => {
+  //   event.charCode === 13
+  //     ? onClickAddNewMessageHandler()
+  //     : console.log("notEnter");
+  // };
+
+  const onSubmit = (formData: FormMessageType) => {
+    if (formData.newMessage) {
+      setError("");
+      dispatch(AddNewMessageAC(formData.newMessage));
+    } else {
+      setError("Invalid input");
+    }
+  };
+  return (
+    <>
+      <CreateMessageReduxForm onSubmit={onSubmit} />
       <div className={classes.errorMessage}>{error}</div>
-      <button className={classes.postBtn} onClick={onClickAddNewMessageHandler}>
-        Send message
-      </button>
-    </div>
+    </>
   );
 };

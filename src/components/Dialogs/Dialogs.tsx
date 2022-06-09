@@ -5,15 +5,13 @@ import { DialogsPageType } from "../../store/reducers/dialogs-reducer";
 import { AppStateType } from "../../store/redux-store";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
-import { CreateMessage } from "./MessageItem/CreateMessage/CreateMessage";
+import { CreateMessageForm } from "./MessageItem/CreateMessage/CreateMessage";
 import MessageItem from "./MessageItem/MesssageItem";
 
 type DialogsPropsType = {
   dialogsState: DialogsPageType;
   addNewMessageToStore: (newMessage: string) => void;
 };
-
-// type берем из типизированных mapStateToProps & mapDispatchToProps
 
 const Dialogs: React.FC<DialogsPropsType> = ({
   dialogsState,
@@ -22,7 +20,6 @@ const Dialogs: React.FC<DialogsPropsType> = ({
   const authState = useSelector((state: AppStateType) => state.authReducer);
 
   useEffect(() => {
-    // Потом переисать для всех страниц
     document.title = `Dialogs`;
     return () => {
       // cleanup
@@ -48,7 +45,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({
       <div className={classes.dialogsList}>{dialogsElements}</div>
       <div className={classes.messagesList}>
         <div className={classes.item}>{messageElements}</div>
-        <CreateMessage addNewMessageToStore={addNewMessageToStore} />
+        <CreateMessageForm />
       </div>
     </main>
   );
