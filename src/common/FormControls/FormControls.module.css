@@ -1,0 +1,11 @@
+.textarea {
+   background-color: "#edeef0"
+}
+
+.error {
+  border: 1px solid red
+}
+
+.errorSpan {
+  color: red
+}

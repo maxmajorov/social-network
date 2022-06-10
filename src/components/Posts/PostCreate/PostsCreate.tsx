@@ -1,59 +1,69 @@
-import { Button } from "antd";
-import TextArea from "antd/lib/input/TextArea";
-import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Textarea } from "../../../common/FormControls/FormControls";
+import { addNewPostAC } from "../../../store/actions";
+import { maxLength100, required } from "../../../utils/validators/validators";
 import classes from "./PostsCreate.module.css";
 
-type PostCreatePropsType = {
-  addNewPostToStore: (newPost: string) => void;
+type FormPostType = {
+  newPost: string;
 };
 
-export const PostCreate: React.FC<PostCreatePropsType> = ({
-  addNewPostToStore,
-}) => {
-  const [newPost, setNewPost] = useState("");
-  const [error, setError] = useState("");
+export const CreatePost: React.FC<InjectedFormProps<FormPostType>> = (
+  props
+) => {
+  return (
+    <form className={classes.createMessage} onSubmit={props.handleSubmit}>
+      <Field
+        component={Textarea}
+        name="newPost"
+        className={classes.inputMessage}
+        placeholder="Write something here..."
+        // onKeyPress={onKeyPressInputHandler}
+        validate={[required, maxLength100]}
+        cols={50}
+        rows={2}
+      ></Field>
+      <button className={classes.postBtn}>add post</button>
+    </form>
+  );
+};
 
-  const onChangeAddPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewPost(event.currentTarget.value.trim());
-    setError("");
-  };
+export const CreatePostReduxForm = reduxForm<FormPostType>({
+  form: "addPostForm",
+})(CreatePost);
 
-  const onClickAddPostHandler = () => {
-    newPost.length ? addNewPostToStore(newPost) : setError("Invalid input");
-    setNewPost("");
-  };
+export const CreatePostForm: React.FC = () => {
+  const dispatch = useDispatch();
 
-  const onKeyPressInputHandler = (
-    event: KeyboardEvent<HTMLTextAreaElement>
-  ) => {
-    event.charCode === 13 ? onClickAddPostHandler() : console.log("notEnter");
+  // const onChangeAddPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  //   setNewPost(event.currentTarget.value.trim());
+  //   setError("");
+  // };
+
+  // const onClickAddPostHandler = () => {
+  //   newPost.length ? addNewPostToStore(newPost) : setError("Invalid input");
+  //   setNewPost("");
+  // };
+
+  // const onKeyPressInputHandler = (
+  //   event: KeyboardEvent<HTMLTextAreaElement>
+  // ) => {
+  //   event.charCode === 13 ? onClickAddPostHandler() : console.log("notEnter");
+  // };
+
+  const onSubmit = (formData: FormPostType) => {
+    console.log(formData);
+    formData.newPost
+      ? dispatch(addNewPostAC(formData.newPost))
+      : console.log("Field is empty");
   };
 
   return (
     <div className={classes.postCreate}>
       <h3 className={classes.postTitle}>Create Posts</h3>
-      <TextArea
-        value={newPost}
-        showCount
-        maxLength={100}
-        // placeholder="Write something here..."
-        placeholder={error ? error : "Write something here..."}
-        bordered={false}
-        style={{
-          height: 40,
-          backgroundColor: "#edeef0",
-          // borderRadius: "7px",
-          border: error ? "1px solid red" : "",
-        }}
-        onChange={onChangeAddPostHandler}
-        onKeyPress={onKeyPressInputHandler}
-      />
-      {/* <div className={classes.errorMessage}>{error}</div> */}
-      <div className={classes.postBtn}>
-        <Button type="primary" size={"large"} onClick={onClickAddPostHandler}>
-          Add post
-        </Button>
-      </div>
+      <CreatePostReduxForm onSubmit={onSubmit} />
     </div>
   );
 };

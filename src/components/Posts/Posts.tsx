@@ -1,7 +1,7 @@
 import React from "react";
 import { PostObj } from "../../store/reducers/profile-reducer";
 import MyPost from "./MyPost/MyPost";
-import { PostCreate } from "./PostCreate/PostsCreate";
+import { CreatePostForm } from "./PostCreate/PostsCreate";
 import classes from "./Posts.module.css";
 
 // Контейнерная компонента ==> вся логика и store только здесь.
@@ -26,7 +26,7 @@ export const Posts: React.FC<PostsPropsType> = ({
 
   return (
     <div className={classes.post}>
-      <PostCreate addNewPostToStore={addNewPostToStore} />
+      <CreatePostForm />
       <div className={classes.postItem}>{postsElement}</div>
     </div>
   );

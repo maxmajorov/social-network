@@ -51,7 +51,6 @@ const initialState = {
     { _id: v1(), text: "Hello everybody!", likes: 4, comments: 2 },
     { _id: v1(), text: "I'm start learning React", likes: 14, comments: 4 },
     { _id: v1(), text: "Redux & TypeScript...", likes: 8, comments: 10 },
-    { _id: v1(), text: "BLL => Redux", likes: 18, comments: 1 },
   ] as Array<PostObj>,
   newPostText: "Write something here...",
 };

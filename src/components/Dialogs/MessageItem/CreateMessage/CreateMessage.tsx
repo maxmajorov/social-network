@@ -1,8 +1,12 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Textarea } from "../../../../common/FormControls/FormControls";
 import { AddNewMessageAC } from "../../../../store/actions";
-
+import {
+  maxLength100,
+  required,
+} from "../../../../utils/validators/validators";
 import classes from "./CreateMessage.module.css";
 
 type FormMessageType = {
@@ -12,15 +16,15 @@ type FormMessageType = {
 export const CreateMessage: React.FC<InjectedFormProps<FormMessageType>> = (
   props
 ) => {
-  console.log(props.error);
   return (
     <form className={classes.createMessage} onSubmit={props.handleSubmit}>
       <Field
-        component="textarea"
+        component={Textarea}
         name="newMessage"
         className={classes.inputMessage}
         placeholder="Write something here..."
         // onKeyPress={onKeyPressInputHandler}
+        validate={[required, maxLength100]}
         cols={50}
         rows={2}
       ></Field>
@@ -35,7 +39,6 @@ export const CreateMessageReduxForm = reduxForm<FormMessageType>({
 
 export const CreateMessageForm: React.FC = () => {
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
 
   // const onKeyPressInputHandler = (
   //   event: KeyboardEvent<HTMLTextAreaElement>
@@ -46,17 +49,13 @@ export const CreateMessageForm: React.FC = () => {
   // };
 
   const onSubmit = (formData: FormMessageType) => {
-    if (formData.newMessage) {
-      setError("");
-      dispatch(AddNewMessageAC(formData.newMessage));
-    } else {
-      setError("Invalid input");
-    }
+    formData.newMessage
+      ? dispatch(AddNewMessageAC(formData.newMessage))
+      : console.log("Field is empty");
   };
   return (
     <>
       <CreateMessageReduxForm onSubmit={onSubmit} />
-      <div className={classes.errorMessage}>{error}</div>
     </>
   );
 };
