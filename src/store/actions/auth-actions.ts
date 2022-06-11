@@ -1,4 +1,5 @@
 export const AUTHORIZE_ME = "AUTHORIZE-ME";
+export const STOP_AUTH = "STOP-AUTH";
 
 export const authorizeMeAC = (
   id: number | null,
@@ -16,4 +17,12 @@ export const authorizeMeAC = (
     },
   } as const);
 
-export type AuthorizeActionsType = ReturnType<typeof authorizeMeAC>;
+export const stopAuthorizationAC = (responseMessage: string) =>
+  ({
+    type: STOP_AUTH,
+    responseMessage,
+  } as const);
+
+export type AuthorizeActionsType =
+  | ReturnType<typeof authorizeMeAC>
+  | ReturnType<typeof stopAuthorizationAC>;

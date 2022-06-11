@@ -1,7 +1,3 @@
-// export const requaredFields = (value: string) => {
-//   return value ? undefined : console.log("Field is requared");
-// };
-
 export const required = (value: string) =>
   value || typeof value === "number" ? undefined : "Required";
 

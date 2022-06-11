@@ -1,4 +1,4 @@
-import { authorizeMeAC } from "./../actions/auth-actions";
+import { authorizeMeAC, stopAuthorizationAC } from "./../actions/auth-actions";
 import { AnyAction, Dispatch } from "redux";
 import { authAPI } from "../../api/api";
 
@@ -15,10 +15,10 @@ export const loginTC =
   (email: string, password: string, rememberMe: boolean) =>
   (dispatch: Dispatch<AnyAction>) => {
     authAPI.login(email, password, rememberMe).then((response) => {
-      console.log(response, email);
       if (response.resultCode === 0) {
+        dispatch(stopAuthorizationAC(""));
         authUserTC()(dispatch);
-      } else alert(response.messages);
+      } else dispatch(stopAuthorizationAC(response.messages[0]));
     });
   };
 

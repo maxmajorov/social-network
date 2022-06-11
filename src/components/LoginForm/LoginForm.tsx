@@ -6,7 +6,11 @@ import {
   CheckboxForm,
   InputForm,
 } from "../../common/FormControls/FormControls";
-import { minLength2, required } from "../../utils/validators/validators";
+import {
+  // inputError,
+  minLength2,
+  required,
+} from "../../utils/validators/validators";
 import { loginTC } from "../../store/thunks";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -20,6 +24,9 @@ type FormDataType = {
 };
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+  const { responseMessage } = useSelector(
+    (state: AppStateType) => state.authReducer
+  );
   return (
     <div className={classes.loginContainer}>
       <form onSubmit={props.handleSubmit} className={classes.loginForm}>
@@ -44,6 +51,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
           component={InputForm}
           validate={[required, minLength2]}
         />
+        {responseMessage ? (
+          <div style={{ color: "red" }}>{responseMessage}</div>
+        ) : null}
         <Field type={"checkbox"} name={"rememderme"} component={CheckboxForm} />
 
         <Button

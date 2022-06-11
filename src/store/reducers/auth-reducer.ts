@@ -1,10 +1,15 @@
-import { AUTHORIZE_ME, AuthorizeActionsType } from "./../actions/auth-actions";
+import {
+  AUTHORIZE_ME,
+  AuthorizeActionsType,
+  STOP_AUTH,
+} from "./../actions/auth-actions";
 
 export type initialStateType = {
   id: number | null;
   email: string | null;
   login: string | null;
   isAuth: boolean;
+  responseMessage: string;
 };
 
 const initialState = {
@@ -12,6 +17,7 @@ const initialState = {
   email: null,
   login: null,
   isAuth: false,
+  responseMessage: "",
 };
 
 export const authReducer = (
@@ -23,6 +29,13 @@ export const authReducer = (
       return {
         ...state,
         ...action.payload,
+      };
+    }
+
+    case STOP_AUTH: {
+      return {
+        ...state,
+        responseMessage: action.responseMessage,
       };
     }
     default: {
