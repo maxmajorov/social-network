@@ -56,10 +56,22 @@ export const profileAPI = {
 export const authAPI = {
   authUser() {
     return instance
-      .get<AuthResponseType>(`/auth/me`, {
+      .get<AuthResponseType>(`auth/me`, {
         withCredentials: true, // При кроссдоменности
       })
-      .then((response) => response.data.data);
+      .then((response) => response.data);
+  },
+
+  login(email: string, password: string, rememberMe: boolean = false) {
+    return instance
+      .post<LoginResponseType>(`auth/login`, { email, password, rememberMe })
+      .then((response) => response.data);
+  },
+
+  logout() {
+    return instance
+      .delete<LogoutResponseType>(`auth/login`)
+      .then((response) => response.data);
   },
 };
 // ==== TYPES ====
@@ -123,6 +135,20 @@ export type LoginInfo = {
   id: number;
   email: string;
   login: string;
+};
+
+export type LoginResponseType = {
+  resultCode: number;
+  messages: any[];
+  data: {
+    userId: number;
+  };
+};
+
+export type LogoutResponseType = {
+  resultCode: number;
+  messages: any[];
+  data: {};
 };
 
 // ==== FOLLOW ====

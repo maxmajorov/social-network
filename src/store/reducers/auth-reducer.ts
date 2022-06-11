@@ -1,16 +1,16 @@
 import { AUTHORIZE_ME, AuthorizeActionsType } from "./../actions/auth-actions";
 
 export type initialStateType = {
-  id: number;
-  email: string;
-  login: string;
+  id: number | null;
+  email: string | null;
+  login: string | null;
   isAuth: boolean;
 };
 
 const initialState = {
-  id: 0,
-  email: "",
-  login: "",
+  id: null,
+  email: null,
+  login: null,
   isAuth: false,
 };
 
@@ -22,8 +22,7 @@ export const authReducer = (
     case AUTHORIZE_ME: {
       return {
         ...state,
-        ...action.data,
-        isAuth: true,
+        ...action.payload,
       };
     }
     default: {

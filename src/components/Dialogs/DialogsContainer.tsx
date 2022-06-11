@@ -12,8 +12,8 @@ export const DialogsContainer = () => {
   );
 
   const dispatch = useDispatch();
-
   const authState = useSelector((state: AppStateType) => state.authReducer);
+
   let navigate = useNavigate();
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { AuthModal } from "../AuthModal/AuthModal";
 import socialLogo from "../../assets/img/social-logo.png";
 
 type HeaderType = {
-  login: string;
+  login: string | null;
   authRequest: () => void;
 };
 

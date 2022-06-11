@@ -1,6 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal, Form, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { loginTC, logoutTC } from "../../store/thunks";
 
 interface Values {
   title: string;
@@ -12,7 +14,7 @@ interface AuthFormProps {
   visible?: boolean;
   onCreate?: (values: Values) => void;
   onCancel?: () => void;
-  login: string;
+  login: string | null;
   authRequest: () => void;
 }
 
@@ -23,22 +25,31 @@ export const AuthModal: React.FC<AuthFormProps> = ({
   login,
   authRequest,
 }) => {
-  const [inputLogin, setInputLogin] = useState<string>("");
+  const dispatch = useDispatch();
+  const [inputEmailPass, setInputEmailPass] = useState({
+    email: "",
+    password: "",
+    rememberme: false,
+  });
 
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+  const onFinish = (formData: any) => {
+    console.log("Received values of form: ", formData);
+    setInputEmailPass(formData);
   };
   const [form] = Form.useForm();
 
-  const inputLoginHander = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputLogin(event.currentTarget.value);
-  };
+  console.log(inputEmailPass);
 
   const logINHandler = () => {
-    authRequest();
-    // inputLogin === login
-    //   ? alert(`Hello, ${login}`)
-    //   : alert("User is not found");
+    loginTC(
+      inputEmailPass.email,
+      inputEmailPass.password,
+      inputEmailPass.rememberme
+    )(dispatch);
+  };
+
+  const logOUTHandler = () => {
+    logoutTC()(dispatch);
   };
 
   return (
@@ -67,14 +78,12 @@ export const AuthModal: React.FC<AuthFormProps> = ({
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="email"
           rules={[{ required: true, message: "Please input your Username!" }]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
-            onChange={inputLoginHander}
-            value={login}
           />
         </Form.Item>
         <Form.Item
@@ -88,7 +97,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
           />
         </Form.Item>
         <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Form.Item name="rememberme" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
@@ -104,7 +113,15 @@ export const AuthModal: React.FC<AuthFormProps> = ({
             className="login-form-button"
             onClick={logINHandler}
           >
-            Sign in
+            sign in
+          </Button>
+          <Button
+            style={{ marginLeft: "5px" }}
+            htmlType="submit"
+            className="login-form-button"
+            onClick={logOUTHandler}
+          >
+            sign out
           </Button>
           Or <a href="#">register now!</a>
         </Form.Item>

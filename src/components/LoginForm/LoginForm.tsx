@@ -1,17 +1,20 @@
 import React from "react";
 import { Button } from "antd";
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
-// import { Form, Input, Button, Checkbox } from "antd";
-// import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import classes from "./LoginForm.module.css";
 import {
   CheckboxForm,
   InputForm,
 } from "../../common/FormControls/FormControls";
 import { minLength2, required } from "../../utils/validators/validators";
+import { loginTC } from "../../store/thunks";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { AppStateType } from "../../store/redux-store";
+import { useNavigate } from "react-router";
 
 type FormDataType = {
-  username: string;
+  email: string;
   password: string;
   rememderme: boolean;
 };
@@ -27,9 +30,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
           </b>
         </h2>
         <Field
-          placeholder={"username"}
-          label={"Username"}
-          name={"username"}
+          placeholder={"email"}
+          label={"Email"}
+          name={"email"}
           component={InputForm}
           validate={[required, minLength2]}
         />
@@ -37,6 +40,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
           placeholder={"password"}
           label={"Password"}
           name={"password"}
+          type={"password"}
           component={InputForm}
           validate={[required, minLength2]}
         />
@@ -57,8 +61,19 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({ form: "login" })(LoginForm);
 
 export const Login: React.FC = () => {
+  const isAuth = useSelector((state: AppStateType) => state.authReducer.isAuth);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const onSubmit = (formData: FormDataType) => {
     console.log(formData);
+    const { email, password, rememderme } = formData;
+    loginTC(email, password, rememderme)(dispatch);
   };
-  return <LoginReduxForm onSubmit={onSubmit} />;
+
+  return isAuth ? (
+    <> {navigate("/profile")}</>
+  ) : (
+    <LoginReduxForm onSubmit={onSubmit} />
+  );
 };
