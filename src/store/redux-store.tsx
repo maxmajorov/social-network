@@ -7,11 +7,14 @@ import {
   profileReducer,
   usersReducer,
   authReducer,
+  appReducer,
 } from "./reducers";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 const rootReducers = combineReducers({
+  appReducer: appReducer,
   profileReducer: profileReducer,
   dialogsReducer: dialogsReducer,
   usersReducer: usersReducer,
@@ -22,17 +25,15 @@ const rootReducers = combineReducers({
 
 type RootReducersType = typeof rootReducers;
 
-// export const store = configureStore({
-//   reducer: rootReducer,
-// });
-
 export const store: Store<AppStateType> = createStore(
   rootReducers,
   composeWithDevTools(applyMiddleware(thunkMiddleware))
-  // applyMiddleware(thunkMiddleware)
 );
 
 export type AppStateType = ReturnType<RootReducersType>; // ТИП ВСЕГО СТЕЙТА
+
+// SELECTOR TYPE
+export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
 
 //@ts-ignore
 window.store = store;

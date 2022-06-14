@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { AddNewMessageAC } from "../../store/actions";
-import { AppStateType } from "../../store/redux-store";
+import { useAppSelector } from "../../store/redux-store";
 import Dialogs from "./Dialogs";
 
 export const DialogsContainer = () => {
-  const dialogsState = useSelector(
-    (state: AppStateType) => state.dialogsReducer
-  );
+  const dialogsState = useAppSelector((state) => state.dialogsReducer);
+  const authState = useAppSelector((state) => state.authReducer);
 
   const dispatch = useDispatch();
-  const authState = useSelector((state: AppStateType) => state.authReducer);
 
   let navigate = useNavigate();
 

@@ -1,7 +1,6 @@
 import { ProfileResponseType } from "./../../api/api";
 
 export const ADD_NEW_POST = "ADD-NEW-POST";
-// export const GET_MY_PROFILE = "GET-MY-PROFILE";
 export const IS_FETCHING_PROFILE = "IS-FETCHING-PROFILE";
 export const GET_USER_PROFILE = "GET-USER-PROFILE";
 export const GET_USER_PROFILE_STATUS = "GET-USER-PROFILE-STATUS";
@@ -40,7 +39,6 @@ export const updateUserProfileStatusAC = (status: string) =>
 
 export type PostsActionsType =
   | ReturnType<typeof addNewPostAC>
-  // | GetMyProfileACType
   | ReturnType<typeof isFetchingProfileAC>
   | ReturnType<typeof getUserProfileAC>
   | ReturnType<typeof getUserProfileStatusAC>

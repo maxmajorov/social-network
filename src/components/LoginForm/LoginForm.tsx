@@ -13,8 +13,7 @@ import {
 } from "../../utils/validators/validators";
 import { loginTC } from "../../store/thunks";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { AppStateType } from "../../store/redux-store";
+import { useAppSelector } from "../../store/redux-store";
 import { useNavigate } from "react-router";
 
 type FormDataType = {
@@ -24,9 +23,7 @@ type FormDataType = {
 };
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-  const { responseMessage } = useSelector(
-    (state: AppStateType) => state.authReducer
-  );
+  const { responseMessage } = useAppSelector((state) => state.authReducer);
   return (
     <div className={classes.loginContainer}>
       <form onSubmit={props.handleSubmit} className={classes.loginForm}>
@@ -71,7 +68,8 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({ form: "login" })(LoginForm);
 
 export const Login: React.FC = () => {
-  const isAuth = useSelector((state: AppStateType) => state.authReducer.isAuth);
+  const authUserID = useAppSelector((state) => state.authReducer.id);
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -81,8 +79,8 @@ export const Login: React.FC = () => {
     loginTC(email, password, rememderme)(dispatch);
   };
 
-  return isAuth ? (
-    <> {navigate("/profile")}</>
+  return authUserID ? (
+    <> {navigate(`/profile/${authUserID}`)}</>
   ) : (
     <LoginReduxForm onSubmit={onSubmit} />
   );

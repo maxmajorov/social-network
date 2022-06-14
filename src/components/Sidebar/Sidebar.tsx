@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../store/redux-store";
 import { getMyProfileTC } from "../../store/thunks/profile-thunk";
 import classes from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {
+  const myProfileID = useAppSelector((state) => state.authReducer.id);
   const dispatch = useDispatch();
   const loadProfileHandler = () => {
     getMyProfileTC()(dispatch);
@@ -12,10 +14,10 @@ const Sidebar: React.FC = () => {
 
   return (
     <aside className={classes.sidebar}>
-      <ul className="sidebar__list list-reset">
+      <ul>
         <li className={classes.item}>
           <NavLink
-            to="/profile/23584"
+            to={`/profile/${myProfileID}`}
             className={({ isActive }) =>
               classes.link + " " + (isActive ? classes.active : "")
             }

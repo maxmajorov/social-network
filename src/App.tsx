@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -11,16 +11,29 @@ import { UsersContainer } from "./components/Users/UsersContainer";
 import { ProfileContainer } from "./components/Profile/ProfileContainer";
 import { HeaderContainer } from "./components/Header/HeaderContainer";
 import { Login } from "./components/LoginForm/LoginForm";
+import { useAppSelector } from "./store/redux-store";
+import { Preloader } from "./components/Preloader/Preloader";
+import { useDispatch } from "react-redux";
+import { initializeAppTC } from "./store/thunks";
 
 const App = () => {
-  return (
+  const appState = useAppSelector((state) => state.appReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    initializeAppTC()(dispatch);
+  }, []);
+
+  return !appState.initialized ? (
+    <Preloader />
+  ) : (
     <div className="container">
       <HeaderContainer />
       <Sidebar />
       <div className="container-content">
         <Routes>
           <Route path="/authentication" element={<Login />} />
-          <Route path="/profile/" element={<ProfileContainer />} />
+          {/* <Route path="/profile/" element={<ProfileContainer />} /> */}
           <Route path="/profile/:userId" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />

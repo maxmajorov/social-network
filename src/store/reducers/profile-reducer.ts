@@ -29,17 +29,17 @@ const initialState = {
   profile: {
     userId: 0,
     lookingForAJob: true,
-    lookingForAJobDescription: "looking for new opportunities",
-    fullName: "Maxim Predko",
+    lookingForAJobDescription: "",
+    fullName: "",
     contacts: {
-      github: "https://github.com/maxmajorov",
+      github: "",
       vk: "none",
       facebook: "none",
       instagram: "none",
       twitter: "none",
       website: "none",
       youtube: "none",
-      mainLink: "maxpredko@gmail.com",
+      mainLink: "",
     },
     photos: {
       small: "./img/avatar.jpg",

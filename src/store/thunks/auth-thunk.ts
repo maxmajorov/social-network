@@ -3,7 +3,7 @@ import { AnyAction, Dispatch } from "redux";
 import { authAPI } from "../../api/api";
 
 export const authUserTC = () => (dispatch: Dispatch<AnyAction>) => {
-  authAPI.authUser().then((response) => {
+  return authAPI.authUser().then((response) => {
     if (response.resultCode === 0) {
       const { id, login, email } = response.data;
       dispatch(authorizeMeAC(id, login, email, true));

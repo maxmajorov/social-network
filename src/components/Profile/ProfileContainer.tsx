@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Profile from "./Profile";
 import { getProfileStatusTC, getUserProfileTC } from "../../store/thunks";
 import { Preloader } from "../Preloader/Preloader";
-import { useSelector } from "react-redux";
-import { AppStateType } from "../../store/redux-store";
+import { useAppSelector } from "../../store/redux-store";
 // import classes from "./Profile.module.css";
 
 export const ProfileContainer = () => {
-  const { isFetching } = useSelector(
-    (state: AppStateType) => state.profileReducer
-  );
+  const { isFetching } = useAppSelector((state) => state.profileReducer);
+  const authUserID = useAppSelector((state) => state.authReducer.id);
+
   const dispatch = useDispatch();
   const userId = useParams();
+  let navigate = useNavigate();
 
   console.log(userId);
 
@@ -22,5 +22,15 @@ export const ProfileContainer = () => {
     getProfileStatusTC(userId)(dispatch);
   }, [dispatch, userId]);
 
-  return <>{isFetching ? <Preloader /> : <Profile />}</>;
+  return (
+    <>
+      {isFetching ? (
+        <Preloader />
+      ) : authUserID ? (
+        <Profile />
+      ) : (
+        navigate(`/authentication`)
+      )}
+    </>
+  );
 };
