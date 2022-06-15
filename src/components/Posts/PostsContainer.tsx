@@ -1,27 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { addNewPostAC } from "../../store/actions";
-import { AppStateType } from "../../store/redux-store";
-
+import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { selectPosts } from "../../store/selectors";
 import { Posts } from "./Posts";
 
-// Контейнерная компонента ==> вся логика и store только здесь.
-
 export const PostsContainer = () => {
-  const postsState = useSelector(
-    (state: AppStateType) => state.profileReducer.posts
-  );
-  const dispatch = useDispatch();
+  const posts = useAppSelector(selectPosts);
+  const dispatch = useAppDispatch();
 
   const addNewPostToStoreCallback = (newPost: string) => {
     dispatch(addNewPostAC(newPost));
   };
 
   return (
-    <Posts
-      postsState={postsState}
-      addNewPostToStore={addNewPostToStoreCallback}
-    />
+    <Posts postsState={posts} addNewPostToStore={addNewPostToStoreCallback} />
   );
 };

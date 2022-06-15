@@ -1,8 +1,9 @@
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Textarea } from "../../../common/FormControls/FormControls";
 import { addNewPostAC } from "../../../store/actions";
+import { useAppDispatch } from "../../../store/redux-store";
 import { maxLength100, required } from "../../../utils/validators/validators";
 import classes from "./PostsCreate.module.css";
 
@@ -13,6 +14,16 @@ type FormPostType = {
 export const CreatePost: React.FC<InjectedFormProps<FormPostType>> = (
   props
 ) => {
+  const dispatch = useAppDispatch();
+
+  const onKeyPressInputHandler = (
+    event: KeyboardEvent<HTMLTextAreaElement>
+  ) => {
+    event.charCode === 13
+      ? dispatch(addNewPostAC(event.currentTarget.value))
+      : console.log("notEnter");
+  };
+
   return (
     <form className={classes.createMessage} onSubmit={props.handleSubmit}>
       <Field
@@ -20,7 +31,7 @@ export const CreatePost: React.FC<InjectedFormProps<FormPostType>> = (
         name="newPost"
         className={classes.inputMessage}
         placeholder="Write something here..."
-        // onKeyPress={onKeyPressInputHandler}
+        onKeyPress={onKeyPressInputHandler}
         validate={[required, maxLength100]}
         cols={50}
         rows={2}
@@ -36,22 +47,6 @@ export const CreatePostReduxForm = reduxForm<FormPostType>({
 
 export const CreatePostForm: React.FC = () => {
   const dispatch = useDispatch();
-
-  // const onChangeAddPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setNewPost(event.currentTarget.value.trim());
-  //   setError("");
-  // };
-
-  // const onClickAddPostHandler = () => {
-  //   newPost.length ? addNewPostToStore(newPost) : setError("Invalid input");
-  //   setNewPost("");
-  // };
-
-  // const onKeyPressInputHandler = (
-  //   event: KeyboardEvent<HTMLTextAreaElement>
-  // ) => {
-  //   event.charCode === 13 ? onClickAddPostHandler() : console.log("notEnter");
-  // };
 
   const onSubmit = (formData: FormPostType) => {
     console.log(formData);

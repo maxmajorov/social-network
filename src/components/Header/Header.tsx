@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "antd";
-import classes from "./Header.module.css";
 import { AuthModal } from "../AuthModal/AuthModal";
 import socialLogo from "../../assets/img/social-logo.png";
+import classes from "./Header.module.css";
 
 type HeaderType = {
   login: string | null;

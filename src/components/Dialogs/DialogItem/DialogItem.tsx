@@ -7,8 +7,8 @@ type DialogItemPropsType = {
   id: string;
 };
 
-function DialogItem(props: DialogItemPropsType) {
-  let path: string = "/dialogs/" + props.id; //Путь можно вынести в переменную
+export const DialogItem: React.FC<DialogItemPropsType> = ({ userName, id }) => {
+  let path: string = "/dialogs/" + id; //Путь можно вынести в переменную
 
   return (
     <NavLink to={path} className={classes.dialog}>
@@ -17,9 +17,7 @@ function DialogItem(props: DialogItemPropsType) {
         alt="user-avatar"
         className={classes.userAvatar}
       />
-      {props.userName}
+      {userName}
     </NavLink>
   );
-}
-
-export default DialogItem;
+};

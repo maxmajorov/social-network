@@ -1,16 +1,16 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { AppStateType } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { selectLogin } from "../../store/selectors";
 import { authUserTC } from "../../store/thunks";
 import { Header } from "./Header";
 
 export const HeaderContainer = () => {
-  const { login } = useSelector((state: AppStateType) => state.authReducer);
-  const dispatch = useDispatch();
+  const login = useAppSelector(selectLogin);
+  const dispatch = useAppDispatch();
 
   const authRequestCallback = () => {
     console.log("auth");
-    authUserTC()(dispatch);
+    dispatch(authUserTC());
   };
   return (
     <>

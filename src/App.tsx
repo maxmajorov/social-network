@@ -1,30 +1,30 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar/Sidebar";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import Friends from "./components/Friends/Friends";
+import { Friends } from "./components/Friends/Friends";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from "./components/Users/UsersContainer";
 import { ProfileContainer } from "./components/Profile/ProfileContainer";
 import { HeaderContainer } from "./components/Header/HeaderContainer";
 import { Login } from "./components/LoginForm/LoginForm";
-import { useAppSelector } from "./store/redux-store";
+import { useAppDispatch, useAppSelector } from "./store/redux-store";
 import { Preloader } from "./components/Preloader/Preloader";
-import { useDispatch } from "react-redux";
 import { initializeAppTC } from "./store/thunks";
+import { selectAppInitialize } from "./store/selectors";
 
-const App = () => {
-  const appState = useAppSelector((state) => state.appReducer);
-  const dispatch = useDispatch();
+export const App = () => {
+  const appInitialize = useAppSelector(selectAppInitialize);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    initializeAppTC()(dispatch);
+    dispatch(initializeAppTC());
   }, []);
 
-  return !appState.initialized ? (
+  return !appInitialize ? (
     <Preloader />
   ) : (
     <div className="container">
@@ -33,7 +33,6 @@ const App = () => {
       <div className="container-content">
         <Routes>
           <Route path="/authentication" element={<Login />} />
-          {/* <Route path="/profile/" element={<ProfileContainer />} /> */}
           <Route path="/profile/:userId" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />
@@ -46,5 +45,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;

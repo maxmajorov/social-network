@@ -1,23 +1,18 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
-import { DialogsPageType } from "../../store/reducers/dialogs-reducer";
-import { AppStateType } from "../../store/redux-store";
-import DialogItem from "./DialogItem/DialogItem";
-import classes from "./Dialogs.module.css";
+import { useAppSelector } from "../../store/redux-store";
+import { selectDialogs, selectMessages } from "../../store/selectors";
+import { DialogItem } from "./DialogItem/DialogItem";
 import { CreateMessageForm } from "./MessageItem/CreateMessage/CreateMessage";
-import MessageItem from "./MessageItem/MesssageItem";
+import { MessageItem } from "./MessageItem/MesssageItem";
+import classes from "./Dialogs.module.css";
 
 type DialogsPropsType = {
-  dialogsState: DialogsPageType;
   addNewMessageToStore: (newMessage: string) => void;
 };
 
-const Dialogs: React.FC<DialogsPropsType> = ({
-  dialogsState,
-  addNewMessageToStore,
-}) => {
-  const authState = useSelector((state: AppStateType) => state.authReducer);
+const Dialogs: React.FC<DialogsPropsType> = ({ addNewMessageToStore }) => {
+  const dialogs = useAppSelector(selectDialogs);
+  const messages = useAppSelector(selectMessages);
 
   useEffect(() => {
     document.title = `Dialogs`;
@@ -27,18 +22,13 @@ const Dialogs: React.FC<DialogsPropsType> = ({
     };
   });
 
-  const dialogsElements = dialogsState.dialogs.map((el) => (
+  const dialogsElements = dialogs.map((el) => (
     <DialogItem key={el._id} userName={el.name} id={el._id} />
   ));
 
-  const messageElements = dialogsState.messages.map((el) => (
+  const messageElements = messages.map((el) => (
     <MessageItem key={el._id} messageText={el.message} id={el._id} />
   ));
-
-  if (!authState.isAuth) {
-    console.log(authState.isAuth);
-    return <Navigate replace to="/authentication" />;
-  }
 
   return (
     <main className={classes.dialogs}>

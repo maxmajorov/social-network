@@ -6,15 +6,14 @@ import {
   CheckboxForm,
   InputForm,
 } from "../../common/FormControls/FormControls";
-import {
-  // inputError,
-  minLength2,
-  required,
-} from "../../utils/validators/validators";
+import { minLength2, required } from "../../utils/validators/validators";
 import { loginTC } from "../../store/thunks";
-import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../store/redux-store";
 import { useNavigate } from "react-router";
+import {
+  selectMyProfileID,
+  selectResponseMessage,
+} from "../../store/selectors";
 
 type FormDataType = {
   email: string;
@@ -23,7 +22,8 @@ type FormDataType = {
 };
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-  const { responseMessage } = useAppSelector((state) => state.authReducer);
+  const responseMessage = useAppSelector(selectResponseMessage);
+
   return (
     <div className={classes.loginContainer}>
       <form onSubmit={props.handleSubmit} className={classes.loginForm}>
@@ -68,9 +68,8 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({ form: "login" })(LoginForm);
 
 export const Login: React.FC = () => {
-  const authUserID = useAppSelector((state) => state.authReducer.id);
-
-  const dispatch = useDispatch();
+  const authUserID = useAppSelector(selectMyProfileID);
+  const dispatch = useAppDispatch();
   let navigate = useNavigate();
 
   const onSubmit = (formData: FormDataType) => {

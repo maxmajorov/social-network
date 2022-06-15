@@ -1,6 +1,6 @@
-import { Button } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { Button } from "antd";
 import classes from "./FriendMaxi.module.css";
 
 type FriendsMaxiPropsType = {
@@ -31,7 +31,6 @@ export const FriendMaxi: React.FC<FriendsMaxiPropsType> = React.memo(
         : followUser && followUser(id);
     };
 
-    console.log(followProgress);
     return (
       <div className={classes.card}>
         <NavLink to={"/profile/" + id}>

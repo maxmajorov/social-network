@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { showMoreUsersAC, isFetchingAC } from "../../store/actions";
+
+import { isFetchingAC } from "../../store/actions";
 import { Users } from "./Users";
 import { Preloader } from "../Preloader/Preloader";
 import {
@@ -9,13 +9,13 @@ import {
   unfollowUserThunkCreator,
 } from "../../store/thunks/index";
 import { useSelector } from "react-redux";
-import { AppStateType } from "../../store/redux-store";
+import { AppStateType, useAppDispatch } from "../../store/redux-store";
 
 export const UsersContainer = () => {
   const { users, totalCount, isFetching, followProgress } = useSelector(
     (state: AppStateType) => state.usersReducer
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize: number = 8; // Количество пользователей на странице
@@ -28,30 +28,26 @@ export const UsersContainer = () => {
 
   useEffect(() => {
     if (users.length === 0) {
-      getUsersThunkCreator(currentPage, pageSize)(dispatch);
+      dispatch(getUsersThunkCreator(currentPage, pageSize));
     }
   }, [dispatch, users, currentPage, pageSize]);
 
   const setCurrentPageCallback = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     dispatch(isFetchingAC(true));
-    getUsersThunkCreator(pageNumber, pageSize)(dispatch);
-  };
-
-  const showMoreUsersCallback = () => {
-    dispatch(showMoreUsersAC());
+    dispatch(getUsersThunkCreator(pageNumber, pageSize));
   };
 
   const followUserCallback = useCallback(
     (userID: string) => {
-      followUserThunkCreator(userID)(dispatch);
+      dispatch(followUserThunkCreator(userID));
     },
     [dispatch]
   );
 
   const unFollowUserCallback = useCallback(
     (userID: string) => {
-      unfollowUserThunkCreator(userID)(dispatch);
+      dispatch(unfollowUserThunkCreator(userID));
     },
     [dispatch]
   );
@@ -66,7 +62,6 @@ export const UsersContainer = () => {
           pagesNumber={pagesNumber}
           currentPage={currentPage}
           setCurrentPage={setCurrentPageCallback}
-          showMoreUsers={showMoreUsersCallback}
           followUser={followUserCallback}
           unFollowUser={unFollowUserCallback}
           followProgress={followProgress}

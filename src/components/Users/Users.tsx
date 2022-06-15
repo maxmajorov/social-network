@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { useEffect } from "react";
 import { UsersFromServerType } from "../../api/api";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
 
@@ -9,7 +9,6 @@ type UsersPropsType = {
   pagesNumber: Array<number>;
   currentPage: number;
   setCurrentPage: (pageNumber: number) => void;
-  showMoreUsers: () => void;
   followUser: (userID: string) => void;
   unFollowUser: (userID: string) => void;
   followProgress: boolean[];
@@ -20,7 +19,6 @@ export const Users: React.FC<UsersPropsType> = ({
   pagesNumber,
   currentPage,
   setCurrentPage,
-  showMoreUsers,
   followUser,
   unFollowUser,
   followProgress,
@@ -70,7 +68,6 @@ export const Users: React.FC<UsersPropsType> = ({
           ))
           .filter((el, ind, arr) => ind < 9)}
       </div>
-      <button onClick={showMoreUsers}>SHOW MORE</button>
     </main>
   );
 };

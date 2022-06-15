@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
 import { loginTC, logoutTC } from "../../store/thunks";
+import { useAppDispatch } from "../../store/redux-store";
 
 interface Values {
   title: string;
@@ -25,7 +25,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
   login,
   authRequest,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [inputEmailPass, setInputEmailPass] = useState({
     email: "",
     password: "",

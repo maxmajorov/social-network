@@ -1,15 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { selectMyProfileID } from "../../store/selectors";
 import { getMyProfileTC } from "../../store/thunks/profile-thunk";
 import classes from "./Sidebar.module.css";
 
-const Sidebar: React.FC = () => {
-  const myProfileID = useAppSelector((state) => state.authReducer.id);
-  const dispatch = useDispatch();
+export const Sidebar: React.FC = () => {
+  const myProfileID = useAppSelector(selectMyProfileID);
+  const dispatch = useAppDispatch();
+
   const loadProfileHandler = () => {
-    getMyProfileTC()(dispatch);
+    dispatch(getMyProfileTC());
   };
 
   return (
@@ -131,5 +132,3 @@ const Sidebar: React.FC = () => {
     </aside>
   );
 };
-
-export default Sidebar;

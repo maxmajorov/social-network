@@ -1,13 +1,13 @@
 import React from "react";
-import classes from "./ProfilePhotoActions.module.css";
 import defaultImage from "../../../../assets/img/def-image.png";
 import { Button } from "antd";
+import classes from "./ProfilePhotoActions.module.css";
 
-type ProfilePhotoActionsPropsType = {
+type ProfilePhotoPropsType = {
   profilePhoto: string;
 };
 
-export const ProfilePhotoActions: React.FC<ProfilePhotoActionsPropsType> = ({
+export const ProfilePhotoActions: React.FC<ProfilePhotoPropsType> = ({
   profilePhoto,
 }) => {
   return (

@@ -6,8 +6,9 @@ type MessageItemPropsType = {
   messageText: string;
 };
 
-function MessageItem(props: MessageItemPropsType) {
-  return <div className={classes.message}>{props.messageText}</div>;
-}
-
-export default MessageItem;
+export const MessageItem: React.FC<MessageItemPropsType> = ({
+  messageText,
+  id,
+}) => {
+  return <div className={classes.message}>{messageText}</div>;
+};

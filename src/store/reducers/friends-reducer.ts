@@ -2,19 +2,7 @@ import { v1 } from "uuid";
 
 const ADD_NEW_FRIEND = "ADD-NEW-FRIEND";
 
-type LocationType = {
-  city: string;
-  country: string;
-};
-
-type FriendsPageType = {
-  _id: string;
-  name: string;
-  location: LocationType;
-  avatar: string;
-};
-
-const initialState = {
+const initialState: FriendsPageType = {
   friends: [
     {
       _id: v1(),
@@ -93,3 +81,21 @@ export const addFriendActionCreator = (newFriend: string) => ({
   type: "ADD-NEW-FRIEND",
   newItem: newFriend,
 });
+
+// TYPES
+
+type LocationType = {
+  city: string;
+  country: string;
+};
+
+type FriendsType = {
+  _id: string;
+  name: string;
+  location: LocationType;
+  avatar: string;
+};
+
+type FriendsPageType = {
+  friends: Array<FriendsType>;
+};
