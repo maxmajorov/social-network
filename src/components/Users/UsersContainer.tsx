@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-
 import { isFetchingAC } from "../../store/actions";
 import { Users } from "./Users";
 import { Preloader } from "../Preloader/Preloader";
@@ -8,13 +7,22 @@ import {
   followUserThunkCreator,
   unfollowUserThunkCreator,
 } from "../../store/thunks/index";
-import { useSelector } from "react-redux";
-import { AppStateType, useAppDispatch } from "../../store/redux-store";
+
+import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import {
+  selectAllUsers,
+  selectAllUsersByFilter,
+  selectFolowingProgress,
+  selectIsFetching,
+  selectTotalCount,
+} from "../../store/selectors";
 
 export const UsersContainer = () => {
-  const { users, totalCount, isFetching, followProgress } = useSelector(
-    (state: AppStateType) => state.usersReducer
-  );
+  const users = useAppSelector(selectAllUsersByFilter);
+  const totalCount = useAppSelector(selectTotalCount);
+  const isFetching = useAppSelector(selectIsFetching);
+  const followProgress = useAppSelector(selectFolowingProgress);
+
   const dispatch = useAppDispatch();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
