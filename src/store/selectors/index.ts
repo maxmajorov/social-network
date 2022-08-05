@@ -8,8 +8,6 @@ export {
 
 export { selectFriends } from "./selectFriendsPage";
 
-export { selectDialogs, selectMessages } from "./selectDialogsPage";
-
 export {
   selectPosts,
   selectIsProfileFetching,
@@ -22,5 +20,3 @@ export {
   selectMyProfileID,
   selectResponseMessage,
 } from "./selectAuth";
-
-export { selectAppInitialize } from "./selectApp";

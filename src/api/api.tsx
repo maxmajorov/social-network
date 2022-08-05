@@ -53,8 +53,9 @@ export const profileAPI = {
 };
 
 // ==== AUTH ====
+
 export const authAPI = {
-  authUser() {
+  authMe() {
     return instance
       .get<AuthResponseType>(`auth/me`, {
         withCredentials: true, // При кроссдоменности

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import classes from "./ProfileContent.module.css";
-import { AppStateType } from "../../../store/redux-store";
+import { AppRootStateType } from "../../../bll/store";
 import { ProfilePhotoActions } from "./ProfilePhotoActions/ProfilePhotoActions";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { Col, Row } from "antd";
@@ -10,10 +10,10 @@ import { PostsContainer } from "../../Posts/PostsContainer";
 
 export const ProfileContent: React.FC = () => {
   const profileState = useSelector(
-    (state: AppStateType) => state.profileReducer.profile
+    (state: AppRootStateType) => state.profileReducer.profile
   );
   const friendsState = useSelector(
-    (state: AppStateType) => state.friendsReducer.friends
+    (state: AppRootStateType) => state.friendsReducer.friends
   );
   return (
     <div className={classes.profileContainer}>

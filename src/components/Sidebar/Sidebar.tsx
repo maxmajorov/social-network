@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { selectMyProfileID } from "../../store/selectors";
 import { getMyProfileTC } from "../../store/thunks/profile-thunk";
 import classes from "./Sidebar.module.css";

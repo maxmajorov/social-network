@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { selectLogin } from "../../store/selectors";
 import { authUserTC } from "../../store/thunks";
 import { Header } from "./Header";

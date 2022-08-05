@@ -8,7 +8,7 @@ import {
   unfollowUserThunkCreator,
 } from "../../store/thunks/index";
 
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import {
   selectAllUsers,
   selectAllUsersByFilter,

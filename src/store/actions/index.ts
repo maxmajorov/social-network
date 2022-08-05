@@ -1,5 +1,3 @@
-export { appSetInitializedAC } from "./app-actions";
-
 export { authorizeMeAC, stopAuthorizationAC } from "./auth-actions";
 export {
   getUsersAC,
@@ -10,7 +8,7 @@ export {
   unFollowUserAC,
   setTotalCountUsersAC,
 } from "./users-actions";
-export { AddNewMessageAC } from "./dialogs-actions";
+
 export {
   addNewPostAC,
   // getMyProfileAC,

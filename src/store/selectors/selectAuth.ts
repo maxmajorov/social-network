@@ -1,10 +1,12 @@
-import { AppStateType } from "../redux-store";
+import { AppRootStateType } from "../../bll/store";
 
-export const selectLogin = (state: AppStateType) => state.authReducer.login;
+export const selectLogin = (state: AppRootStateType) => state.authReducer.login;
 
-export const selectMyProfileID = (state: AppStateType) => state.authReducer.id;
+export const selectMyProfileID = (state: AppRootStateType) =>
+  state.authReducer.id;
 
-export const selectResponseMessage = (state: AppStateType) =>
+export const selectResponseMessage = (state: AppRootStateType) =>
   state.authReducer.responseMessage;
 
-export const selectIsAuth = (state: AppStateType) => state.authReducer.isAuth;
+export const selectIsAuth = (state: AppRootStateType) =>
+  state.authReducer.isAuth;

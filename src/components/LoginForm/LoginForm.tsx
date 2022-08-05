@@ -8,7 +8,7 @@ import {
 } from "../../common/FormControls/FormControls";
 import { minLength2, required } from "../../utils/validators/validators";
 import { loginTC } from "../../store/thunks";
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { useNavigate } from "react-router";
 import {
   selectMyProfileID,

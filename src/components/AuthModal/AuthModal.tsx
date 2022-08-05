@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Form, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { loginTC, logoutTC } from "../../store/thunks";
-import { useAppDispatch } from "../../store/redux-store";
+import { useAppDispatch } from "../../bll/store";
 
 interface Values {
   title: string;

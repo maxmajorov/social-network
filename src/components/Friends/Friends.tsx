@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router";
-import { useAppSelector } from "../../store/redux-store";
+import { useAppSelector } from "../../bll/store";
 import { selectFriends, selectIsAuth } from "../../store/selectors";
 import { FriendMaxi } from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";

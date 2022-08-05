@@ -1,6 +1,6 @@
 import React from "react";
 import { addNewPostAC } from "../../store/actions";
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { selectPosts } from "../../store/selectors";
 import { Posts } from "./Posts";
 

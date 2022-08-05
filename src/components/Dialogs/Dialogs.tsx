@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { useAppSelector } from "../../store/redux-store";
-import { selectDialogs, selectMessages } from "../../store/selectors";
+import { useAppSelector } from "../../bll/store";
 import { DialogItem } from "./DialogItem/DialogItem";
 import { CreateMessageForm } from "./MessageItem/CreateMessage/CreateMessage";
 import { MessageItem } from "./MessageItem/MesssageItem";
 import classes from "./Dialogs.module.css";
+import {
+  selectDialogs,
+  selectMessages,
+} from "../../bll/reducers/dialogs-reducer";
 
 type DialogsPropsType = {
   addNewMessageToStore: (newMessage: string) => void;

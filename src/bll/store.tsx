@@ -8,17 +8,19 @@ import {
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import {
-  dialogsReducer,
   friendsReducer,
   profileReducer,
   usersReducer,
   authReducer,
-  appReducer,
-} from "./reducers";
-
+} from "../store/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { AppActionsTypes, appReducer } from "../bll/reducers/app-reducer";
+import {
+  DialogsActionsTypes,
+  dialogsReducer,
+} from "./reducers/dialogs-reducer";
 
 const rootReducers = combineReducers({
   appReducer: appReducer,
@@ -30,26 +32,38 @@ const rootReducers = combineReducers({
   form: formReducer,
 });
 
-type RootReducersType = typeof rootReducers;
-
-export const store: Store<AppStateType> = createStore(
+export const store: Store<AppRootStateType> = createStore(
   rootReducers,
   composeWithDevTools(applyMiddleware(thunkMiddleware))
 );
 
-export type AppStateType = ReturnType<RootReducersType>;
+export type AppRootStateType = ReturnType<typeof rootReducers>;
+export type AppRootActionsType = AppActionsTypes | DialogsActionsTypes;
+//   | ForgotPassActionsType
+//   | ProfileActionsTypes
+//   | RegisterActionsType
+//   | PacksActionsTypes
+//   | CardsActionsTypes;
 
 // SELECTOR TYPE
-export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
+
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> =
+  useSelector;
 
 // DISPATCH TYPE & DISPATCH
-export type useAppDispatch = ThunkDispatch<AppStateType, unknown, AnyAction>;
-export const useAppDispatch = () => useDispatch<useAppDispatch>();
 
-// THUNK TYPE
+export type useAppDispatchType = ThunkDispatch<
+  AppRootStateType,
+  unknown,
+  AnyAction // change
+>;
+export const useAppDispatch = () => useDispatch<useAppDispatchType>();
+
+// ==== THUNKS TYPES ====
+
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
-  AppStateType,
+  AppRootStateType,
   unknown,
   AnyAction //Потом заменить на свои
 >;

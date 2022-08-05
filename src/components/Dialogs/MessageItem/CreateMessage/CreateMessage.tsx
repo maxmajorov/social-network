@@ -1,8 +1,8 @@
 import React, { KeyboardEvent } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { AddNewMessageAC } from "../../../../bll/reducers/dialogs-reducer";
+import { useAppDispatch } from "../../../../bll/store";
 import { Textarea } from "../../../../common/FormControls/FormControls";
-import { AddNewMessageAC } from "../../../../store/actions";
-import { useAppDispatch } from "../../../../store/redux-store";
 import {
   maxLength100,
   required,

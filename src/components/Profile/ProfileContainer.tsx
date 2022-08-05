@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import Profile from "./Profile";
 import { getProfileStatusTC, getUserProfileTC } from "../../store/thunks";
 import { Preloader } from "../Preloader/Preloader";
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import {
   selectIsProfileFetching,
   selectMyProfileID,

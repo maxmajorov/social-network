@@ -1,5 +1,3 @@
-export { initializeAppTC } from "./app-thunk";
-
 export { authUserTC, loginTC, logoutTC } from "./auth-thunk";
 export {
   getUserProfileTC,

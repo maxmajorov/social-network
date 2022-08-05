@@ -2,10 +2,10 @@
 
 @font-face {
   font-family: 'Raleway', sans-serif;
-  src: url("./assets/fonts/Raleway-Bold.ttf") format("ttf");
-  src: url("./assets/fonts/Raleway-Light.ttf") format("ttf");
-  src: url("./assets/fonts/Raleway-Medium.ttf") format("ttf");
-  src: url("./assets/fonts/Raleway-Thin.ttf") format("ttf");
+  src: url("../assets/fonts/Raleway-Bold.ttf") format("ttf");
+  src: url("../assets/fonts/Raleway-Light.ttf") format("ttf");
+  src: url("../assets/fonts/Raleway-Medium.ttf") format("ttf");
+  src: url("../assets/fonts/Raleway-Thin.ttf") format("ttf");
 }
 
 body {

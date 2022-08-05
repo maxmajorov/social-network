@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../../store/redux-store";
+import { useAppDispatch, useAppSelector } from "../../../../bll/store";
 import { selectProfileStatus } from "../../../../store/selectors";
 import { updateProfileStatusTC } from "../../../../store/thunks";
 import { EditableSpan } from "../../../EditableSpan/EditableSpan";

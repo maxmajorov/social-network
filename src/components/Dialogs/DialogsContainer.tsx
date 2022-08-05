@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { AddNewMessageAC } from "../../store/actions";
-import { useAppDispatch, useAppSelector } from "../../store/redux-store";
+import { AddNewMessageAC } from "../../bll/reducers/dialogs-reducer";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { selectIsAuth } from "../../store/selectors";
 import Dialogs from "./Dialogs";
 

@@ -1,4 +1,4 @@
-import { AppStateType } from "../redux-store";
+import { AppRootStateType } from "../../bll/store";
 
-export const selectFriends = (state: AppStateType) =>
+export const selectFriends = (state: AppRootStateType) =>
   state.friendsReducer.friends;

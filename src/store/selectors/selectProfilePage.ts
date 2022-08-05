@@ -1,9 +1,10 @@
-import { AppStateType } from "../redux-store";
+import { AppRootStateType } from "../../bll/store";
 
-export const selectIsProfileFetching = (state: AppStateType) =>
+export const selectIsProfileFetching = (state: AppRootStateType) =>
   state.profileReducer.isFetching;
 
-export const selectProfileStatus = (state: AppStateType) =>
+export const selectProfileStatus = (state: AppRootStateType) =>
   state.profileReducer.profileStatus;
 
-export const selectPosts = (state: AppStateType) => state.profileReducer.posts;
+export const selectPosts = (state: AppRootStateType) =>
+  state.profileReducer.posts;
