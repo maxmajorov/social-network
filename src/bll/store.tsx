@@ -20,7 +20,7 @@ import {
   DialogsActionsTypes,
   dialogsReducer,
 } from "./reducers/dialogs-reducer";
-import { authReducer } from "./reducers/auth-reducer";
+import { AuthActionsType, authReducer } from "./reducers/auth-reducer";
 
 const rootReducers = combineReducers({
   appReducer: appReducer,
@@ -38,12 +38,10 @@ export const store: Store<AppRootStateType> = createStore(
 );
 
 export type AppRootStateType = ReturnType<typeof rootReducers>;
-export type AppRootActionsType = AppActionsTypes | DialogsActionsTypes;
-//   | ForgotPassActionsType
-//   | ProfileActionsTypes
-//   | RegisterActionsType
-//   | PacksActionsTypes
-//   | CardsActionsTypes;
+export type AppRootActionsType =
+  | AppActionsTypes
+  | DialogsActionsTypes
+  | AuthActionsType;
 
 // SELECTOR TYPE
 

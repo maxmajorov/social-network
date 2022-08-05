@@ -1,34 +1,34 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
-import Profile from "./Profile";
+import { Navigate, useParams } from "react-router";
 import { getProfileStatusTC, getUserProfileTC } from "../../store/thunks";
 import { Preloader } from "../Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
-import { selectIsProfileFetching } from "../../store/selectors";
-import { userIDSelector } from "../../bll/reducers/auth-reducer";
-// import classes from "./Profile.module.css";
+import { isLoggedInSelector } from "../../bll/reducers/auth-reducer";
+import { appStatusSelect } from "../../bll/reducers/app-reducer";
+import { ProfileContent } from "./ProfileContent/ProfileContent";
+import classes from "./Profile.module.css";
 
 export const ProfileContainer = () => {
-  const isFetching = useAppSelector(selectIsProfileFetching);
-  const authUserID = useAppSelector(userIDSelector);
+  const status = useAppSelector(appStatusSelect);
+  const isLoggedIn = useAppSelector(isLoggedInSelector);
   const dispatch = useAppDispatch();
   const userId = useParams();
-  let navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUserProfileTC(userId));
     dispatch(getProfileStatusTC(userId));
   }, [dispatch, userId]);
 
+  if (!isLoggedIn) {
+    return <Navigate to="/authentication" />;
+  }
+
   return (
     <>
-      {isFetching ? (
-        <Preloader />
-      ) : authUserID ? (
-        <Profile />
-      ) : (
-        navigate(`/authentication`)
-      )}
+      {status === "loading" && <Preloader />}
+      <main className={classes.profile}>
+        <ProfileContent />
+      </main>
     </>
   );
 };

@@ -34,6 +34,7 @@ export const App = () => {
       <Sidebar />
       <div className="container-content">
         <Routes>
+          <Route path={"/"} element={<Login />} />
           <Route path="/authentication" element={<Login />} />
           <Route path="/profile/:userId" element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />

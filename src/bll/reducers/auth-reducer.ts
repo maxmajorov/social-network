@@ -1,7 +1,5 @@
 import { AppRootStateType, AppThunk } from "../store";
 import { appSetErrorAC, appSetStatusAC } from "./app-reducer";
-// import { setProfileInfoAC } from "./profile-reducer";
-// import { authAPI, LoginPayloadType } from "../../api/authorization-api";
 import { AxiosError } from "axios";
 import { authAPI } from "../../api/api";
 // import { handleNetworkError } from "../../utils/errorUtils";
@@ -9,8 +7,6 @@ import { authAPI } from "../../api/api";
 const initialState = {
   isLoggedIn: false,
   userID: null as number | null,
-  email: "",
-  login: "",
   responseMessage: "",
 };
 
@@ -49,8 +45,8 @@ export const loginTC =
       console.log("click login");
       dispatch(appSetStatusAC("loading"));
       const response = await authAPI.login(email, password, rememderme);
-      dispatch(loginAC(true));
       dispatch(setUserIDAC(response.data.userId));
+      dispatch(loginAC(true));
       // dispatch(setProfileInfoAC(response.data));
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>;
@@ -82,14 +78,12 @@ export const isLoggedInSelector = (state: AppRootStateType) =>
 export const userIDSelector = (state: AppRootStateType) =>
   state.authReducer.userID;
 
-export const selectLogin = (state: AppRootStateType) => state.authReducer.login;
-
 export const selectResponseMessage = (state: AppRootStateType) =>
   state.authReducer.responseMessage;
 
 // ==== TYPES ====
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 
 export type LoginType = ReturnType<typeof loginAC>;
 export type SetUserType = ReturnType<typeof setUserIDAC>;
