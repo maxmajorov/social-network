@@ -21,7 +21,7 @@ export const dialogsReducer = (
   action: DialogsActionsTypes
 ): InitialStateType => {
   switch (action.type) {
-    case "ADD-NEW-MESSAGE": {
+    case "DIALOGS/add-new-message": {
       const messageItem = {
         _id: v1(),
         message: action.newMessage,
@@ -37,7 +37,7 @@ export const dialogsReducer = (
 // ===== ACTIONS =====
 
 export const AddNewMessageAC = (newMessage: string) => ({
-  type: "DIALOGS/ADD-NEW-MESSAGE",
+  type: "DIALOGS/add-new-message",
   newMessage: newMessage,
 });
 

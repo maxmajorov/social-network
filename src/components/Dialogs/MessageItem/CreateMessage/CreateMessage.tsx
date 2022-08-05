@@ -21,6 +21,7 @@ export const CreateMessage: React.FC<InjectedFormProps<FormMessageType>> = (
   const onKeyPressInputHandler = (
     event: KeyboardEvent<HTMLTextAreaElement>
   ) => {
+    console.log(event.currentTarget.value);
     event.charCode === 13
       ? dispatch(AddNewMessageAC(event.currentTarget.value))
       : console.log("notEnter");
