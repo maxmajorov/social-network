@@ -13,10 +13,3 @@ export {
   selectIsProfileFetching,
   selectProfileStatus,
 } from "./selectProfilePage";
-
-export {
-  selectIsAuth,
-  selectLogin,
-  selectMyProfileID,
-  selectResponseMessage,
-} from "./selectAuth";

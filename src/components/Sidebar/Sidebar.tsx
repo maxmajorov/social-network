@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { userIDSelector } from "../../bll/reducers/auth-reducer";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
-import { selectMyProfileID } from "../../store/selectors";
 import { getMyProfileTC } from "../../store/thunks/profile-thunk";
 import classes from "./Sidebar.module.css";
 
 export const Sidebar: React.FC = () => {
-  const myProfileID = useAppSelector(selectMyProfileID);
+  const myProfileID = useAppSelector(userIDSelector);
   const dispatch = useAppDispatch();
 
   const loadProfileHandler = () => {

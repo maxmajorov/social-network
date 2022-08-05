@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { loginTC, logoutTC } from "../../store/thunks";
-import { useAppDispatch } from "../../bll/store";
+import { loginTC, logoutTC } from "../../bll/reducers/auth-reducer";
 
 interface Values {
   title: string;
@@ -15,7 +14,6 @@ interface AuthFormProps {
   onCreate?: (values: Values) => void;
   onCancel?: () => void;
   login: string | null;
-  authRequest: () => void;
 }
 
 export const AuthModal: React.FC<AuthFormProps> = ({
@@ -23,9 +21,7 @@ export const AuthModal: React.FC<AuthFormProps> = ({
   onCreate,
   onCancel,
   login,
-  authRequest,
 }) => {
-  const dispatch = useAppDispatch();
   const [inputEmailPass, setInputEmailPass] = useState({
     email: "",
     password: "",
@@ -45,11 +41,11 @@ export const AuthModal: React.FC<AuthFormProps> = ({
       inputEmailPass.email,
       inputEmailPass.password,
       inputEmailPass.rememberme
-    )(dispatch);
+    );
   };
 
   const logOUTHandler = () => {
-    logoutTC()(dispatch);
+    logoutTC();
   };
 
   return (

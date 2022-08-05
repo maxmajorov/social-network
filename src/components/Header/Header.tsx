@@ -6,10 +6,9 @@ import classes from "./Header.module.css";
 
 type HeaderType = {
   login: string | null;
-  authRequest: () => void;
 };
 
-export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
+export const Header: React.FC<HeaderType> = ({ login }) => {
   const [visible, setVisible] = useState(false);
 
   const classNameForIndicator = `${classes.indicator} ${
@@ -52,7 +51,6 @@ export const Header: React.FC<HeaderType> = ({ login, authRequest }) => {
           setVisible(false);
         }}
         login={login}
-        authRequest={authRequest}
       />
     </header>
   );

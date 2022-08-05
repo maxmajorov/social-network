@@ -4,15 +4,13 @@ import Profile from "./Profile";
 import { getProfileStatusTC, getUserProfileTC } from "../../store/thunks";
 import { Preloader } from "../Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
-import {
-  selectIsProfileFetching,
-  selectMyProfileID,
-} from "../../store/selectors";
+import { selectIsProfileFetching } from "../../store/selectors";
+import { userIDSelector } from "../../bll/reducers/auth-reducer";
 // import classes from "./Profile.module.css";
 
 export const ProfileContainer = () => {
   const isFetching = useAppSelector(selectIsProfileFetching);
-  const authUserID = useAppSelector(selectMyProfileID);
+  const authUserID = useAppSelector(userIDSelector);
   const dispatch = useAppDispatch();
   const userId = useParams();
   let navigate = useNavigate();

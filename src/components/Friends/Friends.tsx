@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router";
+import { isLoggedInSelector } from "../../bll/reducers/auth-reducer";
 import { useAppSelector } from "../../bll/store";
-import { selectFriends, selectIsAuth } from "../../store/selectors";
+import { selectFriends } from "../../store/selectors";
 import { FriendMaxi } from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
 
 export const Friends: React.FC = () => {
-  const isAuth = useAppSelector(selectIsAuth);
+  const isAuth = useAppSelector(isLoggedInSelector);
   const friends = useAppSelector(selectFriends);
 
   useEffect(() => {

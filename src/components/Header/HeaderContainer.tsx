@@ -1,20 +1,15 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../bll/store";
-import { selectLogin } from "../../store/selectors";
-import { authUserTC } from "../../store/thunks";
+import { selectLogin } from "../../bll/reducers/auth-reducer";
+import { useAppSelector } from "../../bll/store";
+
 import { Header } from "./Header";
 
 export const HeaderContainer = () => {
   const login = useAppSelector(selectLogin);
-  const dispatch = useAppDispatch();
 
-  const authRequestCallback = () => {
-    console.log("auth");
-    dispatch(authUserTC());
-  };
   return (
     <>
-      <Header login={login} authRequest={authRequestCallback} />
+      <Header login={login} />
     </>
   );
 };

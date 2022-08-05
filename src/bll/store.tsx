@@ -11,7 +11,6 @@ import {
   friendsReducer,
   profileReducer,
   usersReducer,
-  authReducer,
 } from "../store/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
@@ -21,6 +20,7 @@ import {
   DialogsActionsTypes,
   dialogsReducer,
 } from "./reducers/dialogs-reducer";
+import { authReducer } from "./reducers/auth-reducer";
 
 const rootReducers = combineReducers({
   appReducer: appReducer,

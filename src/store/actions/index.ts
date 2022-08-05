@@ -1,4 +1,3 @@
-export { authorizeMeAC, stopAuthorizationAC } from "./auth-actions";
 export {
   getUsersAC,
   isFetchingAC,

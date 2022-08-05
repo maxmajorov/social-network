@@ -7,13 +7,14 @@ import {
   InputForm,
 } from "../../common/FormControls/FormControls";
 import { minLength2, required } from "../../utils/validators/validators";
-import { loginTC } from "../../store/thunks";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { useNavigate } from "react-router";
 import {
-  selectMyProfileID,
+  isLoggedInSelector,
+  loginTC,
   selectResponseMessage,
-} from "../../store/selectors";
+  userIDSelector,
+} from "../../bll/reducers/auth-reducer";
 
 type FormDataType = {
   email: string;
@@ -68,17 +69,19 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({ form: "login" })(LoginForm);
 
 export const Login: React.FC = () => {
-  const authUserID = useAppSelector(selectMyProfileID);
+  const authUserID = useAppSelector(userIDSelector);
+  const isLoggenIn = useAppSelector(isLoggedInSelector);
+
   const dispatch = useAppDispatch();
+
   let navigate = useNavigate();
 
   const onSubmit = (formData: FormDataType) => {
-    console.log(formData);
     const { email, password, rememderme } = formData;
-    loginTC(email, password, rememderme)(dispatch);
+    dispatch(loginTC(email, password, rememderme));
   };
 
-  return authUserID ? (
+  return isLoggenIn ? (
     <> {navigate(`/profile/${authUserID}`)}</>
   ) : (
     <LoginReduxForm onSubmit={onSubmit} />

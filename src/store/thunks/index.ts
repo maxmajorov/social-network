@@ -1,4 +1,3 @@
-export { authUserTC, loginTC, logoutTC } from "./auth-thunk";
 export {
   getUserProfileTC,
   getProfileStatusTC,
