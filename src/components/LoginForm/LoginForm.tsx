@@ -2,10 +2,7 @@ import React from "react";
 import { Button } from "antd";
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
 import classes from "./LoginForm.module.css";
-import {
-  CheckboxForm,
-  InputForm,
-} from "../../common/FormControls/FormControls";
+import { CheckboxForm, InputForm } from "../common/FormControls/FormControls";
 import { minLength2, required } from "../../utils/validators/validators";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { useNavigate } from "react-router";

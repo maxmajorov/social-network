@@ -1,5 +1,14 @@
 import axios from "axios";
 import { Params } from "react-router";
+import {
+  AuthResponseType,
+  FollowResponseType,
+  LoginResponseType,
+  LogoutResponseType,
+  ProfileResponseType,
+  ProfileStatusResponseType,
+  UsersResponseType,
+} from "./types";
 
 export const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -74,88 +83,4 @@ export const authAPI = {
       .delete<LogoutResponseType>(`auth/login`)
       .then((response) => response.data);
   },
-};
-// ==== TYPES ====
-
-export type UsersFromServerType = {
-  id: number;
-  followed: boolean;
-  name: string;
-  photos: {
-    large: string | null;
-    small: string | null;
-  };
-  uniqueUrlName: string | null;
-  status: string;
-};
-
-export type UsersResponseType = {
-  items: Array<UsersFromServerType>;
-  totalCount: number;
-  error: string;
-};
-
-// ==== PROFILE ====
-
-export type ProfileResponseType = {
-  userId: number;
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  fullName: string;
-  contacts: {
-    github: string;
-    vk: string;
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    website: string;
-    youtube: string;
-    mainLink: string;
-  };
-  photos: {
-    small: string;
-    large: string;
-  };
-};
-
-type ProfileStatusResponseType = {
-  resultCode: number;
-  messages: Array<string>;
-  data: {};
-};
-
-// ==== AUTHORIZATION ====
-
-export type AuthResponseType = {
-  data: LoginInfo;
-  resultCode: number;
-  messages: Array<any>;
-};
-
-export type LoginInfo = {
-  id: number;
-  email: string;
-  login: string;
-};
-
-export type LoginResponseType = {
-  resultCode: number;
-  messages: any[];
-  data: {
-    userId: number;
-  };
-};
-
-export type LogoutResponseType = {
-  resultCode: number;
-  messages: any[];
-  data: {};
-};
-
-// ==== FOLLOW ====
-
-export type FollowResponseType = {
-  resultCode: number;
-  data: any;
-  messages: Array<string>;
 };

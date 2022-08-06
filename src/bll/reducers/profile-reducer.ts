@@ -1,7 +1,8 @@
 import { AxiosError } from "axios";
 import { Params } from "react-router";
 import { v1 } from "uuid";
-import { profileAPI, ProfileResponseType } from "../../api/api";
+import { profileAPI } from "../../api/api";
+import { ProfileResponseType } from "../../api/types";
 import { AppRootStateType, AppThunk } from "../store";
 import { appSetStatusAC } from "./app-reducer";
 

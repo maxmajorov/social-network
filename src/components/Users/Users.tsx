@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { UsersFromServerType } from "../../api/api";
+import { UsersFromServerType } from "../../api/types";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
 import classes from "./Users.module.css";
 

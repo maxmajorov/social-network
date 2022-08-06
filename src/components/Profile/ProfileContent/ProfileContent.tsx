@@ -22,12 +22,7 @@ export const ProfileContent: React.FC = () => {
             <ProfilePhotoActions profilePhoto={profileState.photos.large} />
           </Col>
           <Col className={classes.infoContainer} span={17} offset={1}>
-            <ProfileInfo
-              fullName={profileState.fullName}
-              lookingForJobDescr={profileState.lookingForAJobDescription}
-              mailLink={profileState.contacts.mainLink}
-              github={profileState.contacts.github}
-            />
+            <ProfileInfo />
           </Col>
         </Row>
         <Row justify="center" align="top">

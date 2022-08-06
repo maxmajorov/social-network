@@ -1,33 +1,32 @@
 import React from "react";
 import classes from "./ProfileInfo.module.css";
 import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
+import { useAppSelector } from "../../../../bll/store";
+import { profileSelect } from "../../../../bll/reducers/profile-reducer";
 
-type ProfileInfoPropsType = {
-  fullName: string;
-  lookingForJobDescr: string;
-  mailLink: string;
-  github: string;
-};
+export const ProfileInfo: React.FC = () => {
+  const profileState = useAppSelector(profileSelect);
 
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
-  fullName,
-  lookingForJobDescr,
-  mailLink,
-  github,
-}) => {
   return (
     <div className={classes.userInfo}>
       <div className={classes.userName}>
-        <h3>{fullName}</h3>
+        <h3>{profileState.fullName}</h3>
         <ProfileStatus />
       </div>
       <div>
         <ul className={classes.userList}>
           <li className={classes.userItem}>city: Minsk</li>
-          <li className={classes.userItem}>{lookingForJobDescr}</li>
-          <li className={classes.userItem}>mail: {mailLink}</li>
           <li className={classes.userItem}>
-            github: <a href="https://github.com/maxmajorov">{github}</a>
+            {profileState.lookingForAJobDescription}
+          </li>
+          <li className={classes.userItem}>
+            mail: {profileState.contacts.mainLink}
+          </li>
+          <li className={classes.userItem}>
+            github:{" "}
+            <a href={profileState.contacts.github}>
+              {profileState.contacts.github}
+            </a>
           </li>
         </ul>
       </div>

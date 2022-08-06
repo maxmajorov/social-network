@@ -1,6 +1,6 @@
 import React, { KeyboardEvent } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { Textarea } from "../../../common/FormControls/FormControls";
+import { Textarea } from "../../common/FormControls/FormControls";
 import { useAppDispatch } from "../../../bll/store";
 import { maxLength100, required } from "../../../utils/validators/validators";
 import classes from "./PostsCreate.module.css";

@@ -16,7 +16,6 @@ export const ProfileStatus: React.FC = () => {
     dispatch(updateProfileStatusTC(status));
   };
 
-  console.log("status render");
   return (
     <EditableSpan
       updateProfileStatus={updateProfileStatusCallback}

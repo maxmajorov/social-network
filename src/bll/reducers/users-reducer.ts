@@ -1,7 +1,8 @@
 import { AxiosError } from "axios";
 import { createSelector } from "reselect";
-import { usersAPI, UsersFromServerType } from "../../api/api";
-import { AppRootStateType, AppThunk } from "../store";
+import { usersAPI } from "../../api/api";
+import { UsersFromServerType } from "../../api/types";
+import { AppRootStateType, AppThunk, useAppDispatchType } from "../store";
 import { appSetStatusAC } from "./app-reducer";
 
 const initialState = {
@@ -134,42 +135,48 @@ export const getUsersTC =
     }
   };
 
+// ====help function====
+
+const followUnfollowHelper = async (
+  dispatch: useAppDispatchType,
+  userID: string,
+  action: string
+) => {
+  try {
+    dispatch(followProgressAC(true, userID));
+    dispatch(appSetStatusAC("loading"));
+
+    if (action === "follow") {
+      const response = await usersAPI.follow(userID);
+      if (response.data.resultCode === 0) {
+        dispatch(followUserAC(userID));
+      }
+    } else if (action === "unFollow") {
+      const response = await usersAPI.unfollow(userID);
+      if (response.data.resultCode === 0) {
+        dispatch(unFollowUserAC(userID));
+      }
+    }
+
+    dispatch(followProgressAC(false, userID));
+  } catch (e) {
+    const err = e as Error | AxiosError<{ error: string }>;
+    // handleNetworkError(dispatch, err);
+  } finally {
+    dispatch(appSetStatusAC("idle"));
+  }
+};
+
 export const followUserTC =
   (userID: string): AppThunk =>
   async (dispatch) => {
-    try {
-      dispatch(followProgressAC(true, userID));
-      dispatch(appSetStatusAC("loading"));
-      const response = await usersAPI.follow(userID);
-      response.data.resultCode === 0
-        ? dispatch(followUserAC(userID))
-        : console.log(response.data);
-      dispatch(followProgressAC(false, userID));
-    } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>;
-      // handleNetworkError(dispatch, err);
-    } finally {
-      dispatch(appSetStatusAC("idle"));
-    }
+    followUnfollowHelper(dispatch, userID, "follow");
   };
 
 export const unfollowUserTC =
   (userID: string): AppThunk =>
   async (dispatch) => {
-    try {
-      dispatch(followProgressAC(true, userID));
-      dispatch(appSetStatusAC("loading"));
-      const response = await usersAPI.unfollow(userID);
-      response.data.resultCode === 0
-        ? dispatch(unFollowUserAC(userID))
-        : console.log(response.data);
-      dispatch(followProgressAC(false, userID));
-    } catch (e) {
-      const err = e as Error | AxiosError<{ error: string }>;
-      // handleNetworkError(dispatch, err);
-    } finally {
-      dispatch(appSetStatusAC("idle"));
-    }
+    followUnfollowHelper(dispatch, userID, "unFollow");
   };
 
 // ====TYPES====
@@ -180,8 +187,6 @@ export type InitialStateType = {
   totalCount: number;
   followProgress: Array<boolean>;
 };
-
-// export type InitialStateType = typeof initialState;
 
 export type FollowUserType = ReturnType<typeof followUserAC>;
 export type UnfollowUserType = ReturnType<typeof unFollowUserAC>;
