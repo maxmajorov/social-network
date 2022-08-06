@@ -5,19 +5,7 @@ import { AppRootStateType, AppThunk } from "../store";
 import { appSetStatusAC } from "./app-reducer";
 
 const initialState = {
-  users: [
-    // {
-    //   id: "",
-    //   followed: false,
-    //   name: "",
-    //   photos: {
-    //     large: "",
-    //     small: "",
-    //   },
-    //   uniqueUrlName: "",
-    //   status: "",
-    // },
-  ],
+  users: [],
   currentPage: 1,
   totalCount: 0,
   followProgress: [],
@@ -99,12 +87,6 @@ export const setTotalCountUsersAC = (totalCount: number) =>
   ({
     type: "USERS/set-total-user-count",
     totalCount,
-  } as const);
-
-export const isFetchingAC = (fetch: boolean) =>
-  ({
-    type: "USERS/is-fetching",
-    fetch,
   } as const);
 
 export const followProgressAC = (fetch: boolean, userID: string) =>

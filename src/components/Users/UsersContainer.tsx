@@ -29,8 +29,6 @@ export const UsersContainer = () => {
     pagesNumber.push(i);
   }
 
-  console.log(currentPage);
-
   useEffect(() => {
     dispatch(getUsersTC(currentPage, pageSize));
   }, [dispatch, currentPage, pageSize]);

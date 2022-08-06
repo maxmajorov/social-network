@@ -9,7 +9,6 @@ import { Friends } from "../components/Friends/Friends";
 import { DialogsContainer } from "../components/Dialogs/DialogsContainer";
 import { UsersContainer } from "../components/Users/UsersContainer";
 import { ProfileContainer } from "../components/Profile/ProfileContainer";
-import { HeaderContainer } from "../components/Header/HeaderContainer";
 import { Login } from "../components/LoginForm/LoginForm";
 import { useAppDispatch, useAppSelector } from "../bll/store";
 import { Preloader } from "../components/Preloader/Preloader";
@@ -17,6 +16,7 @@ import {
   initializeAppSelect,
   initializeAppTC,
 } from "../bll/reducers/app-reducer";
+import { Header } from "../components/Header/Header";
 
 export const App = () => {
   const appInitialize = useAppSelector(initializeAppSelect);
@@ -30,7 +30,7 @@ export const App = () => {
     <Preloader />
   ) : (
     <div className="container">
-      <HeaderContainer />
+      <Header />
       <Sidebar />
       <div className="container-content">
         <Routes>

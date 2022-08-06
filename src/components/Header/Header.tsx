@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "antd";
-import { AuthModal } from "../AuthModal/AuthModal";
 import socialLogo from "../../assets/img/social-logo.png";
 import classes from "./Header.module.css";
+import { useAppDispatch, useAppSelector } from "../../bll/store";
+import { isLoggedInSelector, logoutTC } from "../../bll/reducers/auth-reducer";
 
-type HeaderType = {
-  login: string | null;
-};
+export const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(isLoggedInSelector);
 
-export const Header: React.FC<HeaderType> = ({ login }) => {
-  const [visible, setVisible] = useState(false);
-
-  const classNameForIndicator = `${classes.indicator} ${
-    login ? classes.online : classes.offline
+  const indicatorClassName = `${classes.indicator} ${
+    isLoggedIn ? classes.online : classes.offline
   } `;
 
-  const onCreate = (values: any) => {
-    console.log("Received values of form: ", values);
-    setVisible(false);
+  const signOutHandler = () => {
+    dispatch(logoutTC());
   };
+
   return (
     <header className={classes.header}>
       <div className={classes.headerLogo}>
@@ -33,25 +31,15 @@ export const Header: React.FC<HeaderType> = ({ login }) => {
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <div className={classNameForIndicator} />
-        <Button
-          type="text"
-          onClick={() => {
-            setVisible(true);
-          }}
-        >
-          sign in
-        </Button>
+        <div className={indicatorClassName} />
+        {isLoggedIn ? (
+          <Button type="text" onClick={signOutHandler}>
+            sign out
+          </Button>
+        ) : (
+          <Button type="text">sign in</Button>
+        )}
       </div>
-
-      <AuthModal
-        visible={visible}
-        onCreate={onCreate}
-        onCancel={() => {
-          setVisible(false);
-        }}
-        login={login}
-      />
     </header>
   );
 };
