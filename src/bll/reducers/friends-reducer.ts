@@ -1,6 +1,5 @@
 import { v1 } from "uuid";
-
-const ADD_NEW_FRIEND = "ADD-NEW-FRIEND";
+import { AppRootStateType } from "../store";
 
 const initialState: FriendsPageType = {
   friends: [
@@ -78,11 +77,16 @@ export const friendsReducer = (state = initialState, action: any) => {
 };
 
 export const addFriendActionCreator = (newFriend: string) => ({
-  type: "ADD-NEW-FRIEND",
+  type: "FRIENDS/add-new-friend",
   newItem: newFriend,
 });
 
-// TYPES
+// ====SELECTORS====
+
+export const friendsSelect = (state: AppRootStateType) =>
+  state.friendsReducer.friends;
+
+// ====TYPES====
 
 type LocationType = {
   city: string;

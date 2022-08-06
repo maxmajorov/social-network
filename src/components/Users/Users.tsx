@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { UsersFromServerType } from "../../api/api";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
-
 import classes from "./Users.module.css";
 
 type UsersPropsType = {
@@ -30,7 +29,6 @@ export const Users: React.FC<UsersPropsType> = ({
       document.title = `Social Network`;
     };
   });
-  console.log(users);
 
   return (
     <main className={classes.friends}>

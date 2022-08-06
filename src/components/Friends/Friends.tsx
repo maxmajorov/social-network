@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router";
 import { isLoggedInSelector } from "../../bll/reducers/auth-reducer";
+import { friendsSelect } from "../../bll/reducers/friends-reducer";
 import { useAppSelector } from "../../bll/store";
-import { selectFriends } from "../../store/selectors";
 import { FriendMaxi } from "./FriendMaxi/FriendMaxi";
 import classes from "./Friends.module.css";
 
 export const Friends: React.FC = () => {
   const isAuth = useAppSelector(isLoggedInSelector);
-  const friends = useAppSelector(selectFriends);
+  const friends = useAppSelector(friendsSelect);
 
   useEffect(() => {
     document.title = `Friends`;

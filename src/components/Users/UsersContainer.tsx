@@ -1,27 +1,22 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { isFetchingAC } from "../../store/actions";
 import { Users } from "./Users";
 import { Preloader } from "../Preloader/Preloader";
-import {
-  getUsersThunkCreator,
-  followUserThunkCreator,
-  unfollowUserThunkCreator,
-} from "../../store/thunks/index";
-
 import { useAppDispatch, useAppSelector } from "../../bll/store";
 import {
-  selectAllUsers,
+  followUserTC,
+  folowIngProgressSelect,
+  getUsersTC,
   selectAllUsersByFilter,
-  selectFolowingProgress,
-  selectIsFetching,
-  selectTotalCount,
-} from "../../store/selectors";
+  totalCountUserSelect,
+  unfollowUserTC,
+} from "../../bll/reducers/users-reducer";
+import { appStatusSelect } from "../../bll/reducers/app-reducer";
 
 export const UsersContainer = () => {
   const users = useAppSelector(selectAllUsersByFilter);
-  const totalCount = useAppSelector(selectTotalCount);
-  const isFetching = useAppSelector(selectIsFetching);
-  const followProgress = useAppSelector(selectFolowingProgress);
+  const totalCount = useAppSelector(totalCountUserSelect);
+  const status = useAppSelector(appStatusSelect);
+  const followProgress = useAppSelector(folowIngProgressSelect);
 
   const dispatch = useAppDispatch();
 
@@ -34,35 +29,33 @@ export const UsersContainer = () => {
     pagesNumber.push(i);
   }
 
+  console.log(currentPage);
+
   useEffect(() => {
-    if (users.length === 0) {
-      dispatch(getUsersThunkCreator(currentPage, pageSize));
-    }
-  }, [dispatch, users, currentPage, pageSize]);
+    dispatch(getUsersTC(currentPage, pageSize));
+  }, [dispatch, currentPage, pageSize]);
 
   const setCurrentPageCallback = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    dispatch(isFetchingAC(true));
-    dispatch(getUsersThunkCreator(pageNumber, pageSize));
   };
 
   const followUserCallback = useCallback(
     (userID: string) => {
-      dispatch(followUserThunkCreator(userID));
+      dispatch(followUserTC(userID));
     },
     [dispatch]
   );
 
   const unFollowUserCallback = useCallback(
     (userID: string) => {
-      dispatch(unfollowUserThunkCreator(userID));
+      dispatch(unfollowUserTC(userID));
     },
     [dispatch]
   );
 
   return (
     <>
-      {isFetching ? (
+      {status === "loading" ? (
         <Preloader />
       ) : (
         <Users

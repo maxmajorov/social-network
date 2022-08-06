@@ -153,6 +153,7 @@ export type LogoutResponseType = {
 };
 
 // ==== FOLLOW ====
+
 export type FollowResponseType = {
   resultCode: number;
   data: any;
