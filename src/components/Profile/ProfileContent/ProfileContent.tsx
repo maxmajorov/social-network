@@ -1,20 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import classes from "./ProfileContent.module.css";
-import { AppRootStateType } from "../../../bll/store";
+import { AppRootStateType, useAppSelector } from "../../../bll/store";
 import { ProfilePhotoActions } from "./ProfilePhotoActions/ProfilePhotoActions";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { Col, Row } from "antd";
 import FriendMini from "../../Friends/FriendMini/FriendMini";
 import { PostsContainer } from "../../Posts/PostsContainer";
+import { profileSelect } from "../../../bll/reducers/profile-reducer";
 
 export const ProfileContent: React.FC = () => {
-  const profileState = useSelector(
-    (state: AppRootStateType) => state.profileReducer.profile
-  );
-  const friendsState = useSelector(
+  const profileState = useAppSelector(profileSelect);
+  const friendsState = useAppSelector(
     (state: AppRootStateType) => state.friendsReducer.friends
   );
+
   return (
     <div className={classes.profileContainer}>
       <div className={classes.wrapper}>

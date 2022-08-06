@@ -114,6 +114,9 @@ export const updateUserProfileStatusAC = (status: string) =>
 
 // ==== SELECTORS====
 
+export const profileSelect = (state: AppRootStateType) =>
+  state.profileReducer.profile;
+
 export const isProfileFetchingSelect = (state: AppRootStateType) =>
   state.profileReducer.isFetching;
 
