@@ -1,11 +1,10 @@
 import React, { KeyboardEvent } from "react";
-import { useDispatch } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Textarea } from "../../../common/FormControls/FormControls";
-import { addNewPostAC } from "../../../store/actions";
 import { useAppDispatch } from "../../../bll/store";
 import { maxLength100, required } from "../../../utils/validators/validators";
 import classes from "./PostsCreate.module.css";
+import { addNewPostAC } from "../../../bll/reducers/profile-reducer";
 
 type FormPostType = {
   newPost: string;
@@ -46,7 +45,7 @@ export const CreatePostReduxForm = reduxForm<FormPostType>({
 })(CreatePost);
 
 export const CreatePostForm: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onSubmit = (formData: FormPostType) => {
     console.log(formData);

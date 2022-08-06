@@ -1,13 +1,15 @@
 import React from "react";
+import {
+  profileStatusSelect,
+  updateProfileStatusTC,
+} from "../../../../bll/reducers/profile-reducer";
 import { useAppDispatch, useAppSelector } from "../../../../bll/store";
-import { selectProfileStatus } from "../../../../store/selectors";
-import { updateProfileStatusTC } from "../../../../store/thunks";
 import { EditableSpan } from "../../../EditableSpan/EditableSpan";
 
 // import classes from "./ProfileInfo.module.css";
 
 export const ProfileStatus: React.FC = () => {
-  const profileStatus = useAppSelector(selectProfileStatus);
+  const profileStatus = useAppSelector(profileStatusSelect);
   const dispatch = useAppDispatch();
 
   const updateProfileStatusCallback = (status: string) => {

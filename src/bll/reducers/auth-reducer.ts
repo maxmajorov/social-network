@@ -42,7 +42,6 @@ export const loginTC =
   (email: string, password: string, rememderme: boolean): AppThunk =>
   async (dispatch) => {
     try {
-      console.log("click login");
       dispatch(appSetStatusAC("loading"));
       const response = await authAPI.login(email, password, rememderme);
       dispatch(setUserIDAC(response.data.userId));

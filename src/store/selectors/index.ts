@@ -7,9 +7,3 @@ export {
 } from "./selectUsersPage";
 
 export { selectFriends } from "./selectFriendsPage";
-
-export {
-  selectPosts,
-  selectIsProfileFetching,
-  selectProfileStatus,
-} from "./selectProfilePage";

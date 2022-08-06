@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { userIDSelector } from "../../bll/reducers/auth-reducer";
+import { getMyProfileTC } from "../../bll/reducers/profile-reducer";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
-import { getMyProfileTC } from "../../store/thunks/profile-thunk";
 import classes from "./Sidebar.module.css";
 
 export const Sidebar: React.FC = () => {

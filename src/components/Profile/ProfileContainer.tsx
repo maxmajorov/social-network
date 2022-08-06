@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Navigate, useParams } from "react-router";
-import { getProfileStatusTC, getUserProfileTC } from "../../store/thunks";
 import { Preloader } from "../Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
 import { isLoggedInSelector } from "../../bll/reducers/auth-reducer";
 import { appStatusSelect } from "../../bll/reducers/app-reducer";
 import { ProfileContent } from "./ProfileContent/ProfileContent";
 import classes from "./Profile.module.css";
+import {
+  getProfileStatusTC,
+  getUserProfileTC,
+} from "../../bll/reducers/profile-reducer";
 
 export const ProfileContainer = () => {
   const status = useAppSelector(appStatusSelect);

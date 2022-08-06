@@ -1,5 +1,5 @@
 import React from "react";
-import { PostObj } from "../../store/reducers/profile-reducer";
+import { PostObj } from "../../bll/reducers/profile-reducer";
 import MyPost from "./MyPost/MyPost";
 import { CreatePostForm } from "./PostCreate/PostsCreate";
 import classes from "./Posts.module.css";

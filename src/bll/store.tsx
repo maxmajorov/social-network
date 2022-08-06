@@ -7,11 +7,7 @@ import {
 } from "redux";
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
-import {
-  friendsReducer,
-  profileReducer,
-  usersReducer,
-} from "../store/reducers";
+import { friendsReducer, usersReducer } from "../store/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -21,6 +17,7 @@ import {
   dialogsReducer,
 } from "./reducers/dialogs-reducer";
 import { AuthActionsType, authReducer } from "./reducers/auth-reducer";
+import { ProfileActionsType, profileReducer } from "./reducers/profile-reducer";
 
 const rootReducers = combineReducers({
   appReducer: appReducer,
@@ -41,7 +38,8 @@ export type AppRootStateType = ReturnType<typeof rootReducers>;
 export type AppRootActionsType =
   | AppActionsTypes
   | DialogsActionsTypes
-  | AuthActionsType;
+  | AuthActionsType
+  | ProfileActionsType;
 
 // SELECTOR TYPE
 
