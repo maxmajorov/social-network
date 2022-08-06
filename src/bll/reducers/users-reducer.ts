@@ -9,6 +9,7 @@ const initialState = {
   users: [],
   currentPage: 1,
   totalCount: 0,
+  pageSize: 5,
   followProgress: [],
 };
 
@@ -46,6 +47,14 @@ export const usersReducer = (
       return {
         ...state,
         totalCount: action.totalCount,
+      };
+    }
+
+    case "USERS/set-current-page-size": {
+      return {
+        ...state,
+        currentPage: action.currentPage,
+        pageSize: action.pageSize,
       };
     }
 
@@ -90,6 +99,9 @@ export const setTotalCountUsersAC = (totalCount: number) =>
     totalCount,
   } as const);
 
+export const setCurrentPageSizeAC = (currentPage: number, pageSize: number) =>
+  ({ type: "USERS/set-current-page-size", currentPage, pageSize } as const);
+
 export const followProgressAC = (fetch: boolean, userID: string) =>
   ({
     type: "USERS/follow-in-progress",
@@ -111,8 +123,14 @@ export const selectAllUsersByFilter = createSelector(
   (allUsers) => allUsers.filter((user) => true) //можно прописать любую логику а также использовать более одного селектора
 );
 
+export const currentPageSelect = (state: AppRootStateType) =>
+  state.usersReducer.currentPage;
+
 export const totalCountUserSelect = (state: AppRootStateType) =>
   state.usersReducer.totalCount;
+
+export const pageSizeSelect = (state: AppRootStateType) =>
+  state.usersReducer.pageSize;
 
 export const folowIngProgressSelect = (state: AppRootStateType) =>
   state.usersReducer.followProgress;
@@ -185,6 +203,7 @@ export type InitialStateType = {
   users: Array<UsersFromServerType>;
   currentPage: number;
   totalCount: number;
+  pageSize: number;
   followProgress: Array<boolean>;
 };
 
@@ -192,6 +211,7 @@ export type FollowUserType = ReturnType<typeof followUserAC>;
 export type UnfollowUserType = ReturnType<typeof unFollowUserAC>;
 export type GetUsersType = ReturnType<typeof getUsersAC>;
 export type SetTotalCountUsersType = ReturnType<typeof setTotalCountUsersAC>;
+export type SetCurrentPageSizeType = ReturnType<typeof setCurrentPageSizeAC>;
 export type FollowProgressType = ReturnType<typeof followProgressAC>;
 
 export type UsersActionsType =
@@ -199,4 +219,5 @@ export type UsersActionsType =
   | UnfollowUserType
   | GetUsersType
   | SetTotalCountUsersType
+  | SetCurrentPageSizeType
   | FollowProgressType;

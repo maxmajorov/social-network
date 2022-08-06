@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
 import { UsersFromServerType } from "../../api/types";
+import { appStatusSelect } from "../../bll/reducers/app-reducer";
+import {
+  currentPageSelect,
+  pageSizeSelect,
+  totalCountUserSelect,
+} from "../../bll/reducers/users-reducer";
+import { useAppSelector } from "../../bll/store";
+import { PaginationSelect } from "../common/Pagination/PaginationSelect";
 import { FriendMaxi } from "../Friends/FriendMaxi/FriendMaxi";
 import classes from "./Users.module.css";
 
 type UsersPropsType = {
   users: Array<UsersFromServerType>;
-  pagesNumber: Array<number>;
-  currentPage: number;
-  setCurrentPage: (pageNumber: number) => void;
   followUser: (userID: string) => void;
   unFollowUser: (userID: string) => void;
   followProgress: boolean[];
@@ -15,13 +20,15 @@ type UsersPropsType = {
 
 export const Users: React.FC<UsersPropsType> = ({
   users,
-  pagesNumber,
-  currentPage,
-  setCurrentPage,
   followUser,
   unFollowUser,
   followProgress,
 }) => {
+  const status = useAppSelector(appStatusSelect);
+  const totalCount = useAppSelector(totalCountUserSelect);
+  const currentPage = useAppSelector(currentPageSelect);
+  const pageSize = useAppSelector(pageSizeSelect);
+
   useEffect(() => {
     document.title = `Users`;
     return () => {
@@ -53,19 +60,12 @@ export const Users: React.FC<UsersPropsType> = ({
           />
         ))}
       </div>
-      <div className={classes.pages}>
-        {pagesNumber
-          .map((page) => (
-            <span
-              key={page}
-              className={currentPage === page ? classes.activePage : ""}
-              onClick={() => setCurrentPage(page)}
-            >
-              {page}
-            </span>
-          ))
-          .filter((el, ind, arr) => ind < 9)}
-      </div>
+      <PaginationSelect
+        disable={status === "loading"}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+      />
     </main>
   );
 };

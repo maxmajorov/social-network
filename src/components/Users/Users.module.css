@@ -14,23 +14,3 @@
   align-items: center;
   flex-shrink: 0;
 }
-
-.pages {
-  text-align: center;
-}
-
-/* .pages:not(:last-child)::after {
-  content: ' - ';
-  color:green;
-  font-weight:bold;
-} */
-
-.activePage {
-  font-weight: 700;
-}
-
-.activePage::after {
-  content: ' - ';
-  color:blue;
-  font-weight:bold;
-}
