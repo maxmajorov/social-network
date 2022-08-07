@@ -13,7 +13,7 @@ import {
 } from "../../bll/reducers/users-reducer";
 import { appStatusSelect } from "../../bll/reducers/app-reducer";
 
-export const UsersContainer = () => {
+const UsersContainer = () => {
   const users = useAppSelector(selectAllUsersByFilter);
   const currentPage = useAppSelector(currentPageSelect);
   const pageSize = useAppSelector(pageSizeSelect);
@@ -55,3 +55,5 @@ export const UsersContainer = () => {
     </>
   );
 };
+
+export default UsersContainer;

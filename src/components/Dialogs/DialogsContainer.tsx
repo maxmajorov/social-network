@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../bll/store";
 
 import Dialogs from "./Dialogs";
 
-export const DialogsContainer = () => {
+const DialogsContainer = () => {
   const isLoggedIn = useAppSelector(isLoggedInSelector);
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -23,3 +23,5 @@ export const DialogsContainer = () => {
 
   return <Dialogs addNewMessageToStore={addNewMessageToStoreCallback} />;
 };
+
+export default DialogsContainer;
