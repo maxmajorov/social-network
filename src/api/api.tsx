@@ -36,12 +36,6 @@ export const usersAPI = {
 // ==== PROFILE ====
 
 export const profileAPI = {
-  getMyProfile() {
-    return instance
-      .get<ProfileResponseType>(`profile/23584`)
-      .then((response) => response.data);
-  },
-
   getUserProfile(params: Params<string>) {
     return instance
       .get<ProfileResponseType>(`profile/${params.userId}`)
@@ -70,6 +64,12 @@ export const profileAPI = {
   updateProfileStatus(status: string) {
     return instance
       .put<ProfileStatusResponseType>(`profile/status`, { status: status })
+      .then((response) => response.data);
+  },
+
+  updateUserContact(profile: any) {
+    return instance
+      .put<ProfileStatusResponseType>(`profile`, profile)
       .then((response) => response.data);
   },
 };

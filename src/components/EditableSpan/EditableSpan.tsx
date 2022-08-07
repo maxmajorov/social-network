@@ -3,13 +3,13 @@ import React, { ChangeEvent, FocusEvent, MouseEvent, useState } from "react";
 // import classes from "./EditableSpan.module.css";
 
 type EditableSpanPropsType = {
-  statusFromState: string;
-  updateProfileStatus: (status: string) => void;
+  data: string;
+  updateData: (data: string) => void;
 };
 
 export const EditableSpan: React.FC<EditableSpanPropsType> = ({
-  statusFromState,
-  updateProfileStatus,
+  data,
+  updateData,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [status, setStatus] = useState<string>("");
@@ -20,7 +20,7 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = ({
 
   const disactivateEditMode = (event: FocusEvent<HTMLInputElement>) => {
     setEditMode(false);
-    updateProfileStatus(status);
+    updateData(status);
   };
 
   const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,15 +29,14 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = ({
 
   return editMode ? (
     <Input
-      placeholder="set status"
+      placeholder="set value"
       value={status}
       onBlur={disactivateEditMode}
       onChange={onChangeTitleHandler}
       autoFocus
+      style={{ width: "50%" }}
     />
   ) : (
-    <span onDoubleClick={activateEditMode}>
-      {statusFromState ? statusFromState : "set status"}
-    </span>
+    <span onDoubleClick={activateEditMode}>{data ? data : "none"}</span>
   );
 };

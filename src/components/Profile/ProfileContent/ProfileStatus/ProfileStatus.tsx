@@ -18,8 +18,8 @@ export const ProfileStatus: React.FC = () => {
 
   return (
     <EditableSpan
-      updateProfileStatus={updateProfileStatusCallback}
-      statusFromState={profileStatus}
+      updateData={updateProfileStatusCallback}
+      data={profileStatus}
     />
   );
 };

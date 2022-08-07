@@ -129,6 +129,13 @@ export const updateUserProfileStatusAC = (status: string) =>
     status,
   } as const);
 
+export const updateUserContactAC = (contact: string, contactType: string) =>
+  ({
+    type: "PROFILE/set-user-profile-status",
+    contact,
+    contactType,
+  } as const);
+
 // ==== SELECTORS====
 
 export const profileSelect = (state: AppRootStateType) =>
@@ -144,18 +151,6 @@ export const postsSelect = (state: AppRootStateType) =>
   state.profileReducer.posts;
 
 // ====THUNKS=====
-
-export const getMyProfileTC = (): AppThunk => async (dispatch) => {
-  try {
-    dispatch(appSetStatusAC("loading"));
-    const response = await profileAPI.getMyProfile();
-    dispatch(getUserProfileAC(response));
-  } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>;
-  } finally {
-    dispatch(appSetStatusAC("idle"));
-  }
-};
 
 export const getUserProfileTC =
   (userId: Params<string>): AppThunk =>
@@ -210,6 +205,21 @@ export const updateProfileStatusTC =
       dispatch(appSetStatusAC("loading"));
       const response = await profileAPI.updateProfileStatus(status);
       dispatch(updateUserProfileStatusAC(status));
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>;
+    } finally {
+      dispatch(appSetStatusAC("idle"));
+    }
+  };
+
+export const updateUserContactTC =
+  (profile: any, userId: Params<string>): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(appSetStatusAC("loading"));
+      const response = await profileAPI.updateUserContact(profile);
+      dispatch(getUserProfileTC(userId));
+      console.log(response);
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>;
     } finally {

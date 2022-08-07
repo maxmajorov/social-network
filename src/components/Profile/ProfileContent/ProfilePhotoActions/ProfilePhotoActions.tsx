@@ -31,7 +31,7 @@ export const ProfilePhotoActions: React.FC<ProfilePhotoPropsType> = ({
         <img
           src={`${profilePhoto ? profilePhoto : defaultImage}`}
           alt="avatar"
-          className={profilePhoto ? classes.avatar : ""}
+          className={profilePhoto && classes.avatar}
         ></img>
       </div>
 
