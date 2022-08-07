@@ -1,7 +1,24 @@
 .userAvatar {
   display: block;
-  min-width: 200px;
+  max-width: 250px;
   border-radius: 7px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.btns {
+  position: relative
+}
+
+.uploadBtn {
+  position: absolute;
+  content: '';
+  cursor: pointer;
+  color: #228be6; 
+  bottom: 30px;
+  right: 0px; 
 }
 
 .editBtn {

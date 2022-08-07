@@ -24,8 +24,8 @@ const initialState = {
       mainLink: "",
     },
     photos: {
-      small: "./img/avatar.jpg",
-      large: "./img/avatar.jpg",
+      small: "",
+      large: "",
     },
   },
   profileStatus: "",
@@ -70,6 +70,16 @@ export const profileReducer = (
       };
     }
 
+    case "PROFILE/set-profile-avatar": {
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          photos: action.photo,
+        },
+      };
+    }
+
     case "PROFILE/set-user-profile-status": {
       return { ...state, profileStatus: action.status };
     }
@@ -105,6 +115,12 @@ export const getUserProfileStatusAC = (userId: number, status: string) =>
     type: "PROFILE/get-user-profile-status",
     userId,
     status,
+  } as const);
+
+export const setProfileAvatarAC = (photo: any) =>
+  ({
+    type: "PROFILE/set-profile-avatar",
+    photo,
   } as const);
 
 export const updateUserProfileStatusAC = (status: string) =>
@@ -170,6 +186,23 @@ export const getProfileStatusTC =
     }
   };
 
+export const setProfileAvatarTC =
+  (photo: any): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(appSetStatusAC("loading"));
+      const response = await profileAPI.setProfileAvatar(photo);
+      if (response.resultCode === 0) {
+        dispatch(setProfileAvatarAC(response.data));
+      }
+      console.log("ava", response);
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>;
+    } finally {
+      dispatch(appSetStatusAC("idle"));
+    }
+  };
+
 export const updateProfileStatusTC =
   (status: string): AppThunk =>
   async (dispatch) => {
@@ -206,4 +239,5 @@ export type ProfileActionsType =
   | ReturnType<typeof isFetchingProfileAC>
   | ReturnType<typeof getUserProfileAC>
   | ReturnType<typeof getUserProfileStatusAC>
+  | ReturnType<typeof setProfileAvatarAC>
   | ReturnType<typeof updateUserProfileStatusAC>;

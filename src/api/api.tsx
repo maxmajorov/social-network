@@ -54,6 +54,19 @@ export const profileAPI = {
       .then((response) => response.data);
   },
 
+  setProfileAvatar(photo: any) {
+    const formData = new FormData();
+    formData.append("image", photo);
+
+    return instance
+      .put<ProfileStatusResponseType>(`profile/photo`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => response.data);
+  },
+
   updateProfileStatus(status: string) {
     return instance
       .put<ProfileStatusResponseType>(`profile/status`, { status: status })
