@@ -44,7 +44,6 @@ export const loginTC =
     try {
       dispatch(appSetStatusAC("loading"));
       const response = await authAPI.login(email, password, rememderme);
-      dispatch(setUserIDAC(response.data.userId));
       dispatch(loginAC(true));
       // dispatch(setProfileInfoAC(response.data));
     } catch (e) {

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { authAPI } from "../../api/api";
 import { AppRootStateType, AppThunk } from "../store";
+import { loginAC, setUserIDAC } from "./auth-reducer";
 
 const initialState = {
   status: "idle" as RequestStatusType,
@@ -44,8 +45,8 @@ export const initializeAppTC = (): AppThunk => async (dispatch) => {
   try {
     dispatch(appSetStatusAC("loading"));
     const response = await authAPI.authMe();
-    // dispatch(loginAC(true));
-    // dispatch(setUserIDAC(response.data._id));
+    dispatch(loginAC(true));
+    dispatch(setUserIDAC(response.data.id));
     // dispatch(setProfileInfoAC(response.data));
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>;
@@ -83,4 +84,3 @@ export type AppActionsTypes =
   | InitializeAppType
   | AppSetStatusType
   | AppSetErrorType;
-// | LoginType;
