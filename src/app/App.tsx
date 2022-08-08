@@ -33,9 +33,11 @@ export const App = () => {
     dispatch(initializeAppTC());
   }, []);
 
-  return !appInitialize ? (
-    <Preloader />
-  ) : (
+  if (!appInitialize) {
+    return <Preloader />;
+  }
+
+  return (
     <div className="container">
       <Header />
       <Sidebar />

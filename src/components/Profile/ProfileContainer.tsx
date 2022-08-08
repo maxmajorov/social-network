@@ -28,10 +28,13 @@ export const ProfileContainer = () => {
 
   return (
     <>
-      {status === "loading" && <Preloader />}
-      <main className={classes.profile}>
-        <ProfileContent />
-      </main>
+      {status === "loading" ? (
+        <Preloader />
+      ) : (
+        <main className={classes.profile}>
+          <ProfileContent />
+        </main>
+      )}
     </>
   );
 };

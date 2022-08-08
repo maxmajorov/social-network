@@ -16,6 +16,10 @@
     background-color: white;
   }
 
+  .loading {
+    opacity: 0.5
+  }
+
 .heading span {
     font-style: italic;
 }

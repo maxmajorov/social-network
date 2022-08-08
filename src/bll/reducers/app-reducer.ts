@@ -46,6 +46,7 @@ export const initializeAppTC = (): AppThunk => async (dispatch) => {
     dispatch(appSetStatusAC("loading"));
     const response = await authAPI.authMe();
     dispatch(loginAC(true));
+    console.log(response);
     dispatch(setUserIDAC(response.data.id));
     // dispatch(setProfileInfoAC(response.data));
   } catch (e) {
