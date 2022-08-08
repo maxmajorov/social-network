@@ -1,0 +1,30 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  
+  .loginForm{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px;
+    max-width: 300px;
+    border-radius: 7px;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    background-color: white;
+  }
+
+.heading span {
+    font-style: italic;
+}
+
+.loginFormForgot {
+    float: right;
+  }
+
+  .loginFormButton {
+    width: 100%;
+  } 
+

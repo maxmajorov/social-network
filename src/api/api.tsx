@@ -2,6 +2,7 @@ import axios from "axios";
 import { Params } from "react-router";
 import {
   AuthResponseType,
+  CaptchaResponseType,
   FollowResponseType,
   LoginResponseType,
   LogoutResponseType,
@@ -15,6 +16,16 @@ export const instance = axios.create({
   headers: { "API-KEY": "196d543e-854d-4840-b68c-b0f81150459a" },
   withCredentials: true,
 });
+
+// ==== SECURITY ====
+
+export const securityAPI = {
+  getCaptcha() {
+    return instance
+      .get<CaptchaResponseType>(`security/get-captcha-url`)
+      .then((response) => response.data);
+  },
+};
 
 // ==== USERS ====
 

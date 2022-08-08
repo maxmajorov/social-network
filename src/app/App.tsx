@@ -7,7 +7,6 @@ import News from "../components/News/News";
 import Settings from "../components/Settings/Settings";
 import { Friends } from "../components/Friends/Friends";
 import { ProfileContainer } from "../components/Profile/ProfileContainer";
-import { Login } from "../components/LoginForm/LoginForm";
 import { useAppDispatch, useAppSelector } from "../bll/store";
 import { Preloader } from "../components/Preloader/Preloader";
 import {
@@ -15,6 +14,8 @@ import {
   initializeAppTC,
 } from "../bll/reducers/app-reducer";
 import { Header } from "../components/Header/Header";
+import { Login } from "../components/LoginForm/Login";
+
 const DialogsContainer = React.lazy(
   () => import("../components/Dialogs/DialogsContainer")
 );

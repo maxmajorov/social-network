@@ -1,5 +1,9 @@
 // ==== TYPES ====
 
+export type CaptchaResponseType = {
+  url: string;
+};
+
 export type UsersFromServerType = {
   id: number;
   followed: boolean;
