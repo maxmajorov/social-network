@@ -7,7 +7,7 @@ import { store } from "./bll/store";
 import { App } from "./app/App";
 
 ReactDOM.render(
-  <HashRouter basename={process.env.PUBLIC_URL}>
+  <HashRouter>
     <Provider store={store}>
       <App />
     </Provider>

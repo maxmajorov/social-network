@@ -7,7 +7,7 @@ import classes from "./Sidebar.module.css";
 
 export const Sidebar: React.FC = () => {
   const myProfileID = useAppSelector(userIDSelector);
-  const { userId } = useParams();
+  const userId = useParams();
   const dispatch = useAppDispatch();
 
   const loadProfileHandler = () => {

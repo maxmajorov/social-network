@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../../bll/store";
 import { maxLength100, required } from "../../../utils/validators/validators";
 import classes from "./PostsCreate.module.css";
 import { addNewPostAC } from "../../../bll/reducers/profile-reducer";
+import { Button } from "antd";
 
 type FormPostType = {
   newPost: string;
@@ -35,7 +36,9 @@ export const CreatePost: React.FC<InjectedFormProps<FormPostType>> = (
         cols={50}
         rows={2}
       ></Field>
-      <button className={classes.postBtn}>add post</button>
+      <Button type="primary" style={{ marginTop: "10px" }}>
+        add post
+      </Button>
     </form>
   );
 };

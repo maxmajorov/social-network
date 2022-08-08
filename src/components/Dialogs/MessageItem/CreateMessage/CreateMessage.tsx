@@ -8,6 +8,7 @@ import {
   required,
 } from "../../../../utils/validators/validators";
 import classes from "./CreateMessage.module.css";
+import { Button } from "antd";
 
 type FormMessageType = {
   newMessage: string;
@@ -39,7 +40,10 @@ export const CreateMessage: React.FC<InjectedFormProps<FormMessageType>> = (
         cols={50}
         rows={2}
       ></Field>
-      <button className={classes.postBtn}>Send message</button>
+      <Button type="primary" style={{ marginTop: "10px" }}>
+        send message
+      </Button>
+      {/* <button className={classes.postBtn}>Send message</button> */}
     </form>
   );
 };

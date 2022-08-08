@@ -147,6 +147,9 @@ export const isProfileFetchingSelect = (state: AppRootStateType) =>
 export const profileStatusSelect = (state: AppRootStateType) =>
   state.profileReducer.profileStatus;
 
+export const profilePhotoSelect = (state: AppRootStateType) =>
+  state.profileReducer.profile.photos.small;
+
 export const postsSelect = (state: AppRootStateType) =>
   state.profileReducer.posts;
 
@@ -219,7 +222,6 @@ export const updateUserContactTC =
       dispatch(appSetStatusAC("loading"));
       const response = await profileAPI.updateUserContact(profile);
       dispatch(getUserProfileTC(userId));
-      console.log(response);
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>;
     } finally {

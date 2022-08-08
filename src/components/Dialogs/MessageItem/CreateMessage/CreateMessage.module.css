@@ -1,11 +1,12 @@
 .createMessage {
-  margin-top: 40px;
-  display: flex;
+  margin-top: 35px;
+  /* display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
 }
 
 .inputMessage {
+
   border-radius: 7px;
   border: 2px solid #edeff1;
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
@@ -15,7 +16,7 @@
   color: red;
 }
 
-.postBtn {
+/* .postBtn {
   display: inline-block;
   box-sizing: border-box;
   padding: 0 20px;
@@ -48,4 +49,4 @@
 .postBtn:disabled {
   pointer-events: none;
   opacity: 0.65;
-}
+} */

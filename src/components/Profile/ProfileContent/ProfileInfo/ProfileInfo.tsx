@@ -12,7 +12,7 @@ import { useParams } from "react-router";
 export const ProfileInfo: React.FC = () => {
   const profileState = useAppSelector(profileSelect);
 
-  const { userId } = useParams();
+  const userId = useParams();
   const dispatch = useAppDispatch();
 
   const updateContactCallback = (contact: string) => {
@@ -27,9 +27,6 @@ export const ProfileInfo: React.FC = () => {
         // github: contact.includes("github") ? contact : "",
       },
     };
-
-    console.log(updatedProfile.contacts);
-    console.log(contact.includes("github"));
 
     dispatch(updateUserContactTC(updatedProfile, userId));
   };
