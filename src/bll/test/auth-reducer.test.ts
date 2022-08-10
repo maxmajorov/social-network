@@ -8,6 +8,7 @@ beforeEach(() => {
     isLoggedIn: false,
     userID: null as number | null,
     responseMessage: "",
+    captcha: null as string | null,
   };
 });
 
