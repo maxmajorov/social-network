@@ -4,55 +4,47 @@ import { userIDSelector } from "../../bll/reducers/auth-reducer";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
 import classes from "./Chat.module.css";
 
+type ChatMessageType = {
+  userId: number;
+  userName: string;
+  message: string;
+  photo: string;
+};
+
+// craete connection then component mount
+
 export const Chat = () => {
-  const [name, setName] = useState<string>("");
   const [newMessage, setNewMessage] = useState<string>("");
-  const [messages, setNessages] = useState([
-    { userId: "", userName: "", message: "", photo: "" },
-  ]);
+  const [messages, setNessages] = useState<ChatMessageType[]>([]);
 
   const userID = useAppSelector(userIDSelector);
   const dispatch = useAppDispatch();
 
   // socket
+  const socket = new WebSocket(
+    "wss://social-network.samuraijs.com/handlers/chatHandler.ashx"
+  );
 
   useEffect(() => {
-    // craete connection then component mount
-    const socket = new WebSocket(
-      "wss://social-network.samuraijs.com/handlers/chatHandler.ashx"
-    );
-
-    socket.addEventListener("message", (event) => {
-      setNessages(JSON.parse(event.data));
-      console.log(event.data);
+    socket.addEventListener("message", (event: MessageEvent) => {
+      const newMessages = JSON.parse(event.data);
+      setNessages((prevMessages) => [...prevMessages, ...newMessages]);
     });
 
-    // socket.onmessage((event) => {
-    //   console.log(event.data);
-    // });
     // close connection then component unmount
-    // return () => {
-    //   // dispatch(destroyConnectionTC());
-    // };
+    return () => {
+      // socket.addEventListener("close", (event) => {
+      //   console.log("close connection");
+      // });
+      // dispatch(destroyConnectionTC());
+    };
   }, []);
 
-  console.log(messages);
-
-  // useEffect(() => {
-  //   messagesAncorRef.current?.scrollIntoView();
-  // }, [messages]);
+  useEffect(() => {
+    messagesAncorRef.current?.scrollIntoView();
+  }, [messages]);
 
   const messagesAncorRef = useRef<HTMLDivElement>(null);
-
-  // add new user
-  const changeNameHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.currentTarget.value);
-  };
-
-  const setNewUser = () => {
-    // dispatch(setClientNameTC(name));
-    setName("");
-  };
 
   // send messages
   const changeMessageHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,6 +53,7 @@ export const Chat = () => {
 
   const sendMessageHandler = () => {
     // dispatch(sendMessageTC(newMessage));
+    newMessage ? socket.send(newMessage) : alert("empty message");
     setNewMessage("");
   };
 
@@ -70,18 +63,13 @@ export const Chat = () => {
 
   return (
     <>
-      <div style={{ paddingTop: "20px", textAlign: "center" }}>
-        <input value={name} onChange={changeNameHandler} />
-        <button onClick={setNewUser}>add user</button>
-      </div>
-
       <div className={classes.chatContainer}>
         <div className={classes.messagesBlock}>
-          {messages.map((mes) => (
+          {messages.map((mes, ind) => (
             <div
-              key={mes.userId}
+              key={ind}
               className={
-                mes.userId === (userID && userID.toString())
+                mes.userId === userID
                   ? `${classes.message} ${classes.message_right}`
                   : `${classes.message} ${classes.message_left}`
               }
