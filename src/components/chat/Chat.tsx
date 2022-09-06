@@ -1,12 +1,17 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import defaultAva from "../../assets/img/def-image.png";
+import { userIDSelector } from "../../bll/reducers/auth-reducer";
 import { useAppDispatch, useAppSelector } from "../../bll/store";
 import classes from "./Chat.module.css";
 
 export const Chat = () => {
   const [name, setName] = useState<string>("");
   const [newMessage, setNewMessage] = useState<string>("");
+  const [messages, setNessages] = useState([
+    { userId: "", userName: "", message: "", photo: "" },
+  ]);
 
+  const userID = useAppSelector(userIDSelector);
   const dispatch = useAppDispatch();
 
   // socket
@@ -16,12 +21,22 @@ export const Chat = () => {
     const socket = new WebSocket(
       "wss://social-network.samuraijs.com/handlers/chatHandler.ashx"
     );
-    console.log(socket);
+
+    socket.addEventListener("message", (event) => {
+      setNessages(JSON.parse(event.data));
+      console.log(event.data);
+    });
+
+    // socket.onmessage((event) => {
+    //   console.log(event.data);
+    // });
     // close connection then component unmount
     // return () => {
     //   // dispatch(destroyConnectionTC());
     // };
   }, []);
+
+  console.log(messages);
 
   // useEffect(() => {
   //   messagesAncorRef.current?.scrollIntoView();
@@ -62,19 +77,23 @@ export const Chat = () => {
 
       <div className={classes.chatContainer}>
         <div className={classes.messagesBlock}>
-          {/* {messages.map((mes) => (
+          {messages.map((mes) => (
             <div
-              key={mes._id}
+              key={mes.userId}
               className={
-                mes.user._id === userID.toString()
+                mes.userId === (userID && userID.toString())
                   ? `${classes.message} ${classes.message_right}`
                   : `${classes.message} ${classes.message_left}`
               }
             >
-              <img src={defaultAva} className={classes.avatar} alt="avatar" />
+              <img
+                src={mes.photo ? mes.photo : defaultAva}
+                className={classes.avatar}
+                alt="avatar"
+              />
               <div className={classes.messageItem}>
                 <div className={classes.nameMessage}>
-                  <span className={classes.name}>{mes.user.name}</span>
+                  <span className={classes.name}>{mes.userName}</span>
                   <span className={classes.item}>{mes.message}</span>
                 </div>
                 <div className={classes.time}>
@@ -82,7 +101,7 @@ export const Chat = () => {
                 </div>
               </div>
             </div>
-          ))} */}
+          ))}
           <div ref={messagesAncorRef}></div>
         </div>
         <div>
