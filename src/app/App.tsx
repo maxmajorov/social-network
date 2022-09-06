@@ -3,7 +3,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar/Sidebar";
 import Music from "../components/Music/Music";
-import News from "../components/News/News";
 import Settings from "../components/Settings/Settings";
 import { Friends } from "../components/Friends/Friends";
 import { ProfileContainer } from "../components/Profile/ProfileContainer";
@@ -15,6 +14,7 @@ import {
 } from "../bll/reducers/app-reducer";
 import { Header } from "../components/Header/Header";
 import { Login } from "../components/LoginForm/Login";
+import { Chat } from "../components/chat/Chat";
 
 const DialogsContainer = React.lazy(
   () => import("../components/Dialogs/DialogsContainer")
@@ -62,7 +62,7 @@ export const App = () => {
               </Suspense>
             }
           />
-          <Route path="/news" element={<News />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/friends" element={<Friends />} />
